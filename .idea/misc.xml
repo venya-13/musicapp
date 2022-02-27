@@ -4,11 +4,22 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/android studio apps/music app/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22135416666666666" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/animetedbackgound1.xml" value="0.332" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/animetedbackground2.xml" value="0.332" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/animetedbackground3.xml" value="0.332" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/background.xml" value="0.332" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/button1.xml" value="0.332" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/button_background.xml" value="0.3769230769230769" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/dialog_background.xml" value="0.332" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/dialog_permmision.xml" value="0.332" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/gradient_list.xml" value="0.332" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22135416666666666" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/permission_dialog.xml" value="0.332" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/preview_permission.xml" value="0.332" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_own_music.xml" value="0.5" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_youtube_search.xml" value="0.2957427536231884" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/layout/permission_dialog.xml" value="0.33" />
       </map>
     </option>
   </component>
