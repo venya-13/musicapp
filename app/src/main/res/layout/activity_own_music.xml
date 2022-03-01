@@ -7,6 +7,13 @@
     android:background="@color/background"
     tools:context=".ownMusic">
 
+    <ListView
+        android:id="@+id/listViewSong"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/searchOwnMusic"
+        android:background="@color/background" />
+
     <EditText
         android:id="@+id/searchOwnMusic"
         android:layout_width="match_parent"
