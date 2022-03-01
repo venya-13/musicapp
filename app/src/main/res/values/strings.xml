@@ -6,5 +6,6 @@
     <string name="ownMusicSearchText">Search your music</string>
     <string name="youtubeMusicSearchText">Search youtube music</string>
     <string name="dialogHeader">Be careful!</string>
-
+    <string name="dialogWarning">Due to the fact that you have not given permission to use your files or voice recordings, the application will not be able to perform all the functionality. If you want to fix it, click the button below.</string>
+    <string name="permissionRequestButton">Request permission!</string>
 </resources>
