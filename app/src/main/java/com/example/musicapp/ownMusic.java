@@ -6,6 +6,8 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,6 +16,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import java.io.File;
@@ -23,17 +26,24 @@ public class ownMusic extends AppCompatActivity {
     private ListView listViewSong;
     private EditText searchOwnMusic;
     static MediaPlayer mediaPlayer;
-    final ArrayList<File> mySongs = findSong(Environment.getExternalStorageDirectory());
+    ArrayList<File> mySongs = findSong(Environment.getExternalStorageDirectory());
 
     String[] items = new String[mySongs.size()];
+
+    ArrayList<File> songList = new ArrayList<>();
+
+    ArrayAdapter<File> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_own_music);
 
+
         listViewSong = findViewById(R.id.listViewSong);
-        searchOwnMusic = findViewById(R.id.searchOwnMusic);
+        //searchOwnMusic = findViewById(R.id.searchOwnMusic);
+
+        adapter = new ArrayAdapter<File>(this, android.R.layout.simple_list_item_1);
 
         displaySongs();
 
@@ -44,8 +54,6 @@ public class ownMusic extends AppCompatActivity {
     }
 
     public ArrayList<File> findSong(File file){
-        ArrayList<File> songList = new ArrayList<>();
-
         File[] files = file.listFiles();
 
         for(File singleFile: files){
@@ -115,5 +123,32 @@ public class ownMusic extends AppCompatActivity {
 
             return myView;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_find_own_music, menu);
+        MenuItem menuItem = menu.findItem(R.id.ownSongsSearch);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Search your song");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                adapter.getFilter().filter(newText);
+
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+
     }
 }
