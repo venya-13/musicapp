@@ -23,6 +23,9 @@ public class ownMusic extends AppCompatActivity {
     private ListView listViewSong;
     private EditText searchOwnMusic;
     static MediaPlayer mediaPlayer;
+    final ArrayList<File> mySongs = findSong(Environment.getExternalStorageDirectory());
+
+    String[] items = new String[mySongs.size()];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +62,6 @@ public class ownMusic extends AppCompatActivity {
     }
 
     void displaySongs(){
-        final ArrayList<File> mySongs = findSong(Environment.getExternalStorageDirectory());
-
-        String[] items = new String[mySongs.size()];
         for (int i = 0; i < mySongs.size(); i++){
             items[i] = mySongs.get(i).getName().toString();
         }
@@ -86,8 +86,6 @@ public class ownMusic extends AppCompatActivity {
     class customAdapter extends BaseAdapter{
         @Override
         public int getCount() {
-            final ArrayList<File> mySongs = findSong(Environment.getExternalStorageDirectory());
-            String[] items = new String[mySongs.size()];
             return items.length;
         }
 
