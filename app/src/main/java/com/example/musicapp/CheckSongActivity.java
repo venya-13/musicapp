@@ -21,7 +21,7 @@ public class CheckSongActivity extends AppCompatActivity {
     private Button stopButton, playButton;
     private TextView startTxt, endTxt, songNameTxt;
     private SeekBar seekBar;
-    private BarVisualizer visualizer;
+    //private BarVisualizer visualizer;
 
     String someName;
     public static final String EXTRA_NAME = "song_name";
@@ -40,7 +40,7 @@ public class CheckSongActivity extends AppCompatActivity {
         endTxt = findViewById(R.id.endTxt);
         songNameTxt = findViewById(R.id.songNameTxt);
         seekBar = findViewById(R.id.seekBar);
-        visualizer = findViewById(R.id.blast);
+        //visualizer = findViewById(R.id.blast);
 
         if(mediaPlayer != null){
             mediaPlayer.stop();
@@ -60,17 +60,15 @@ public class CheckSongActivity extends AppCompatActivity {
 
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
-        mediaPlayer.start();
+        stopButton.setVisibility(View.GONE);
 
         playButton.setOnClickListener(v -> {
-            if(mediaPlayer.isPlaying()){
-                playButton.setBackgroundResource(R.drawable.play_button);
-                mediaPlayer.pause();
-            } else {
-                playButton.setBackgroundResource(R.drawable.pause_button);
-                mediaPlayer.start();
-            }
-
+            mediaPlayer.start();
+            playButton.setBackgroundResource(R.drawable.pause_button);
+        });
+        stopButton.setOnClickListener(v -> {
+            mediaPlayer.pause();
+            stopButton.setBackgroundResource(R.drawable.play_button);
         });
 
     }
