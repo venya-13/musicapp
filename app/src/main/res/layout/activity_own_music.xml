@@ -7,21 +7,19 @@
     android:background="@color/background"
     tools:context=".ownMusic">
 
+    <EditText
+        android:id="@+id/searchOwnMusic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/visor"
+        android:backgroundTint="@color/purple"
+        android:hint="@string/SearchText" />
+
     <ListView
         android:id="@+id/listViewSong"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/searchOwnMusic"
         android:background="@color/background" />
 
-<!--    <EditText-->
-<!--        android:id="@+id/searchOwnMusic"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:backgroundTint="@color/visor"-->
-<!--        android:fontFamily="@font/monofett"-->
-<!--        android:hint="@string/ownMusicSearchText"-->
-<!--        android:textColor="@color/purple"-->
-<!--        android:textColorHint="@color/purple"-->
-<!--        android:textSize="30sp" />-->
-
-</RelativeLayout>
+    </RelativeLayout>

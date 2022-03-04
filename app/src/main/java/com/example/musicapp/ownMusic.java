@@ -2,10 +2,13 @@ package com.example.musicapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +28,6 @@ import java.util.ArrayList;
 public class ownMusic extends AppCompatActivity {
     private ListView listViewSong;
     private EditText searchOwnMusic;
-    static MediaPlayer mediaPlayer;
 
     final ArrayList<File> mySongs = findSong(Environment.getExternalStorageDirectory());
 
@@ -39,16 +41,13 @@ public class ownMusic extends AppCompatActivity {
 
 
         listViewSong = findViewById(R.id.listViewSong);
-//        searchOwnMusic = findViewById(R.id.searchOwnMusic);
+        searchOwnMusic = findViewById(R.id.searchOwnMusic);
 
 
         displaySongs();
 
-        if (mediaPlayer != null){
-            mediaPlayer.stop();
-            mediaPlayer.release();
-        }
     }
+
 
     public ArrayList<File> findSong(File file){
         ArrayList<File> songList = new ArrayList<>();
@@ -83,8 +82,11 @@ public class ownMusic extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Uri uri = Uri.parse(mySongs.get(position).toString());
 
-                mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
-                mediaPlayer.start();
+                String songName = (String) listViewSong.getItemAtPosition(position);
+                startActivity(new Intent(getApplicationContext(), CheckSongActivity.class)
+                .putExtra("songs", mySongs)
+                .putExtra("song name", songName)
+                .putExtra("position", position));
 
             }
         });
@@ -118,34 +120,4 @@ public class ownMusic extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_find_own_music, menu);
-        MenuItem menuItem = menu.findItem(R.id.ownSongsSearch);
-        SearchView searchView = (SearchView) menuItem.getActionView();
-        searchView.setQueryHint("Search your song");
-
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-        listViewSong.setAdapter(myAdapter);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                myAdapter.getFilter().filter(newText);
-
-                return false;
-            }
-        });
-
-        return super.onCreateOptionsMenu(menu);
-
-    }
 }

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context=".CheckSongActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/songNameTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="Song name"
+            android:textAlignment="center"
+            android:textColor="@color/visor"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_centerInParent="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="20dp"
+                android:layout_marginBottom="40dp"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content">
+
+            </SeekBar>
+            <TextView
+                android:id="@+id/startTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/seekBar"
+                android:layout_centerInParent="true"
+                android:layout_alignParentLeft="false"
+                android:layout_marginLeft="20dp"
+                android:text="0:00"
+                android:textColor="@color/purple"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/endTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/seekBar"
+                android:layout_centerInParent="true"
+                android:layout_alignParentRight="false"
+                android:layout_marginRight="20dp"
+                android:text="6:66"
+                android:textColor="@color/purple"
+                android:textSize="14sp"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/playButton"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/play_button"></Button>
+
+            <Button
+                android:id="@+id/stopButton"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/pause_button"></Button>
+
+            <com.gauravk.audiovisualizer.visualizer.BlastVisualizer
+                xmlns:custom="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/blast"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_alignParentBottom="true"
+                custom:avDensity="0.5"
+                custom:avType="outline"
+                custom:avWidth="4dp"
+                custom:avColor="@color/visor"
+                custom:avSpeed="normal"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

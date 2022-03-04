@@ -15,9 +15,13 @@
         <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/gradient_list.xml" value="0.332" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22135416666666666" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/own_music_list_background.xml" value="0.331" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/pause_button.xml" value="0.331" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/permission_dialog.xml" value="0.332" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/play_button.xml" value="0.331" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/preview_permission.xml" value="0.332" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/reset_button.xml" value="0.331" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/font/monofett.xml" value="0.396875" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_check_song.xml" value="0.33" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_own_music.xml" value="0.33" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_youtube_search.xml" value="0.2957427536231884" />
