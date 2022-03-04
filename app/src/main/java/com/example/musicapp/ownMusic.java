@@ -26,13 +26,11 @@ public class ownMusic extends AppCompatActivity {
     private ListView listViewSong;
     private EditText searchOwnMusic;
     static MediaPlayer mediaPlayer;
-    ArrayList<File> mySongs = findSong(Environment.getExternalStorageDirectory());
+
+    final ArrayList<File> mySongs = findSong(Environment.getExternalStorageDirectory());
 
     String[] items = new String[mySongs.size()];
 
-    ArrayList<File> songList = new ArrayList<>();
-
-    ArrayAdapter<File> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +39,8 @@ public class ownMusic extends AppCompatActivity {
 
 
         listViewSong = findViewById(R.id.listViewSong);
-        //searchOwnMusic = findViewById(R.id.searchOwnMusic);
+//        searchOwnMusic = findViewById(R.id.searchOwnMusic);
 
-        adapter = new ArrayAdapter<File>(this, android.R.layout.simple_list_item_1);
 
         displaySongs();
 
@@ -54,6 +51,8 @@ public class ownMusic extends AppCompatActivity {
     }
 
     public ArrayList<File> findSong(File file){
+        ArrayList<File> songList = new ArrayList<>();
+
         File[] files = file.listFiles();
 
         for(File singleFile: files){
@@ -108,14 +107,8 @@ public class ownMusic extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int a, View view, ViewGroup viewGroup) {
-            final ArrayList<File> mySongs = findSong(Environment.getExternalStorageDirectory());
+        public View getView(int i, View view, ViewGroup viewGroup) {
 
-            String[] items = new String[mySongs.size()];
-            int i = 0;
-            for ( i = 0; i < mySongs.size(); i++){
-                items[i] = mySongs.get(i).getName().toString();
-            }
             View myView = getLayoutInflater().inflate(R.layout.music_list_background, null);
             TextView songName = myView.findViewById(R.id.songName);
             songName.setSelected(true);
@@ -133,7 +126,11 @@ public class ownMusic extends AppCompatActivity {
         SearchView searchView = (SearchView) menuItem.getActionView();
         searchView.setQueryHint("Search your song");
 
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+        listViewSong.setAdapter(myAdapter);
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
             @Override
             public boolean onQueryTextSubmit(String s) {
                 return false;
@@ -142,7 +139,7 @@ public class ownMusic extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
 
-                adapter.getFilter().filter(newText);
+                myAdapter.getFilter().filter(newText);
 
                 return false;
             }
