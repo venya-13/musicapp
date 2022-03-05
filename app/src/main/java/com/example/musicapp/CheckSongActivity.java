@@ -60,15 +60,18 @@ public class CheckSongActivity extends AppCompatActivity {
 
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
-        stopButton.setVisibility(View.GONE);
+        mediaPlayer.start();
+        playButton.setVisibility(View.GONE);
 
         playButton.setOnClickListener(v -> {
             mediaPlayer.start();
-            playButton.setBackgroundResource(R.drawable.pause_button);
+            stopButton.setVisibility(View.VISIBLE);
+            playButton.setVisibility(View.GONE);
         });
         stopButton.setOnClickListener(v -> {
             mediaPlayer.pause();
-            stopButton.setBackgroundResource(R.drawable.play_button);
+            stopButton.setVisibility(View.GONE);
+            playButton.setVisibility(View.VISIBLE);
         });
 
     }
