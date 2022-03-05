@@ -26,7 +26,6 @@ public class CheckSongActivity extends AppCompatActivity {
     private Button stopButton, playButton, addSongButton;
     private TextView startTxt, endTxt, songNameTxt;
     private SeekBar seekBar;
-    private BarVisualizer visualizer;
 
     String someName;
     public static final String EXTRA_NAME = "song_name";
@@ -46,7 +45,6 @@ public class CheckSongActivity extends AppCompatActivity {
         endTxt = findViewById(R.id.endTxt);
         songNameTxt = findViewById(R.id.songNameTxt);
         seekBar = findViewById(R.id.seekBar);
-        visualizer = findViewById(R.id.blast);
         addSongButton = findViewById(R.id.addSongButton);
 
         if(mediaPlayer != null){
@@ -65,30 +63,30 @@ public class CheckSongActivity extends AppCompatActivity {
         someName = mySongs.get(position).getName();
         songNameTxt.setText(someName);
 
-        upDateSeekBar = new Thread(){
-            @Override
-            public void run() {
-                int totalDuration = mediaPlayer.getDuration();
-                int currentPosition = 0;
-
-                while(currentPosition<totalDuration){
-                    try {
-                        sleep(500);
-                        currentPosition = mediaPlayer.getCurrentPosition();
-                        seekBar.setProgress(currentPosition);
-                    }
-                    catch (InterruptedException | IllegalStateException e){
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-
-        seekBar.setMax(mediaPlayer.getDuration());
-        upDateSeekBar.start();
-        seekBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.purple), PorterDuff.Mode.MULTIPLY);
-        seekBar.getThumb().setColorFilter(getResources().getColor(R.color.purple), PorterDuff.Mode.SRC_IN);
-
+//        upDateSeekBar = new Thread(){
+//            @Override
+//            public void run() {
+//                int totalDuration = mediaPlayer.getDuration();
+//                int currentPosition = 0;
+//
+//                while(currentPosition<totalDuration){
+//                    try {
+//                        sleep(500);
+//                        currentPosition = mediaPlayer.getCurrentPosition();
+//                        seekBar.setProgress(currentPosition);
+//                    }
+//                    catch (InterruptedException | IllegalStateException e){
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        };
+//
+//        seekBar.setMax(mediaPlayer.getDuration());
+//        upDateSeekBar.start();
+//        seekBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.purple), PorterDuff.Mode.MULTIPLY);
+//        seekBar.getThumb().setColorFilter(getResources().getColor(R.color.purple), PorterDuff.Mode.SRC_IN);
+//
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -125,7 +123,6 @@ public class CheckSongActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
         mediaPlayer.start();
         playButton.setVisibility(View.GONE);
-        startAnimation(addSongButton);
 
         playButton.setOnClickListener(v -> {
             mediaPlayer.start();
@@ -140,14 +137,6 @@ public class CheckSongActivity extends AppCompatActivity {
 
     }
 
-    public void startAnimation(View view){
-        ObjectAnimator animator = ObjectAnimator.ofFloat(addSongButton, "rotation",0f,360f);
-        animator.setDuration(1000);
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(animator);
-        animatorSet.start();
-
-    }
 
     public String createTime (int duration){
         String time = "";
