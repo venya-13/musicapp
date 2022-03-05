@@ -24,10 +24,12 @@ import android.widget.TextView;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class ownMusic extends AppCompatActivity {
     private ListView listViewSong;
-    private EditText searchOwnMusic;
+    private SearchView searchOwnMusic;
 
     final ArrayList<File> mySongs = findSong(Environment.getExternalStorageDirectory());
 
@@ -46,9 +48,39 @@ public class ownMusic extends AppCompatActivity {
 
         displaySongs();
 
+//        searchOwnMusic.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String s) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                filteredList(newText);
+//                return true;
+//            }
+//        });
+
     }
 
 
+//    private void filteredList(String text) {
+//        List<File> filteredList = new ArrayList<>();
+//
+//        for (File item: songList){
+//            if (item.getName().toLowerCase().contains(text.toLowerCase())){
+//                filteredList.add(item);
+//            }
+//        }
+//        addItemsToList(filteredList);
+//    }
+//
+//    private void addItemsToList(List<File> filteredList) {
+//        songList = (ArrayList<File>) filteredList;
+//
+//    }
+//
+//
     public ArrayList<File> findSong(File file){
         ArrayList<File> songList = new ArrayList<>();
 
@@ -92,6 +124,8 @@ public class ownMusic extends AppCompatActivity {
         });
     }
 
+
+
     class customAdapter extends BaseAdapter{
         @Override
         public int getCount() {
@@ -119,5 +153,7 @@ public class ownMusic extends AppCompatActivity {
             return myView;
         }
     }
+
+
 
 }

@@ -100,6 +100,29 @@
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/pause_button"></Button>
 
+            <ImageView
+                android:id="@+id/center"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerHorizontal="true"
+                android:visibility="invisible"></ImageView>
+
+            <Button
+                android:id="@+id/skipSong"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_toRightOf="@+id/center"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/skip_button"></Button>
+
+            <Button
+                android:id="@+id/goBackButton"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_toLeftOf="@+id/center"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/go_back_button"></Button>
+
         </RelativeLayout>
     </LinearLayout>
 

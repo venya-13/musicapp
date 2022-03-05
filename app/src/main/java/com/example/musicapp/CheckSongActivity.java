@@ -1,5 +1,6 @@
 package com.example.musicapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.Animator;
@@ -11,6 +12,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -23,7 +25,7 @@ import java.util.ArrayList;
 
 public class CheckSongActivity extends AppCompatActivity {
 
-    private Button stopButton, playButton, addSongButton;
+    private Button stopButton, playButton, addSongButton, goBackButton, skipSong;
     private TextView startTxt, endTxt, songNameTxt;
     private SeekBar seekBar;
 
@@ -33,6 +35,19 @@ public class CheckSongActivity extends AppCompatActivity {
     int position;
     ArrayList<File> mySongs;
     Thread upDateSeekBar;
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId()==android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +61,14 @@ public class CheckSongActivity extends AppCompatActivity {
         songNameTxt = findViewById(R.id.songNameTxt);
         seekBar = findViewById(R.id.seekBar);
         addSongButton = findViewById(R.id.addSongButton);
+        skipSong = findViewById(R.id.skipSong);
+        goBackButton = findViewById(R.id.goBackButton);
 
         if(mediaPlayer != null){
             mediaPlayer.stop();
             mediaPlayer.release();
         }
+
 
         Intent i = getIntent();
         Bundle bundle = i.getExtras();
@@ -63,30 +81,22 @@ public class CheckSongActivity extends AppCompatActivity {
         someName = mySongs.get(position).getName();
         songNameTxt.setText(someName);
 
-//        upDateSeekBar = new Thread(){
-//            @Override
-//            public void run() {
-//                int totalDuration = mediaPlayer.getDuration();
-//                int currentPosition = 0;
-//
-//                while(currentPosition<totalDuration){
-//                    try {
-//                        sleep(500);
-//                        currentPosition = mediaPlayer.getCurrentPosition();
-//                        seekBar.setProgress(currentPosition);
-//                    }
-//                    catch (InterruptedException | IllegalStateException e){
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        };
-//
-//        seekBar.setMax(mediaPlayer.getDuration());
-//        upDateSeekBar.start();
-//        seekBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.purple), PorterDuff.Mode.MULTIPLY);
-//        seekBar.getThumb().setColorFilter(getResources().getColor(R.color.purple), PorterDuff.Mode.SRC_IN);
-//
+        final Handler handler = new Handler();
+        final int delay = 1000;
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                String currentTime = createTime(mediaPlayer.getCurrentPosition());
+                startTxt.setText(currentTime);
+                handler.postDelayed(this,delay);
+            }
+        }, delay);
+
+
+//        String endTime = createTime(mediaPlayer.getDuration());
+//        endTxt.setText(endTime);
+
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -105,24 +115,32 @@ public class CheckSongActivity extends AppCompatActivity {
             }
         });
 
-        String endTime = createTime(mediaPlayer.getDuration());
-        endTxt.setText(endTime);
-
-        final Handler handler = new Handler();
-        final int delay = 1000;
-
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                String currentTime = createTime(mediaPlayer.getCurrentPosition());
-                startTxt.setText(currentTime);
-                handler.postDelayed(this,delay);
-            }
-        }, delay);
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
         mediaPlayer.start();
         playButton.setVisibility(View.GONE);
+
+        upDateSeekBar = new Thread(){
+            @Override
+            public void run() {
+                int totalDuration = mediaPlayer.getDuration();
+                int currentPosition = 0;
+
+                while(currentPosition<totalDuration){
+                    try {
+                        sleep(500);
+                        currentPosition = mediaPlayer.getCurrentPosition();
+                        seekBar.setProgress(currentPosition);
+                    }
+                    catch (InterruptedException | IllegalStateException e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+
+        seekBar.setMax(mediaPlayer.getDuration());
+        upDateSeekBar.start();
 
         playButton.setOnClickListener(v -> {
             mediaPlayer.start();
@@ -135,6 +153,32 @@ public class CheckSongActivity extends AppCompatActivity {
             playButton.setVisibility(View.VISIBLE);
         });
 
+        skipSong.setOnClickListener(v -> {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            position = ((position+1)%mySongs.size());
+            Uri u = Uri.parse(mySongs.get(position).toString());
+            mediaPlayer = MediaPlayer.create(getApplicationContext(), u);
+            someName = mySongs.get(position).getName();
+            songNameTxt.setText(someName);
+            mediaPlayer.start();
+            stopButton.setVisibility(View.VISIBLE);
+            playButton.setVisibility(View.GONE);
+        });
+
+        goBackButton.setOnClickListener(v -> {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            position = ((position-1)%mySongs.size());
+            Uri u = Uri.parse(mySongs.get(position).toString());
+            mediaPlayer = MediaPlayer.create(getApplicationContext(), u);
+            someName = mySongs.get(position).getName();
+            songNameTxt.setText(someName);
+            mediaPlayer.start();
+            stopButton.setVisibility(View.VISIBLE);
+            playButton.setVisibility(View.GONE);
+        });
+
     }
 
 
@@ -143,7 +187,7 @@ public class CheckSongActivity extends AppCompatActivity {
         int minutes = duration/1000/60;
         int seconds = duration/1000%60;
 
-        time += minutes + ":";
+        time += minutes+":";
 
         if (seconds < 10){
             time += "0";
