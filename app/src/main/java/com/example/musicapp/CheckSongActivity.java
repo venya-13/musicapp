@@ -94,8 +94,6 @@ public class CheckSongActivity extends AppCompatActivity {
         }, delay);
 
 
-//        String endTime = createTime(mediaPlayer.getDuration());
-//        endTxt.setText(endTime);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -119,6 +117,9 @@ public class CheckSongActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
         mediaPlayer.start();
         playButton.setVisibility(View.GONE);
+
+        String endTime = createTime(mediaPlayer.getDuration());
+        endTxt.setText(endTime);
 
         upDateSeekBar = new Thread(){
             @Override
@@ -177,6 +178,11 @@ public class CheckSongActivity extends AppCompatActivity {
             mediaPlayer.start();
             stopButton.setVisibility(View.VISIBLE);
             playButton.setVisibility(View.GONE);
+        });
+
+        addSongButton.setOnClickListener(v ->{
+            Intent intent = new Intent(CheckSongActivity.this, recordOwnSong.class);
+            startActivity(intent);
         });
 
     }

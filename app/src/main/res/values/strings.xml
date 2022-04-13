@@ -4,9 +4,13 @@
     <string name="youtubeButton">Get music from youtube</string>
     <string name="ownMusicButton">Take your own music</string>
     <string name="ownMusicSearchText">Search your music</string>
-    <string name="youtubeMusicSearchText">Search youtube music</string>
+    <string name="youtubeMusicSearchText">Add your youtube link </string>
     <string name="dialogHeader">Be careful!</string>
     <string name="dialogWarning">Due to the fact that you have not given permission to use your files or voice recordings, the application will not be able to perform all the functionality. If you want to fix it, click the button below.</string>
     <string name="permissionRequestButton">Request permission!</string>
     <string name="SearchText">Search your song</string>
+    <string name="ownSongName">Name of your song</string>
+    <string name="startRecordButton">Press to start record</string>
+    <string name="finishRecordButton">Press to finish it</string>
+    <string name="resetButton">Press to reset recorder</string>
 </resources>

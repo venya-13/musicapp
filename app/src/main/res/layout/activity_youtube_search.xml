@@ -7,15 +7,17 @@
     android:background="@color/background"
     tools:context=".YoutubeSearch">
 
-    <EditText
-        android:id="@+id/searchYoutubeMusic"
+    <SearchView
+        android:id="@+id/searchOwnMusic"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/visor"
+        android:backgroundTint="@color/purple"
+        android:hint="@string/youtubeMusicSearchText" />
+
+    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/visor"
-        android:fontFamily="@font/monofett"
-        android:hint="@string/youtubeMusicSearchText"
-        android:textColor="@color/purple"
-        android:textColorHint="@color/purple"
-        android:textSize="30sp" />
+        android:layout_marginTop="50dp"/>
 
 </RelativeLayout>

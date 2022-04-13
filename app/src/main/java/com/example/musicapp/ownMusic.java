@@ -35,6 +35,7 @@ public class ownMusic extends AppCompatActivity {
 
     String[] items = new String[mySongs.size()];
 
+    int searchFilter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,6 @@ public class ownMusic extends AppCompatActivity {
 
         listViewSong = findViewById(R.id.listViewSong);
         searchOwnMusic = findViewById(R.id.searchOwnMusic);
-
 
         displaySongs();
 
@@ -67,7 +67,7 @@ public class ownMusic extends AppCompatActivity {
 //    private void filteredList(String text) {
 //        List<File> filteredList = new ArrayList<>();
 //
-//        for (File item: songList){
+//        for (File item: mySongs){
 //            if (item.getName().toLowerCase().contains(text.toLowerCase())){
 //                filteredList.add(item);
 //            }
@@ -75,16 +75,17 @@ public class ownMusic extends AppCompatActivity {
 //        addItemsToList(filteredList);
 //    }
 //
-//    private void addItemsToList(List<File> filteredList) {
-//        songList = (ArrayList<File>) filteredList;
+//    private void addItemsToList() {
+//        searchFilter += 1;
 //
 //    }
-//
-//
+
+
     public ArrayList<File> findSong(File file){
         ArrayList<File> songList = new ArrayList<>();
 
         File[] files = file.listFiles();
+
 
         for(File singleFile: files){
             if (singleFile.isDirectory() && !singleFile.isHidden()){

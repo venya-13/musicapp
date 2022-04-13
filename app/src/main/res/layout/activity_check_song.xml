@@ -27,12 +27,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="280dp">
+
             <Button
                 android:id="@+id/addSongButton"
-                android:layout_marginBottom="8dp"
                 android:layout_width="250dp"
                 android:layout_height="250dp"
                 android:layout_centerHorizontal="true"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/add_music_button" />
         </RelativeLayout>
 
