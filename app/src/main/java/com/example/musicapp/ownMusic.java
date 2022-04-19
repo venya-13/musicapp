@@ -79,7 +79,6 @@ public class ownMusic extends AppCompatActivity {
 
     public void setFilteredList(ArrayList<File> filteredList){
         mySongs = filteredList;
-        //notifyDataSetChanged();
     }
 
     public ArrayList<File> findSong(File file){
@@ -108,7 +107,7 @@ public class ownMusic extends AppCompatActivity {
 //        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
 //        listViewSong.setAdapter(myAdapter);
 
-        customAdapter customAdapter = new customAdapter();
+        CustomAdapter customAdapter = new CustomAdapter();
         listViewSong.setAdapter(customAdapter);
 
         listViewSong.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -131,7 +130,7 @@ public class ownMusic extends AppCompatActivity {
 
 
 
-    class customAdapter extends BaseAdapter{
+    class CustomAdapter extends BaseAdapter{
         @Override
         public int getCount() {
             return items.length;
