@@ -18,9 +18,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Button youtubeMusicButton, ownMusicButton, requestPermissionButton;
-    private static final int permissionsRequestCodeRecord = 1;
-    private static final int permissionsRequestCodeOwnMusic = 2;
-    private int grantedPermission = 0;
     private String[] PERMISSIONS;
 
     @Override
