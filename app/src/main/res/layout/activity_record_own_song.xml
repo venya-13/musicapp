@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context=".CheckSongActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="280dp">
+
+            <EditText
+                android:id="@+id/finalSongName"
+                android:layout_width="300dp"
+                android:layout_height="25dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="200dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/purple"
+                android:text="@string/ownSongName"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                tools:ignore="TouchTargetSizeCheck" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
+
+            <Button
+                android:id="@+id/startRecordButton"
+                android:layout_width="120dp"
+                android:layout_height="70dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/button1"
+                android:text="@string/startRecordButton"
+                tools:ignore="DuplicateClickableBoundsCheck"></Button>
+
+            <Button
+                android:id="@+id/resetRecord"
+                android:layout_width="120dp"
+                android:layout_height="70dp"
+                android:layout_centerHorizontal="true"
+                android:text="@string/resetButton"
+                android:background="@drawable/button1"></Button>
+
+            <Button
+                android:id="@+id/finishRecord"
+                android:layout_width="120dp"
+                android:layout_height="70dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="80dp"
+                android:text="@string/finishRecordButton"
+                android:background="@drawable/button1"></Button>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

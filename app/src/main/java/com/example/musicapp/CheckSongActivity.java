@@ -183,6 +183,7 @@ public class CheckSongActivity extends AppCompatActivity {
         addSongButton.setOnClickListener(v ->{
             Intent intent = new Intent(CheckSongActivity.this, recordOwnSong.class);
             startActivity(intent);
+            mediaPlayer.pause();
         });
 
     }

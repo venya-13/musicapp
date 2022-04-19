@@ -1,29 +1,27 @@
 package com.example.musicapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    private Button youtubeMusicButton,ownMusicButton, requestPermissionButton;
+    private Button youtubeMusicButton, ownMusicButton, requestPermissionButton;
     private static final int permissionsRequestCodeRecord = 1;
     private static final int permissionsRequestCodeOwnMusic = 2;
     private int grantedPermission = 0;
+    private String[] PERMISSIONS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,85 +32,85 @@ public class MainActivity extends AppCompatActivity {
         ownMusicButton = findViewById(R.id.ownMusicButton);
         requestPermissionButton = findViewById(R.id.requestPermissionButton);
 
+        PERMISSIONS = new String[]{
+                Manifest.permission.RECORD_AUDIO,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+        };
+
         youtubeMusicButton.setVisibility(View.GONE);
         ownMusicButton.setVisibility(View.GONE);
+        requestPermissionButton.setVisibility(View.VISIBLE);
 
-        checkPermission();
+        requestPermission();
 
 
         youtubeMusicButton.setOnClickListener(v -> {
-                Intent intent = new Intent(MainActivity.this, YoutubeSearch.class);
-                startActivity(intent);
+            Intent intent = new Intent(MainActivity.this, YoutubeSearch.class);
+            startActivity(intent);
         });
 
         ownMusicButton.setOnClickListener(v -> {
-                Intent intent = new Intent(MainActivity.this, ownMusic.class);
-                startActivity(intent);
+            Intent intent = new Intent(MainActivity.this, ownMusic.class);
+            startActivity(intent);
         });
 
         requestPermissionButton.setOnClickListener(v -> {
-            checkPermission();
+            requestPermission();
         });
 
     }
 
-
-    private void checkPermission() {
-        int grantedPermission = 0;
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
-            grantedPermission += 1;
+    private void requestPermission(){
+        if (!hasPermissions(MainActivity.this,PERMISSIONS)){
+            ActivityCompat.requestPermissions(MainActivity.this,PERMISSIONS,1);
         } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, permissionsRequestCodeRecord);
-        }
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            grantedPermission += 1;
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, permissionsRequestCodeOwnMusic);
-        }
-
-        if (grantedPermission == 2){
-            ownMusicButton.setVisibility(View.VISIBLE);
-            youtubeMusicButton.setVisibility(View.VISIBLE);
             requestPermissionButton.setVisibility(View.GONE);
+            youtubeMusicButton.setVisibility(View.VISIBLE);
+            ownMusicButton.setVisibility(View.VISIBLE);
         }
+    }
+
+
+    private boolean hasPermissions(Context context, String... PERMISSIONS) {
+        if(context != null && PERMISSIONS != null){
+
+            for (String permission: PERMISSIONS){
+                if (ActivityCompat.checkSelfPermission(context,permission) != PackageManager.PERMISSION_GRANTED){
+                    return false;
+                } else {
+                    requestPermissionButton.setVisibility(View.GONE);
+                    youtubeMusicButton.setVisibility(View.VISIBLE);
+                    ownMusicButton.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+
+        return true;
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        int grantedPermission2 = 0;
-        switch (requestCode) {
+        int permissionsAmount = 0;
+        if(requestCode == 1){
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                permissionsAmount += 1;
+            }else{
+                showPermissionDialog();
+            }
+            if (grantResults[1] == PackageManager.PERMISSION_GRANTED){
+                permissionsAmount += 1;
+            }else{
+                showPermissionDialog();
+            }
 
-            case permissionsRequestCodeRecord:
-
-                for (int i = 0; i < grantResults.length; i++) {
-                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                        showPermissionDialog();
-                    } else{
-                        grantedPermission2 += 1;
-                    }
-                }
-                return;
-
-            case permissionsRequestCodeOwnMusic:
-
-                for (int i = 0; i < grantResults.length; i++) {
-                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                        showPermissionDialog();
-                    } else{
-                        grantedPermission2 += 1;
-                    }
-                }
-                return;
         }
-        if (grantedPermission2 == 2){
-            ownMusicButton.setVisibility(View.VISIBLE);
-            youtubeMusicButton.setVisibility(View.VISIBLE);
-            requestPermissionButton.setVisibility(View.GONE);
+        if (permissionsAmount == 2){
+            requestPermission();
         }
 
     }
+
 
     private void showPermissionDialog() {
         Dialog dialog = new Dialog(this);

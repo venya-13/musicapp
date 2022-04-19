@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -31,11 +32,9 @@ public class ownMusic extends AppCompatActivity {
     private ListView listViewSong;
     private SearchView searchOwnMusic;
 
-    final ArrayList<File> mySongs = findSong(Environment.getExternalStorageDirectory());
+    ArrayList<File> mySongs = findSong(Environment.getExternalStorageDirectory());
 
     String[] items = new String[mySongs.size()];
-
-    int searchFilter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,41 +44,43 @@ public class ownMusic extends AppCompatActivity {
 
         listViewSong = findViewById(R.id.listViewSong);
         searchOwnMusic = findViewById(R.id.searchOwnMusic);
+        searchOwnMusic.clearFocus();
+        searchOwnMusic.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                filterList(s);
+                return true;
+            }
+        });
 
         displaySongs();
 
-//        searchOwnMusic.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String s) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                filteredList(newText);
-//                return true;
-//            }
-//        });
-
     }
 
+    private void filterList(String text) {
+        ArrayList<File> filteredList = new ArrayList<>();
+        for (File file : mySongs){
+            if (file.getName().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(file);
+            }
+        }
 
-//    private void filteredList(String text) {
-//        List<File> filteredList = new ArrayList<>();
-//
-//        for (File item: mySongs){
-//            if (item.getName().toLowerCase().contains(text.toLowerCase())){
-//                filteredList.add(item);
-//            }
-//        }
-//        addItemsToList(filteredList);
-//    }
-//
-//    private void addItemsToList() {
-//        searchFilter += 1;
-//
-//    }
+        if (filteredList.isEmpty()){
+            Toast.makeText(this, "no data found", Toast.LENGTH_SHORT).show();
+        } else{
+            setFilteredList(filteredList);
+        }
+    }
 
+    public void setFilteredList(ArrayList<File> filteredList){
+        mySongs = filteredList;
+        //notifyDataSetChanged();
+    }
 
     public ArrayList<File> findSong(File file){
         ArrayList<File> songList = new ArrayList<>();
@@ -114,6 +115,9 @@ public class ownMusic extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Uri uri = Uri.parse(mySongs.get(position).toString());
+
+                transmissionInformation.getInstance().setUri(uri);
+
 
                 String songName = (String) listViewSong.getItemAtPosition(position);
                 startActivity(new Intent(getApplicationContext(), CheckSongActivity.class)
