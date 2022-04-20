@@ -61,8 +61,8 @@
                 android:layout_height="70dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="80dp"
-                android:text="@string/finishRecordButton"
-                android:background="@drawable/button1"></Button>
+                android:background="@drawable/button1"
+                android:text="@string/finishRecordButton"></Button>
 
 
         </RelativeLayout>

@@ -5,6 +5,7 @@ import static java.lang.Thread.sleep;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -87,7 +88,8 @@ public class recordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
 
 
     public void finishRecord (){
-        Toast.makeText(this, "Hello", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(recordOwnSong.this, MergeFiles.class);
+        startActivity(intent);
     }
 
 
@@ -128,6 +130,9 @@ public class recordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
         ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
         File musicDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
         File file = new File(musicDirectory, "recordingFile" + ".mp3");
+
+        transmissionInformation.getInstance().setFile(file);
+
         return file.getPath();
     }
 

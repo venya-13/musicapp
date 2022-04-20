@@ -13,4 +13,9 @@
     <string name="startRecordButton">Press to start record</string>
     <string name="finishRecordButton">Press to finish it</string>
     <string name="resetButton">Press to reset recorder</string>
+    <string name="emailTxt">Email Address</string>
+    <string name="passwordTxt">Password</string>
+    <string name="loginTxt">Login</string>
+    <string name="forgetPasswordTxt">Forget Password</string>
+    <string name="registerTxt">Register</string>
 </resources>

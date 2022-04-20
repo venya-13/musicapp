@@ -15,6 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Musicapp">
         <activity
+            android:name=".Register"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".MergeFiles"
+            android:exported="false" />
+        <activity
             android:name=".recordOwnSong"
             android:exported="false" />
         <activity
