@@ -58,12 +58,13 @@ public class ownMusic extends AppCompatActivity {
             }
         });
 
-        displaySongs();
+        displaySongs(mySongs);
 
     }
 
     private void filterList(String text) {
         ArrayList<File> filteredList = new ArrayList<>();
+
         for (File file : mySongs){
             if (file.getName().toLowerCase().contains(text.toLowerCase())){
                 filteredList.add(file);
@@ -71,21 +72,21 @@ public class ownMusic extends AppCompatActivity {
         }
 
         if (filteredList.isEmpty()){
-            Toast.makeText(this, "no data found", Toast.LENGTH_SHORT).show();
+            setFilteredList(mySongs);
         } else{
             setFilteredList(filteredList);
         }
     }
 
     public void setFilteredList(ArrayList<File> filteredList){
-        mySongs = filteredList;
+        displaySongs(filteredList);
     }
 
     public ArrayList<File> findSong(File file){
+
         ArrayList<File> songList = new ArrayList<>();
 
         File[] files = file.listFiles();
-
 
         for(File singleFile: files){
             if (singleFile.isDirectory() && !singleFile.isHidden()){
@@ -100,27 +101,25 @@ public class ownMusic extends AppCompatActivity {
         return songList;
     }
 
-    void displaySongs(){
-        for (int i = 0; i < mySongs.size(); i++){
-            items[i] = mySongs.get(i).getName().toString();
+    void displaySongs(ArrayList<File> songs){
+        for (int i = 0; i < songs.size(); i++){
+            items[i] = songs.get(i).getName().toString();
         }
-//        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-//        listViewSong.setAdapter(myAdapter);
 
         CustomAdapter customAdapter = new CustomAdapter();
         listViewSong.setAdapter(customAdapter);
 
+
         listViewSong.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Uri uri = Uri.parse(mySongs.get(position).toString());
+                Uri uri = Uri.parse(songs.get(position).toString());
 
                 transmissionInformation.getInstance().setUri(uri);
 
-
                 String songName = (String) listViewSong.getItemAtPosition(position);
                 startActivity(new Intent(getApplicationContext(), CheckSongActivity.class)
-                .putExtra("songs", mySongs)
+                .putExtra("songs", songs)
                 .putExtra("song name", songName)
                 .putExtra("position", position));
 
@@ -153,6 +152,7 @@ public class ownMusic extends AppCompatActivity {
             TextView songName = myView.findViewById(R.id.songName);
             songName.setSelected(true);
             songName.setText(items[i]);
+            notifyDataSetChanged();
 
             return myView;
         }
