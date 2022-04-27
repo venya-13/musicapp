@@ -26,6 +26,7 @@
         android:backgroundTint="@color/purple"
         android:hint="@string/emailTxt"
         android:textColorHint="@color/purple"
+        android:textColor="@color/purple"
         android:textSize="24dp" />
 
     <EditText
@@ -35,6 +36,7 @@
         android:layout_below="@id/emailTxt"
         android:hint="@string/passwordTxt"
         android:textSize="24dp"
+        android:textColor="@color/purple"
         android:textColorHint="@color/purple"
         android:backgroundTint="@color/purple"
         android:layout_marginTop="50dp"/>
