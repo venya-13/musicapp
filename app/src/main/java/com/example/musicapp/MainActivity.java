@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Button youtubeMusicButton, ownMusicButton, requestPermissionButton;
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ownMusicButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ownMusic.class);
+            Intent intent = new Intent(MainActivity.this, OwnMusic.class);
             startActivity(intent);
         });
 

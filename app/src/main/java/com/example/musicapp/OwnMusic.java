@@ -3,33 +3,22 @@ package com.example.musicapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
-public class ownMusic extends AppCompatActivity {
+public class OwnMusic extends AppCompatActivity {
     private ListView listViewSong;
     private SearchView searchOwnMusic;
 
@@ -118,8 +107,8 @@ public class ownMusic extends AppCompatActivity {
                 Log.d("Register class", "onFailure: "+ musicPath);
                 Uri uri = Uri.parse(songs.get(position).toString());
 
-                transmissionInformation.getInstance().setUri(uri);
-                transmissionInformation.getInstance().setString2(musicPath);
+                TransmissionInformation.getInstance().setUri(uri);
+                TransmissionInformation.getInstance().setString2(musicPath);
 
                 String songName = (String) listViewSong.getItemAtPosition(position);
                 startActivity(new Intent(getApplicationContext(), CheckSongActivity.class)

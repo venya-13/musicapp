@@ -15,8 +15,6 @@ import zeroonezero.android.audio_mixer.input.BlankAudioInput;
 import zeroonezero.android.audio_mixer.input.GeneralAudioInput;
 
 import java.io.File;
-import java.io.FileDescriptor;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 public class MergeFiles extends AppCompatActivity{
@@ -31,9 +29,9 @@ public class MergeFiles extends AppCompatActivity{
         progressDialog.show();
         //progressDialog.setContentView(R.layout.progress_dialog);
 
-        File recordedVoice = transmissionInformation.getInstance().getFile();
-        Uri musicUri = transmissionInformation.getInstance().getUri();
-        String recordVoicePath = transmissionInformation.getInstance().getString();
+        File recordedVoice = TransmissionInformation.getInstance().getFile();
+        Uri musicUri = TransmissionInformation.getInstance().getUri();
+        String recordVoicePath = TransmissionInformation.getInstance().getString();
         Uri voiceRecordUri = Uri.parse(recordVoicePath);
 
 

@@ -27,6 +27,7 @@
         android:backgroundTint="@color/purple"
         android:hint="@string/emailTxt"
         android:textColorHint="@color/purple"
+        android:textColor="@color/purple"
         android:textSize="24dp" />
 
     <EditText
@@ -38,6 +39,7 @@
         android:textSize="24dp"
         android:textColorHint="@color/purple"
         android:backgroundTint="@color/purple"
+        android:textColor="@color/purple"
         android:layout_marginTop="50dp"/>
 
     <Button

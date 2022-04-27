@@ -25,13 +25,13 @@
             android:name=".MergeFiles"
             android:exported="false" />
         <activity
-            android:name=".recordOwnSong"
+            android:name=".RecordOwnSong"
             android:exported="false" />
         <activity
             android:name=".CheckSongActivity"
             android:exported="false" />
         <activity
-            android:name=".ownMusic"
+            android:name=".OwnMusic"
             android:exported="false" />
         <activity
             android:name=".YoutubeSearch"

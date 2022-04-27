@@ -1,27 +1,24 @@
 package com.example.musicapp;
 
 import android.net.Uri;
-import android.util.Log;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 
-public class transmissionInformation extends MainActivity {
+public class TransmissionInformation extends MainActivity {
     private String Something;
     private int Number;
     private Uri Uri;
     private File File;
 
-    private transmissionInformation(){
+    private TransmissionInformation(){
 
     }
 
-    private static transmissionInformation instance;
+    private static TransmissionInformation instance;
 
-    public static transmissionInformation getInstance(){
+    public static TransmissionInformation getInstance(){
         if(instance == null){
-            instance = new transmissionInformation();
+            instance = new TransmissionInformation();
         }
         return instance;
     }

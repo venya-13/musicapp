@@ -7,30 +7,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileDescriptor;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
-public class recordOwnSong extends AppCompatActivity implements MediaPlayer.OnCompletionListener {
+public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCompletionListener {
     private Button startRecordButton, resetRecord, finishRecord;
     private EditText finalSongName;
     MediaRecorder mediaRecorder;
@@ -59,7 +48,7 @@ public class recordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
         finishRecord = findViewById(R.id.finishRecord);
         finalSongName = findViewById(R.id.finalSongName);
 
-        Uri uri = transmissionInformation.getInstance().getUri();
+        Uri uri = TransmissionInformation.getInstance().getUri();
 
         mediaPlayer2 = MediaPlayer.create(getApplicationContext(), uri);
 
@@ -94,7 +83,7 @@ public class recordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
 
 
     public void finishRecord (){
-        Intent intent = new Intent(recordOwnSong.this, MergeFiles.class);
+        Intent intent = new Intent(RecordOwnSong.this, MergeFiles.class);
         startActivity(intent);
         mediaPlayer2.stop();
         mediaRecorder.stop();
@@ -119,7 +108,7 @@ public class recordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
 
             String recordVoice = recordFile.getPath();
 
-            transmissionInformation.getInstance().setString(recordVoice);
+            TransmissionInformation.getInstance().setString(recordVoice);
 
             Toast.makeText(this, "Recording is start", Toast.LENGTH_LONG).show();
         }
@@ -151,7 +140,7 @@ public class recordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
 
         String path = file.getPath();
 
-        transmissionInformation.getInstance().setFile(file);
+        TransmissionInformation.getInstance().setFile(file);
 
 
         return file.getPath();

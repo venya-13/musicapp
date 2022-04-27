@@ -3,11 +3,7 @@ package com.example.musicapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.animation.Animator;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,8 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
-import com.gauravk.audiovisualizer.visualizer.BarVisualizer;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -181,7 +175,7 @@ public class CheckSongActivity extends AppCompatActivity {
         });
 
         addSongButton.setOnClickListener(v ->{
-            Intent intent = new Intent(CheckSongActivity.this, recordOwnSong.class);
+            Intent intent = new Intent(CheckSongActivity.this, RecordOwnSong.class);
             startActivity(intent);
             mediaPlayer.pause();
         });
