@@ -2,41 +2,78 @@ package com.example.musicapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.net.Uri;
 
 import android.os.Bundle;
 import android.os.Environment;
 import android.widget.Toast;
 
-import com.github.piasy.audio_mixer.AudioMixer;
+import zeroonezero.android.audio_mixer.AudioMixer;
+import zeroonezero.android.audio_mixer.input.AudioInput;
+import zeroonezero.android.audio_mixer.input.BlankAudioInput;
+import zeroonezero.android.audio_mixer.input.GeneralAudioInput;
 
 import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.IOException;
 
-public class MergeFiles extends AppCompatActivity implements {
+public class MergeFiles extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_merge_files);
 
-        Uri uri = transmissionInformation.getInstance().getUri();
-        File recordedVoice = transmissionInformation.getInstance().getFile();
+        ProgressDialog progressDialog;
+        progressDialog = new ProgressDialog(MergeFiles.this);
+        progressDialog.show();
+        //progressDialog.setContentView(R.layout.progress_dialog);
 
-        AudioInput input1 = new GeneralAudioInput(uri);
+        File recordedVoice = transmissionInformation.getInstance().getFile();
+        Uri musicUri = transmissionInformation.getInstance().getUri();
+        String recordVoicePath = transmissionInformation.getInstance().getString();
+        Uri voiceRecordUri = Uri.parse(recordVoicePath);
+
+
+        AudioInput input1;
+        AudioInput input2;
+
+        try {
+
+            input1 = new GeneralAudioInput(MergeFiles.this, musicUri,null);
+            input2 = new GeneralAudioInput(MergeFiles.this, voiceRecordUri,null);
+        }catch (IOException exception){
+            Toast.makeText(this, "Bad inputs", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
         input1.setVolume(0.5f); //Optional
         // It will produce a blank portion of 3 seconds between input1 and input2 if mixing type is sequential.
         // But it will does nothing in parallel mixing.
         AudioInput blankInput = new BlankAudioInput(3000000); //
-        AudioInput input2 = new GeneralAudioInput(recordedVoice);
+
         input2.setStartTimeUs(3000000); //Optional
         input2.setEndTimeUs(9000000); //Optional
-        input2.setStartOffsetUs(5000000); //Optional. It is needed to start mixing the input at a certain time.
+        ((GeneralAudioInput) input2).setStartOffsetUs(5000000); //Optional. It is needed to start mixing the input at a certain time.
         String outputPath = Environment.getDownloadCacheDirectory().getAbsolutePath()
                 +"/" +"audio_mixer_output.mp3"; // for example
-        final AudioMixer audioMixer = new AudioMixer(outputPath);
-        audioMixer.addDataSource(input1);
-        audioMixer.addDataSource(blankInput);
-        audioMixer.addDataSource(input2);
+
+        AudioMixer audioMixer;
+
+        try {
+            audioMixer = new AudioMixer(outputPath);
+            audioMixer.addDataSource(input1);
+            audioMixer.addDataSource(blankInput);
+            audioMixer.addDataSource(input2);
+        } catch (IOException exception){
+            Toast.makeText(this, "Bad output", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
         audioMixer.setSampleRate(44100); // Optional
         audioMixer.setBitRate(128000); // Optional
         audioMixer.setChannelCount(2); // Optional //1(mono) or 2(stereo)
@@ -60,16 +97,22 @@ public class MergeFiles extends AppCompatActivity implements {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(context, "Success!!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MergeFiles.this, "Success!!!", Toast.LENGTH_SHORT).show();
                         audioMixer.release();
                     }
                 });
             }
         });
 
+        try {
+            audioMixer.start();
+        } catch (IOException exception){
+            Toast.makeText(this, "Bad start", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         //it is for setting up the all the things
-        audioMixer.start();
+
 
         /* These getter methods must be called after calling 'start()'*/
         //audioMixer.getOutputSampleRate();

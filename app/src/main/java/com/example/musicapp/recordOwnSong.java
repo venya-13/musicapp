@@ -7,17 +7,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
@@ -90,6 +96,8 @@ public class recordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
     public void finishRecord (){
         Intent intent = new Intent(recordOwnSong.this, MergeFiles.class);
         startActivity(intent);
+        mediaPlayer2.stop();
+        mediaRecorder.stop();
     }
 
 
@@ -104,24 +112,34 @@ public class recordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
             mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
             mediaRecorder.prepare();
             mediaRecorder.start();
+            File recordFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath());
+            mediaRecorder.setOutputFile(recordFile);
 
             mediaPlayer2.start();
+
+            String recordVoice = recordFile.getPath();
+
+            transmissionInformation.getInstance().setString(recordVoice);
 
             Toast.makeText(this, "Recording is start", Toast.LENGTH_LONG).show();
         }
         catch (Exception exception){
             exception.printStackTrace();
+            return;
         }
 
     }
 
     public void stopRecordVoiceWithMusic (){
         mediaRecorder.stop();
+        mediaRecorder.reset();
         mediaRecorder.release();
         mediaRecorder = null;
 
         mediaPlayer2.stop();
+        mediaPlayer2.reset();
         mediaPlayer2.release();
+        mediaPlayer2 = null;
 
         Toast.makeText(this, "Recording is stop", Toast.LENGTH_LONG).show();
     }
@@ -131,7 +149,10 @@ public class recordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
         File musicDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
         File file = new File(musicDirectory, "recordingFile" + ".mp3");
 
+        String path = file.getPath();
+
         transmissionInformation.getInstance().setFile(file);
+
 
         return file.getPath();
     }

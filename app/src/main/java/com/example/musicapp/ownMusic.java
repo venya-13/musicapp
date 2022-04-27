@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -113,9 +114,12 @@ public class ownMusic extends AppCompatActivity {
         listViewSong.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String musicPath = (songs.get(position)).getPath();
+                Log.d("Register class", "onFailure: "+ musicPath);
                 Uri uri = Uri.parse(songs.get(position).toString());
 
                 transmissionInformation.getInstance().setUri(uri);
+                transmissionInformation.getInstance().setString2(musicPath);
 
                 String songName = (String) listViewSong.getItemAtPosition(position);
                 startActivity(new Intent(getApplicationContext(), CheckSongActivity.class)

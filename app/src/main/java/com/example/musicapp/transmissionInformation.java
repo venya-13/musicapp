@@ -26,12 +26,22 @@ public class transmissionInformation extends MainActivity {
         return instance;
     }
 
-    public void setSomething (String param){
+    public void setString (String param){
         Something = param;
 
     }
 
-    public String getSomething (){
+    public String getString (){
+
+        return Something;
+    }
+
+    public void setString2 (String param){
+        Something = param;
+
+    }
+
+    public String getString2 (){
 
         return Something;
     }
