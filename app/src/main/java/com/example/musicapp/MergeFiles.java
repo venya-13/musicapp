@@ -49,12 +49,13 @@ public class MergeFiles extends AppCompatActivity{
         }
 
 
-        input1.setVolume(0.5f); //Optional
+        input1.setVolume(0.5f);
+        input2.setVolume(0.7f);//Optional
         // It will produce a blank portion of 3 seconds between input1 and input2 if mixing type is sequential.
         // But it will does nothing in parallel mixing.
         //AudioInput blankInput = new BlankAudioInput(3000000); //
 
-        input2.setStartTimeUs(3000000); //Optional
+        input2.setStartTimeUs(0100000); //Optional
         input2.setEndTimeUs(musicLength); //Optional
         ((GeneralAudioInput) input2).setStartOffsetUs(5000000); //Optional. It is needed to start mixing the input at a certain time.
         String outputPath = Environment.getExternalStorageDirectory().getAbsolutePath()
