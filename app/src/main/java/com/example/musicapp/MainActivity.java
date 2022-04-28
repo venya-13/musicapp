@@ -18,6 +18,7 @@ import android.widget.ImageView;
 public class MainActivity extends AppCompatActivity {
     private Button youtubeMusicButton, ownMusicButton, requestPermissionButton;
     private String[] PERMISSIONS;
+    private final int RequestCode = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         PERMISSIONS = new String[]{
                 Manifest.permission.RECORD_AUDIO,
-                Manifest.permission.READ_EXTERNAL_STORAGE
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
         };
 
         youtubeMusicButton.setVisibility(View.GONE);
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void requestPermission(){
         if (!hasPermissions(MainActivity.this,PERMISSIONS)){
-            ActivityCompat.requestPermissions(MainActivity.this,PERMISSIONS,1);
+            ActivityCompat.requestPermissions(MainActivity.this,PERMISSIONS,RequestCode);
         } else {
             requestPermissionButton.setVisibility(View.GONE);
             youtubeMusicButton.setVisibility(View.VISIBLE);
@@ -88,20 +90,16 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         int permissionsAmount = 0;
-        if(requestCode == 1){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                permissionsAmount += 1;
-            }else{
-                showPermissionDialog();
+        if(requestCode == RequestCode){
+            for(int res: grantResults) {
+                if (res == PackageManager.PERMISSION_GRANTED) {
+                    permissionsAmount++;
+                } else {
+                    showPermissionDialog();
+                }
             }
-            if (grantResults[1] == PackageManager.PERMISSION_GRANTED){
-                permissionsAmount += 1;
-            }else{
-                showPermissionDialog();
-            }
-
         }
-        if (permissionsAmount == 2){
+        if (permissionsAmount == grantResults.length){
             requestPermission();
         }
 

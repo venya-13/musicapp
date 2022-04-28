@@ -15,17 +15,17 @@ import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
 
 public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCompletionListener {
-    private Button startRecordButton, resetRecord, finishRecord;
+    private ImageView startRecordButton, resetRecord, finishRecord;
     private EditText finalSongName;
     MediaRecorder mediaRecorder;
     MediaPlayer mediaPlayer;
     MediaPlayer mediaPlayer2;
-    int i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,16 +89,15 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
         mediaRecorder.stop();
     }
 
-
-
     public void startRecordWithMusic (){
 
         try {
+
             mediaRecorder = new MediaRecorder();
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-            mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+            mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC_ELD);
             mediaRecorder.setOutputFile(getRecordingFilePath());
-            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
             mediaRecorder.prepare();
             mediaRecorder.start();
             File recordFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath());
@@ -121,12 +120,10 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
 
     public void stopRecordVoiceWithMusic (){
         mediaRecorder.stop();
-        mediaRecorder.reset();
         mediaRecorder.release();
         mediaRecorder = null;
 
         mediaPlayer2.stop();
-        mediaPlayer2.reset();
         mediaPlayer2.release();
         mediaPlayer2 = null;
 
@@ -141,6 +138,7 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
         String path = file.getPath();
 
         TransmissionInformation.getInstance().setFile(file);
+        TransmissionInformation.getInstance().setString2(path);
 
 
         return file.getPath();

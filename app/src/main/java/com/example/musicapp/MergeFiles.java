@@ -29,9 +29,10 @@ public class MergeFiles extends AppCompatActivity{
         progressDialog.show();
         //progressDialog.setContentView(R.layout.progress_dialog);
 
+        int musicLength = TransmissionInformation.getInstance().getNumber();
         File recordedVoice = TransmissionInformation.getInstance().getFile();
         Uri musicUri = TransmissionInformation.getInstance().getUri();
-        String recordVoicePath = TransmissionInformation.getInstance().getString();
+        String recordVoicePath = recordedVoice.toURI().toString();
         Uri voiceRecordUri = Uri.parse(recordVoicePath);
 
 
@@ -51,20 +52,20 @@ public class MergeFiles extends AppCompatActivity{
         input1.setVolume(0.5f); //Optional
         // It will produce a blank portion of 3 seconds between input1 and input2 if mixing type is sequential.
         // But it will does nothing in parallel mixing.
-        AudioInput blankInput = new BlankAudioInput(3000000); //
+        //AudioInput blankInput = new BlankAudioInput(3000000); //
 
         input2.setStartTimeUs(3000000); //Optional
-        input2.setEndTimeUs(9000000); //Optional
+        input2.setEndTimeUs(musicLength); //Optional
         ((GeneralAudioInput) input2).setStartOffsetUs(5000000); //Optional. It is needed to start mixing the input at a certain time.
-        String outputPath = Environment.getDownloadCacheDirectory().getAbsolutePath()
-                +"/" +"audio_mixer_output.mp3"; // for example
+        String outputPath = Environment.getExternalStorageDirectory().getAbsolutePath()
+                +"/" +"audio_mixer_output.mp3"; // for example(MY NAME)
 
         AudioMixer audioMixer;
 
         try {
             audioMixer = new AudioMixer(outputPath);
             audioMixer.addDataSource(input1);
-            audioMixer.addDataSource(blankInput);
+            //audioMixer.addDataSource(blankInput);
             audioMixer.addDataSource(input2);
         } catch (IOException exception){
             Toast.makeText(this, "Bad output", Toast.LENGTH_SHORT).show();
@@ -78,7 +79,7 @@ public class MergeFiles extends AppCompatActivity{
 
         // Smaller audio inputs will be encoded from start-time again if it reaches end-time
         // It is only valid for parallel mixing
-        //audioMixer.setLoopingEnabled(true);
+        audioMixer.setLoopingEnabled(true);
         audioMixer.setMixingType(AudioMixer.MixingType.PARALLEL); // or AudioMixer.MixingType.SEQUENTIAL
         audioMixer.setProcessingListener(new AudioMixer.ProcessingListener() {
             @Override

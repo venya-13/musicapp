@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "815766722262",
+    "firebase_url": "https://compactmusiccreator-default-rtdb.firebaseio.com",
+    "project_id": "compactmusiccreator",
+    "storage_bucket": "compactmusiccreator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815766722262:android:7fa76e2444e600bd4e1b77",
+        "android_client_info": {
+          "package_name": "com.example.musicapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "815766722262-bnqq6eu1p8efjfu8o4jrf34mbd8g9lb7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.musicapp",
+            "certificate_hash": "f0569e307ee0b86596faed84d53bc96f023151da"
+          }
+        },
+        {
+          "client_id": "815766722262-5g3aqhmck0nl6g5asnjidh0ic850gqkq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC08dMS3d0YqNLz_aRGGQr4FPhUkM3BMcU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "815766722262-5g3aqhmck0nl6g5asnjidh0ic850gqkq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

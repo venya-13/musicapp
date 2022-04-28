@@ -112,6 +112,9 @@ public class CheckSongActivity extends AppCompatActivity {
         mediaPlayer.start();
         playButton.setVisibility(View.GONE);
 
+        int timeLength = (mediaPlayer.getDuration()) * 1000;
+        TransmissionInformation.getInstance().setNumber(timeLength);
+
         String endTime = createTime(mediaPlayer.getDuration());
         endTxt.setText(endTime);
 
