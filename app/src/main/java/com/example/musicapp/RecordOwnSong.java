@@ -94,9 +94,9 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
         try {
 
             mediaRecorder = new MediaRecorder();
-            mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+            mediaRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_RECOGNITION);
             mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC_ELD);
+            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
             mediaRecorder.setOutputFile(getRecordingFilePath());
             mediaRecorder.prepare();
             mediaRecorder.start();

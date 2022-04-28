@@ -49,6 +49,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         progressBar = findViewById(R.id.progressBar);
         registerButton = findViewById(R.id.registerButton);
 
+        mAuth = FirebaseAuth.getInstance();
+
         appName.setOnClickListener(this);
         registerButton.setOnClickListener(this);
     }
@@ -76,15 +78,20 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             return;
         }
 
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            emailTxt.setError("Please provide valid Email");
+            emailTxt.requestFocus();
+            return;
+        }
+
         if (password.isEmpty()){
             passwordTxt.setError("Password is required");
             passwordTxt.requestFocus();
             return;
         }
-
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            emailTxt.setError("Please provide valid Email");
-            emailTxt.requestFocus();
+        if (password.length() < 6){
+            passwordTxt.setError("Minimum password length should be 6 character");
+            passwordTxt.requestFocus();
             return;
         }
 
