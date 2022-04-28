@@ -22,12 +22,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth mAuth;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db;
 
     private TextView appName;
     private EditText passwordTxt, emailTxt;
@@ -40,6 +41,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         appName = findViewById(R.id.appName);
         passwordTxt = findViewById(R.id.passwordTxt);
@@ -88,33 +90,27 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
         progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email,password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                .addOnCompleteListener(task -> {
+                    Log.d("Register Successful", "Successful");
+                    if (task.isSuccessful()){
+                        User user = new User(email);
 
-                        if (task.isSuccessful()){
-                            User user = new User(email);
+                        db.collection("Users")
+                                .document(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())
+                                .set(user).addOnCompleteListener(task1 -> {
 
-                            db.collection("Users")
-                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-
-                                    if (task.isSuccessful()){
+                                    if (task1.isSuccessful()){
                                         Toast.makeText(Register.this, "User has benn registered successfully",Toast.LENGTH_LONG).show();
-                                        progressBar.setVisibility(View.VISIBLE);
+                                        progressBar.setVisibility(View.GONE);
                                     } else{
                                         Toast.makeText(Register.this, "Failed to register! Try again!", Toast.LENGTH_SHORT).show();
                                         progressBar.setVisibility(View.GONE);
                                     }
-                                }
-                            });
+                                });
 
-                        } else {
-                            Toast.makeText(Register.this, "Failed to register! Try again!", Toast.LENGTH_SHORT).show();
-                            progressBar.setVisibility(View.GONE);
-                        }
+                    } else {
+                        Toast.makeText(Register.this, "Failed to register! Try again!", Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
