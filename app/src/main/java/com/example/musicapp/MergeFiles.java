@@ -10,9 +10,14 @@ import android.net.Uri;
 
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import zeroonezero.android.audio_mixer.AudioMixer;
 import zeroonezero.android.audio_mixer.input.AudioInput;
@@ -23,11 +28,18 @@ import java.io.File;
 import java.io.IOException;
 
 public class MergeFiles extends AppCompatActivity{
+    private Button downloadTrack, shareButton, backToMainPageButton;
+    private TextView logoTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_merge_files);
+
+        downloadTrack = findViewById(R.id.downloadTrack);
+        shareButton = findViewById(R.id.shareButton);
+        backToMainPageButton = findViewById(R.id.backToMainPageButton);
+        logoTxt = findViewById(R.id.logoTxt);
 
         ProgressDialog progressDialog;
         progressDialog = new ProgressDialog(MergeFiles.this);
@@ -108,8 +120,6 @@ public class MergeFiles extends AppCompatActivity{
                         Toast.makeText(MergeFiles.this, "Success!!!", Toast.LENGTH_SHORT).show();
                         audioMixer.release();
                         progressDialog.dismiss();
-                        shareDialog(outputPath);
-
                     }
                 });
             }
@@ -140,6 +150,20 @@ public class MergeFiles extends AppCompatActivity{
         // We have to use this carefully.
         // Tt will do the processing in caller thread
         // And calling audioMixer.stop() from the same thread won't stop the processing
+
+        logoTxt.setOnClickListener(v -> {
+            Intent intent = new Intent(MergeFiles.this, MainActivity.class);
+            startActivity(intent);
+        });
+
+        backToMainPageButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MergeFiles.this, MainActivity.class);
+            startActivity(intent);
+        });
+
+        shareButton.setOnClickListener(v -> {
+            shareDialog(outputPath);
+        });
 
     }
 

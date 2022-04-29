@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     private Button youtubeMusicButton, ownMusicButton, requestPermissionButton;
-    private TextView loginTxt, registerTxt;
+    //private TextView loginTxt, registerTxt;
     private String[] PERMISSIONS;
     private final int RequestCode = 1;
 
@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         youtubeMusicButton = findViewById(R.id.youtubeMusicButton);
         ownMusicButton = findViewById(R.id.ownMusicButton);
         requestPermissionButton = findViewById(R.id.requestPermissionButton);
-        loginTxt = findViewById(R.id.loginTxt);
-        registerTxt = findViewById(R.id.registerTxt);
+//        loginTxt = findViewById(R.id.loginTxt);
+//        registerTxt = findViewById(R.id.registerTxt);
 
         PERMISSIONS = new String[]{
                 Manifest.permission.RECORD_AUDIO,
@@ -55,15 +55,15 @@ public class MainActivity extends AppCompatActivity {
 
         requestPermission();
 
-        loginTxt.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, Login.class);
-            startActivity(intent);
-        });
-
-        registerTxt.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, Register.class);
-            startActivity(intent);
-        });
+//        loginTxt.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, Login.class);
+//            startActivity(intent);
+//        });
+//
+//        registerTxt.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, Register.class);
+//            startActivity(intent);
+//        });
 
         youtubeMusicButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, YoutubeSearch.class);

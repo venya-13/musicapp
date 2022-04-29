@@ -7,6 +7,54 @@
     android:background="@color/background"
     tools:context=".MergeFiles">
 
+    <TextView
+        android:id="@+id/logoTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50sp"
+        android:fontFamily="@font/monofett"
+        android:text="@string/logo"
+        android:textAlignment="center"
+        android:textColor="@color/purple"
+        android:textSize="40sp" />
+
+    <Button
+        android:id="@+id/downloadTrack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logoTxt"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="100sp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/button1"
+        android:text="@string/downloadButton"
+        android:textAllCaps="false" />
+
+
+    <Button
+        android:id="@+id/shareButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/downloadTrack"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20sp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/button1"
+        android:text="@string/shareButton"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/backToMainPageButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/shareButton"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20sp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/button1"
+        android:text="@string/backToMainPageButton"
+        android:textAllCaps="false" />
+
 
 
 </RelativeLayout>

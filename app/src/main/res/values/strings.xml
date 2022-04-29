@@ -19,4 +19,7 @@
     <string name="forgetPasswordTxt">Forget Password</string>
     <string name="registerTxt">Register</string>
     <string name="loadDialog">Loading...</string>
+    <string name="downloadButton">Download result</string>
+    <string name="shareButton">Share with friends</string>
+    <string name="backToMainPageButton">Back to main page</string>
 </resources>
