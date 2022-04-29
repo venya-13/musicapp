@@ -144,7 +144,6 @@ public class OwnMusic extends AppCompatActivity {
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
 
-            progressDialog.dismiss();
             View myView = getLayoutInflater().inflate(R.layout.music_list_background, null);
             TextView songName = myView.findViewById(R.id.songName);
             songName.setSelected(true);

@@ -3,6 +3,7 @@ package com.example.musicapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
@@ -163,6 +164,20 @@ public class MergeFiles extends AppCompatActivity{
 
         shareButton.setOnClickListener(v -> {
             shareDialog(outputPath);
+        });
+
+        downloadTrack.setOnClickListener(v -> {
+            Uri uri = Uri.parse(outputPath);
+            DownloadManager.Request request = new DownloadManager.Request(uri);
+            request.setTitle(finalSongName);
+            request.setDescription("Downloading");
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,finalSongName);
+
+            DownloadManager downloadManager = (DownloadManager)getSystemService(DOWNLOAD_SERVICE);
+            downloadManager.enqueue(request);
+
+            Toast.makeText(this, "Download started", Toast.LENGTH_SHORT).show();
         });
 
     }

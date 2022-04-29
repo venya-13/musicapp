@@ -31,11 +31,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null) {
-            Intent intent = new Intent(MainActivity.this, Login.class);
-            startActivity(intent);
-        }
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        if (user == null) {
+//            Intent intent = new Intent(MainActivity.this, Login.class);
+//            startActivity(intent);
+//        }
 
         youtubeMusicButton = findViewById(R.id.youtubeMusicButton);
         ownMusicButton = findViewById(R.id.ownMusicButton);
