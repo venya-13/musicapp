@@ -34,12 +34,6 @@ public class OwnMusic extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_own_music);
 
-
-        progressDialog = new ProgressDialog(OwnMusic.this);
-        progressDialog.show();
-        progressDialog.setContentView(R.layout.progress_dialog);
-        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
         listViewSong = findViewById(R.id.listViewSong);
         searchOwnMusic = findViewById(R.id.searchOwnMusic);
         searchOwnMusic.clearFocus();
