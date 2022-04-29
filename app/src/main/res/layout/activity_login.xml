@@ -26,9 +26,10 @@
         android:layout_marginTop="100dp"
         android:backgroundTint="@color/purple"
         android:hint="@string/emailTxt"
-        android:textColorHint="@color/purple"
+        android:inputType="textEmailAddress"
         android:textColor="@color/purple"
-        android:textSize="24dp" />
+        android:textColorHint="@color/purple"
+        android:textSize="24sp" />
 
     <EditText
         android:id="@+id/passwordTxt"
@@ -36,7 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/emailTxt"
         android:hint="@string/passwordTxt"
-        android:textSize="24dp"
+        android:textSize="24sp"
+        android:inputType="textPassword"
         android:textColorHint="@color/purple"
         android:backgroundTint="@color/purple"
         android:textColor="@color/purple"
@@ -47,11 +49,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/passwordTxt"
-        android:layout_marginTop="50dp"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="50dp"
-        android:text="@string/loginTxt"
-        android:background="@drawable/button1"/>
+        android:background="@drawable/button1"
+        android:text="@string/loginTxt" />
 
     <TextView
         android:id="@+id/registerButton"

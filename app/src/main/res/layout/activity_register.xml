@@ -25,9 +25,9 @@
         android:layout_marginTop="100dp"
         android:backgroundTint="@color/purple"
         android:hint="@string/emailTxt"
+        android:inputType="textEmailAddress"
         android:textColor="@color/purple"
         android:textColorHint="@color/purple"
-        android:inputType="textEmailAddress"
         android:textSize="24sp" />
 
     <EditText

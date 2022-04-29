@@ -42,6 +42,7 @@ public class Login extends AppCompatActivity implements  View.OnClickListener {
         loginButton = findViewById(R.id.loginButton);
 
         registerButton.setOnClickListener(this);
+        loginButton.setOnClickListener(this);
     }
 
     @Override
@@ -83,16 +84,13 @@ public class Login extends AppCompatActivity implements  View.OnClickListener {
 
         progressBar.setVisibility(View.VISIBLE);
 
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
 
-                if(task.isSuccessful()){
-                    Intent intent = new Intent(Login.this, MainActivity.class);
-                    startActivity(intent);
-                } else{
-                    Toast.makeText(Login.this, "Failed to login!", Toast.LENGTH_SHORT).show();
-                }
+            if(task.isSuccessful()){
+                Intent intent = new Intent(Login.this, MainActivity.class);
+                startActivity(intent);
+            } else{
+                Toast.makeText(Login.this, "Failed to login!", Toast.LENGTH_SHORT).show();
             }
         });
     }
