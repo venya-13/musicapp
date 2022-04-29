@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
     <item
-        android:drawable="@drawable/animetedbackgound1"
+        android:drawable="@drawable/animetedbackground1"
         android:duration="5000"/>
 
     <item

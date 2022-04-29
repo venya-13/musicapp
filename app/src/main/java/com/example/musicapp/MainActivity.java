@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,9 +15,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private Button youtubeMusicButton, ownMusicButton, requestPermissionButton;
+    private TextView loginTxt, registerTxt;
     private String[] PERMISSIONS;
     private final int RequestCode = 1;
 
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         youtubeMusicButton = findViewById(R.id.youtubeMusicButton);
         ownMusicButton = findViewById(R.id.ownMusicButton);
         requestPermissionButton = findViewById(R.id.requestPermissionButton);
+        loginTxt = findViewById(R.id.loginTxt);
+        registerTxt = findViewById(R.id.registerTxt);
 
         PERMISSIONS = new String[]{
                 Manifest.permission.RECORD_AUDIO,
@@ -41,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
 
         requestPermission();
 
+        loginTxt.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            startActivity(intent);
+        });
+
+        registerTxt.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Register.class);
+            startActivity(intent);
+        });
 
         youtubeMusicButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, YoutubeSearch.class);
@@ -50,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
         ownMusicButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, OwnMusic.class);
             startActivity(intent);
+            ProgressDialog progressDialog;
+            progressDialog = new ProgressDialog(MainActivity.this);
+            progressDialog.show();
+            progressDialog.setContentView(R.layout.progress_dialog);
+            progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         });
 
         requestPermissionButton.setOnClickListener(v -> {

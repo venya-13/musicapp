@@ -54,4 +54,29 @@
         android:background="@drawable/button1"
         android:text="@string/permissionRequestButton"
         android:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/loginTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ownMusicButton"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="80dp"
+        android:textSize="16dp"
+        android:text="@string/loginTxt"
+        android:textAlignment="center"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/registerTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ownMusicButton"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="80dp"
+        android:layout_marginTop="150dp"
+        android:text="@string/registerTxt"
+        android:textColor="@color/white"
+        android:textSize="16dp" />
+
 </RelativeLayout>

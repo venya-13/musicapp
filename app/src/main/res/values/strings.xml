@@ -18,4 +18,5 @@
     <string name="loginTxt">Login</string>
     <string name="forgetPasswordTxt">Forget Password</string>
     <string name="registerTxt">Register</string>
+    <string name="loadDialog">Loading...</string>
 </resources>

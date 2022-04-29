@@ -2,6 +2,7 @@ package com.example.musicapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,11 +27,18 @@ public class OwnMusic extends AppCompatActivity {
 
     String[] items = new String[mySongs.size()];
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_own_music);
 
+
+        progressDialog = new ProgressDialog(OwnMusic.this);
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.progress_dialog);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         listViewSong = findViewById(R.id.listViewSong);
         searchOwnMusic = findViewById(R.id.searchOwnMusic);
@@ -100,6 +108,7 @@ public class OwnMusic extends AppCompatActivity {
         listViewSong.setAdapter(customAdapter);
 
 
+
         listViewSong.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -141,6 +150,7 @@ public class OwnMusic extends AppCompatActivity {
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
 
+            progressDialog.dismiss();
             View myView = getLayoutInflater().inflate(R.layout.music_list_background, null);
             TextView songName = myView.findViewById(R.id.songName);
             songName.setSelected(true);

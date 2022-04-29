@@ -23,6 +23,16 @@ public class TransmissionInformation extends MainActivity {
         return instance;
     }
 
+    public void setSongName (String param){
+        Something = param;
+
+    }
+
+    public String getSongName (){
+
+        return Something;
+    }
+
     public void setString (String param){
         Something = param;
 

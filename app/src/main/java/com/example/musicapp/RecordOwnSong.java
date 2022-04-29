@@ -85,6 +85,8 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
     public void finishRecord (){
         Intent intent = new Intent(RecordOwnSong.this, MergeFiles.class);
         startActivity(intent);
+        String songName = finalSongName.getText().toString();
+        TransmissionInformation.getInstance().setSongName(songName);
         mediaPlayer2.stop();
         mediaRecorder.stop();
     }

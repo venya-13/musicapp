@@ -1,12 +1,17 @@
 package com.example.musicapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 
 import android.os.Bundle;
 import android.os.Environment;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import zeroonezero.android.audio_mixer.AudioMixer;
@@ -27,14 +32,15 @@ public class MergeFiles extends AppCompatActivity{
         ProgressDialog progressDialog;
         progressDialog = new ProgressDialog(MergeFiles.this);
         progressDialog.show();
-        //progressDialog.setContentView(R.layout.progress_dialog);
+        progressDialog.setContentView(R.layout.progress_dialog);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         int musicLength = TransmissionInformation.getInstance().getNumber();
         File recordedVoice = TransmissionInformation.getInstance().getFile();
         Uri musicUri = TransmissionInformation.getInstance().getUri();
         String recordVoicePath = recordedVoice.toURI().toString();
         Uri voiceRecordUri = Uri.parse(recordVoicePath);
-
+        String finalSongName = TransmissionInformation.getInstance().getSongName();
 
         AudioInput input1;
         AudioInput input2;
@@ -59,9 +65,11 @@ public class MergeFiles extends AppCompatActivity{
         input2.setEndTimeUs(musicLength); //Optional
         ((GeneralAudioInput) input2).setStartOffsetUs(5000000); //Optional. It is needed to start mixing the input at a certain time.
         String outputPath = Environment.getExternalStorageDirectory().getAbsolutePath()
-                +"/" +"audio_mixer_output.mp3"; // for example(MY NAME)
+                +"/" +finalSongName +".mp3"; // for example(MY NAME)
 
         AudioMixer audioMixer;
+
+        File finalTrack = new File(outputPath);
 
         try {
             audioMixer = new AudioMixer(outputPath);
@@ -99,6 +107,9 @@ public class MergeFiles extends AppCompatActivity{
                     public void run() {
                         Toast.makeText(MergeFiles.this, "Success!!!", Toast.LENGTH_SHORT).show();
                         audioMixer.release();
+                        progressDialog.dismiss();
+                        shareDialog(outputPath);
+
                     }
                 });
             }
@@ -129,6 +140,18 @@ public class MergeFiles extends AppCompatActivity{
         // We have to use this carefully.
         // Tt will do the processing in caller thread
         // And calling audioMixer.stop() from the same thread won't stop the processing
+
+    }
+
+    private void shareDialog(String path){
+        Uri uri = Uri.parse(path);
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        sendIntent.setType("audio/mp3");
+
+        Intent shareIntent = Intent.createChooser(sendIntent, null);
+        startActivity(shareIntent);
 
     }
 }
