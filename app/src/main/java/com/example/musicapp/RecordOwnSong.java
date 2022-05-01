@@ -24,7 +24,6 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
     private ImageView startRecordButton, resetRecord, finishRecord;
     private EditText finalSongName;
     MediaRecorder mediaRecorder;
-    MediaPlayer mediaPlayer;
     MediaPlayer mediaPlayer2;
 
     @Override
@@ -32,11 +31,7 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_own_song);
         checkMicro();
-
-        if(mediaPlayer != null){
-            mediaPlayer.stop();
-            mediaPlayer.release();
-        }
+        mediaRecorder = new MediaRecorder();
 
         if(mediaPlayer2 != null){
             mediaPlayer2.stop();
@@ -94,8 +89,6 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
     public void startRecordWithMusic (){
 
         try {
-
-            mediaRecorder = new MediaRecorder();
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_RECOGNITION);
             mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
             mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
@@ -110,8 +103,6 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
             String recordVoice = recordFile.getPath();
 
             TransmissionInformation.getInstance().setString(recordVoice);
-
-            Toast.makeText(this, "Recording is start", Toast.LENGTH_LONG).show();
         }
         catch (Exception exception){
             exception.printStackTrace();
@@ -121,13 +112,14 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
     }
 
     public void stopRecordVoiceWithMusic (){
-        mediaRecorder.stop();
+        mediaRecorder.reset();
         mediaRecorder.release();
         mediaRecorder = null;
 
-        mediaPlayer2.stop();
+        mediaPlayer2.reset();
         mediaPlayer2.release();
         mediaPlayer2 = null;
+
 
         Toast.makeText(this, "Recording is stop", Toast.LENGTH_LONG).show();
     }

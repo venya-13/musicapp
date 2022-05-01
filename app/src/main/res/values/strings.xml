@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">musicapp</string>
     <string name="logo">Compact Music creator</string>
-    <string name="youtubeButton">Get music from youtube</string>
+    <string name="alreadyRecordTracks">Already recording tracks</string>
     <string name="ownMusicButton">Take your own music</string>
     <string name="ownMusicSearchText">Search your music</string>
     <string name="youtubeMusicSearchText">Add your youtube link </string>

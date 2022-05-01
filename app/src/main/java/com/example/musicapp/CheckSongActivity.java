@@ -162,6 +162,9 @@ public class CheckSongActivity extends AppCompatActivity {
             mediaPlayer.start();
             stopButton.setVisibility(View.VISIBLE);
             playButton.setVisibility(View.GONE);
+            String timeEnd = createTime(mediaPlayer.getDuration());
+            endTxt.setText(timeEnd);
+
         });
 
         goBackButton.setOnClickListener(v -> {
@@ -175,6 +178,8 @@ public class CheckSongActivity extends AppCompatActivity {
             mediaPlayer.start();
             stopButton.setVisibility(View.VISIBLE);
             playButton.setVisibility(View.GONE);
+            String timeEnd = createTime(mediaPlayer.getDuration());
+            endTxt.setText(timeEnd);
         });
 
         addSongButton.setOnClickListener(v ->{

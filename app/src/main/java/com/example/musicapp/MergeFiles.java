@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
@@ -74,7 +75,7 @@ public class MergeFiles extends AppCompatActivity{
         // But it will does nothing in parallel mixing.
         //AudioInput blankInput = new BlankAudioInput(3000000); //
 
-        input2.setStartTimeUs(0100000); //Optional
+        input2.setStartTimeUs(100000); //Optional
         input2.setEndTimeUs(musicLength); //Optional
         ((GeneralAudioInput) input2).setStartOffsetUs(5000000); //Optional. It is needed to start mixing the input at a certain time.
         String outputPath = Environment.getExternalStorageDirectory().getAbsolutePath()
@@ -187,10 +188,9 @@ public class MergeFiles extends AppCompatActivity{
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_STREAM, uri);
-        sendIntent.setType("audio/mp3");
+        sendIntent.setType("audio/*");
 
         Intent shareIntent = Intent.createChooser(sendIntent, null);
         startActivity(shareIntent);
-
     }
 }
