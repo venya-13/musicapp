@@ -31,7 +31,6 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_own_song);
         checkMicro();
-        mediaRecorder = new MediaRecorder();
 
         if(mediaPlayer2 != null){
             mediaPlayer2.stop();
@@ -45,6 +44,7 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
 
         Uri uri = TransmissionInformation.getInstance().getUri();
 
+        mediaRecorder = new MediaRecorder();
         mediaPlayer2 = MediaPlayer.create(getApplicationContext(), uri);
 
         resetRecord.setVisibility(View.GONE);
@@ -89,6 +89,7 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
     public void startRecordWithMusic (){
 
         try {
+            mediaRecorder = new MediaRecorder();
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_RECOGNITION);
             mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
             mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
@@ -112,14 +113,11 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
     }
 
     public void stopRecordVoiceWithMusic (){
+        mediaRecorder.stop();
         mediaRecorder.reset();
-        mediaRecorder.release();
-        mediaRecorder = null;
 
-        mediaPlayer2.reset();
-        mediaPlayer2.release();
-        mediaPlayer2 = null;
-
+        mediaPlayer2.pause();
+        mediaPlayer2.seekTo(0);
 
         Toast.makeText(this, "Recording is stop", Toast.LENGTH_LONG).show();
     }
