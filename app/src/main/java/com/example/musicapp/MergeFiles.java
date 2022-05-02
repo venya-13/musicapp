@@ -55,6 +55,8 @@ public class MergeFiles extends AppCompatActivity{
         String recordVoicePath = recordedVoice.toURI().toString();
         Uri voiceRecordUri = Uri.parse(recordVoicePath);
         String finalSongName = TransmissionInformation.getInstance().getSongName();
+        int songVolume = TransmissionInformation.getInstance().getVolumeSong();
+        int voiceVolume = TransmissionInformation.getInstance().getVolumeVoice();
 
         AudioInput input1;
         AudioInput input2;

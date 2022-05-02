@@ -140,6 +140,8 @@ public class CheckSongActivity extends AppCompatActivity {
         seekBar.setMax(mediaPlayer.getDuration());
         upDateSeekBar.start();
 
+        int positionNow = (position)%mySongs.size();
+
         playButton.setOnClickListener(v -> {
             mediaPlayer.start();
             stopButton.setVisibility(View.VISIBLE);
@@ -152,6 +154,7 @@ public class CheckSongActivity extends AppCompatActivity {
         });
 
         skipSong.setOnClickListener(v -> {
+
             mediaPlayer.stop();
             mediaPlayer.release();
             position = ((position+1)%mySongs.size());
@@ -168,18 +171,20 @@ public class CheckSongActivity extends AppCompatActivity {
         });
 
         goBackButton.setOnClickListener(v -> {
-            mediaPlayer.stop();
-            mediaPlayer.release();
-            position = ((position-1)%mySongs.size());
-            Uri u = Uri.parse(mySongs.get(position).toString());
-            mediaPlayer = MediaPlayer.create(getApplicationContext(), u);
-            someName = mySongs.get(position).getName();
-            songNameTxt.setText(someName);
-            mediaPlayer.start();
-            stopButton.setVisibility(View.VISIBLE);
-            playButton.setVisibility(View.GONE);
-            String timeEnd = createTime(mediaPlayer.getDuration());
-            endTxt.setText(timeEnd);
+            if (positionNow != 0){
+                mediaPlayer.stop();
+                mediaPlayer.release();
+                position = ((position-1)%mySongs.size());
+                Uri u = Uri.parse(mySongs.get(position).toString());
+                mediaPlayer = MediaPlayer.create(getApplicationContext(), u);
+                someName = mySongs.get(position).getName();
+                songNameTxt.setText(someName);
+                mediaPlayer.start();
+                stopButton.setVisibility(View.VISIBLE);
+                playButton.setVisibility(View.GONE);
+                String timeEnd = createTime(mediaPlayer.getDuration());
+                endTxt.setText(timeEnd);
+            }
         });
 
         addSongButton.setOnClickListener(v ->{

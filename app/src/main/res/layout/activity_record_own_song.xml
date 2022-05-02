@@ -11,9 +11,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="7"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:layout_weight="7"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -43,14 +43,14 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/record_button"/>
+                android:background="@drawable/record_button" />
 
             <ImageView
                 android:id="@+id/resetRecord"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/reset_button"/>
+                android:background="@drawable/reset_button" />
 
             <ImageView
                 android:id="@+id/finishRecord"
@@ -60,6 +60,56 @@
                 android:layout_marginTop="80dp"
                 android:background="@drawable/finish_record_button" />
 
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+            <SeekBar
+                android:id="@+id/voiceSeekBar"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:backgroundTint="@color/purple"
+                android:max="10"
+                android:progress="7" />
+
+            <TextView
+                android:id="@+id/voiceSeekBarTxt"
+                android:layout_width="300dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/voiceSeekBar"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button1"
+                android:text="@string/voiceSeekBar"
+                android:textAlignment="center"
+                android:textColor="@color/white"/>
+
+            <SeekBar
+                android:id="@+id/songSeekBar"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/voiceSeekBarTxt"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/purple"
+                android:max="10"
+                android:progress="5" />
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/songSeekBar"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button1"
+                android:text="@string/songSeekBar"
+                android:textAlignment="center"
+                android:textColor="@color/white"/>
 
         </RelativeLayout>
     </LinearLayout>

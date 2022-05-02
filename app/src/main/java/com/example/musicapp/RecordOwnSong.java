@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import java.io.File;
@@ -23,6 +24,7 @@ import java.io.File;
 public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCompletionListener {
     private ImageView startRecordButton, resetRecord, finishRecord;
     private EditText finalSongName;
+    private SeekBar voiceSeekBar, songSeekBar;
     MediaRecorder mediaRecorder;
     MediaPlayer mediaPlayer2;
 
@@ -41,6 +43,8 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
         resetRecord = findViewById(R.id.resetRecord);
         finishRecord = findViewById(R.id.finishRecord);
         finalSongName = findViewById(R.id.finalSongName);
+        voiceSeekBar = findViewById(R.id.voiceSeekBar);
+        songSeekBar = findViewById(R.id.songSeekBar);
 
         Uri uri = TransmissionInformation.getInstance().getUri();
 
@@ -68,6 +72,24 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
         });
 
         mediaPlayer2.setOnCompletionListener(this);
+
+        songSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                int songVolume = (songSeekBar.getProgress()) / 10;
+                mediaPlayer2.setVolume(songVolume,songVolume);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     @Override
@@ -81,9 +103,14 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
         Intent intent = new Intent(RecordOwnSong.this, MergeFiles.class);
         startActivity(intent);
         String songName = finalSongName.getText().toString();
+        int voiceVolume = (voiceSeekBar.getProgress()) / 10;
+        int songVolume = (songSeekBar.getProgress()) / 10;
         TransmissionInformation.getInstance().setSongName(songName);
+        TransmissionInformation.getInstance().setVolumeVoice(voiceVolume);
+        TransmissionInformation.getInstance().setVolumeSong(songVolume);
         mediaPlayer2.stop();
         mediaRecorder.stop();
+
     }
 
     public void startRecordWithMusic (){

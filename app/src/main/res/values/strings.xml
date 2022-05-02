@@ -22,4 +22,6 @@
     <string name="downloadButton">Download result</string>
     <string name="shareButton">Share with friends</string>
     <string name="backToMainPageButton">Back to main page</string>
+    <string name="voiceSeekBar">The volume of your voice</string>
+    <string name="songSeekBar">The volume of your song</string>
 </resources>

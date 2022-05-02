@@ -63,6 +63,26 @@ public class TransmissionInformation extends MainActivity {
         return Number;
     }
 
+    public void setVolumeVoice (int param){
+        Number = param;
+
+    }
+
+    public int getVolumeVoice (){
+
+        return Number;
+    }
+
+    public void setVolumeSong (int param){
+        Number = param;
+
+    }
+
+    public int getVolumeSong (){
+
+        return Number;
+    }
+
     public void setUri (Uri param){
         Uri = param;
 
