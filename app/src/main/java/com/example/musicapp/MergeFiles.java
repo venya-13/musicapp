@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import java.io.IOException;
 public class MergeFiles extends AppCompatActivity{
     private Button downloadTrack, shareButton, backToMainPageButton;
     private TextView logoTxt;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,9 @@ public class MergeFiles extends AppCompatActivity{
         String finalSongName = TransmissionInformation.getInstance().getSongName();
         int songVolume = TransmissionInformation.getInstance().getVolumeSong();
         int voiceVolume = TransmissionInformation.getInstance().getVolumeVoice();
+
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), voiceRecordUri);
+        mediaPlayer.start();
 
         AudioInput input1;
         AudioInput input2;
@@ -109,22 +114,14 @@ public class MergeFiles extends AppCompatActivity{
         audioMixer.setProcessingListener(new AudioMixer.ProcessingListener() {
             @Override
             public void onProgress(final double progress) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressDialog.setProgress((int) (progress * 100));
-                    }
-                });
+                runOnUiThread(() -> progressDialog.setProgress((int) (progress * 100)));
             }
             @Override
             public void onEnd() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(MergeFiles.this, "Success!!!", Toast.LENGTH_SHORT).show();
-                        audioMixer.release();
-                        progressDialog.dismiss();
-                    }
+                runOnUiThread(() -> {
+                    Toast.makeText(MergeFiles.this, "Success!!!", Toast.LENGTH_SHORT).show();
+                    audioMixer.release();
+                    progressDialog.dismiss();
                 });
             }
         });
