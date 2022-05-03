@@ -60,7 +60,7 @@ public class MergeFiles extends AppCompatActivity{
         int voiceVolume = TransmissionInformation.getInstance().getVolumeVoice();
 
         AudioInput input1;
-        GeneralAudioInput input2;
+        AudioInput input2;
 
         try {
 
@@ -71,15 +71,15 @@ public class MergeFiles extends AppCompatActivity{
             return;
         }
 
-        input1.setVolume((float) songVolume);
-        input2.setVolume((float) voiceVolume);//Optional
+        input1.setVolume(0.5f);
+        input2.setVolume(0.7f);//Optional
         // It will produce a blank portion of 3 seconds between input1 and input2 if mixing type is sequential.
         // But it will does nothing in parallel mixing.
         //AudioInput blankInput = new BlankAudioInput(3000000); //
 
-        input2.setStartTimeUs(1000); //Optional
-        input2.setEndTimeUs(1000000); //Optional
-        input2.setStartOffsetUs(5000000); //Optional. It is needed to start mixing the input at a certain time.
+        input1.setStartTimeUs(1000000); //Optional
+        input1.setEndTimeUs(45000000); //Optional
+        ((GeneralAudioInput) input2).setStartOffsetUs(0500000); //Optional. It is needed to start mixing the input at a certain time.
         String outputPath = Environment.getExternalStorageDirectory().getAbsolutePath()
                 +"/" +finalSongName +".mp3"; // for example(MY NAME)
 
@@ -104,7 +104,7 @@ public class MergeFiles extends AppCompatActivity{
 
         // Smaller audio inputs will be encoded from start-time again if it reaches end-time
         // It is only valid for parallel mixing
-        audioMixer.setLoopingEnabled(true);
+        audioMixer.setLoopingEnabled(false);
         audioMixer.setMixingType(AudioMixer.MixingType.PARALLEL); // or AudioMixer.MixingType.SEQUENTIAL
         audioMixer.setProcessingListener(new AudioMixer.ProcessingListener() {
             @Override
