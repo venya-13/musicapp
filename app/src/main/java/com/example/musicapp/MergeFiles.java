@@ -73,8 +73,8 @@ public class MergeFiles extends AppCompatActivity{
             return;
         }
 
-        input1.setVolume(0.5f);
-        input2.setVolume(0.7f);//Optional
+        input1.setVolume((float) songVolume);
+        input2.setVolume((float) voiceVolume);//Optional
         // It will produce a blank portion of 3 seconds between input1 and input2 if mixing type is sequential.
         // But it will does nothing in parallel mixing.
         //AudioInput blankInput = new BlankAudioInput(3000000); //

@@ -26,4 +26,5 @@
     <string name="songSeekBar">The volume of your song</string>
     <string name="logOutTxt">Logout</string>
     <string name="singInWithGoogleButton">Sing in with Google</string>
+    <string name="headphonesWarningText">For the best recording, put on headphones if possible.</string>
 </resources>

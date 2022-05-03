@@ -4,9 +4,11 @@ import static java.lang.Thread.sleep;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
@@ -38,6 +40,8 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
             mediaPlayer2.stop();
             mediaPlayer2.release();
         }
+
+        showPermissionDialog();
 
         startRecordButton = findViewById(R.id.startRecordButton);
         resetRecord = findViewById(R.id.resetRecord);
@@ -176,6 +180,21 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
         time += seconds;
 
         return time;
+    }
+
+    private void showPermissionDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.permission_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+
+        ImageView button;
+        button = dialog.findViewById(R.id.button);
+
+        button.setOnClickListener(v -> {
+            dialog.cancel();
+        });
+
+        dialog.show();
     }
 
 
