@@ -5,8 +5,8 @@ import android.net.Uri;
 import java.io.File;
 
 public class TransmissionInformation extends MainActivity {
-    private String Something;
-    private int Number;
+    private String Something,SongName,RecordPath;
+    private int Number,SongTime;
     private Uri Uri;
     private File File;
 
@@ -24,23 +24,23 @@ public class TransmissionInformation extends MainActivity {
     }
 
     public void setSongName (String param){
-        Something = param;
+        SongName = param;
 
     }
 
     public String getSongName (){
 
-        return Something;
+        return SongName;
     }
 
     public void setString (String param){
-        Something = param;
+        RecordPath = param;
 
     }
 
     public String getString (){
 
-        return Something;
+        return RecordPath;
     }
 
     public void setString2 (String param){
@@ -101,5 +101,15 @@ public class TransmissionInformation extends MainActivity {
     public File getFile (){
 
         return File;
+    }
+
+    public void setSongTime (int param){
+        SongTime = param;
+
+    }
+
+    public int getSongTime (){
+
+        return SongTime;
     }
 }

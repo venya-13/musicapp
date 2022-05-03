@@ -13,6 +13,7 @@ import android.net.Uri;
 
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -50,7 +51,8 @@ public class MergeFiles extends AppCompatActivity{
         progressDialog.setContentView(R.layout.progress_dialog);
         progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
-        int musicLength = TransmissionInformation.getInstance().getNumber();
+        int musicLength = TransmissionInformation.getInstance().getSongTime();
+        Log.e("endTime !!!!!!!!!!!!!!", String.valueOf(musicLength));
         File recordedVoice = TransmissionInformation.getInstance().getFile();
         Uri musicUri = TransmissionInformation.getInstance().getUri();
         String recordVoicePath = recordedVoice.toURI().toString();
