@@ -55,15 +55,15 @@ public class MainActivity extends AppCompatActivity {
 
         requestPermission();
 
-//        loginTxt.setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, Login.class);
-//            startActivity(intent);
-//        });
-//
-//        registerTxt.setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, Register.class);
-//            startActivity(intent);
-//        });
+        loginTxt.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            startActivity(intent);
+        });
+
+        registerTxt.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Register.class);
+            startActivity(intent);
+        });
 
         youtubeMusicButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, YoutubeSearch.class);
