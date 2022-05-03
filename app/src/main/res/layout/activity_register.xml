@@ -36,20 +36,20 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/emailTxt"
         android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
         android:backgroundTint="@color/purple"
         android:hint="@string/passwordTxt"
-        android:inputType="textPassword"
         android:textColor="@color/purple"
         android:textColorHint="@color/purple"
-        android:textSize="24sp"
-        android:layout_marginStart="40dp"/>
+        android:textSize="24sp" />
 
     <ImageView
         android:id="@+id/eyeForHidePassword"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/emailTxt"
-        android:layout_marginTop="60dp"/>
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="50dp" />
 
     <Button
         android:id="@+id/registerButton"

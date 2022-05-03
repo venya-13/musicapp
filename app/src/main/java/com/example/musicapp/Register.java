@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +37,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     private EditText passwordTxt, emailTxt;
     private ProgressBar progressBar;
     private Button registerButton;
+    private ImageView eyeForHidePassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +52,24 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         emailTxt = findViewById(R.id.emailTxt);
         progressBar = findViewById(R.id.progressBar);
         registerButton = findViewById(R.id.registerButton);
+        eyeForHidePassword = findViewById(R.id.eyeForHidePassword);
+
+        eyeForHidePassword.setImageResource(R.drawable.password_hide_eye);
 
         mAuth = FirebaseAuth.getInstance();
 
         appName.setOnClickListener(this);
         registerButton.setOnClickListener(this);
+
+        eyeForHidePassword.setOnClickListener(v -> {
+            if (passwordTxt.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())){
+                passwordTxt.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                eyeForHidePassword.setImageResource(R.drawable.password_hide_eye);
+            } else {
+                passwordTxt.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                eyeForHidePassword.setImageResource(R.drawable.password_eye);
+            }
+        });
     }
 
     @Override

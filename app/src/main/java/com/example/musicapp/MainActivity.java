@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
     private Button youtubeMusicButton, ownMusicButton, requestPermissionButton;
     private TextView loginTxt, registerTxt, logoutTxt;
-    private ImageView eyeForHidePassword;
+
     private String[] PERMISSIONS;
     private final int RequestCode = 1;
     private FirebaseAuth mAuth;
@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         loginTxt = findViewById(R.id.loginTxt);
         registerTxt = findViewById(R.id.registerTxt);
         logoutTxt = findViewById(R.id.logoutTxt);
-        eyeForHidePassword = findViewById(R.id.eyeForHidePassword);
 
         PERMISSIONS = new String[]{
                 Manifest.permission.RECORD_AUDIO,
@@ -155,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(v -> {
                 dialog.cancel();
         });
-
 
         dialog.show();
     }

@@ -25,4 +25,5 @@
     <string name="voiceSeekBar">The volume of your voice</string>
     <string name="songSeekBar">The volume of your song</string>
     <string name="logOutTxt">Logout</string>
+    <string name="singInWithGoogleButton">Sing in with Google</string>
 </resources>
