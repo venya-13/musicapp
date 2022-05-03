@@ -78,7 +78,7 @@ public class MergeFiles extends AppCompatActivity{
         //AudioInput blankInput = new BlankAudioInput(3000000); //
 
         input1.setStartTimeUs(1000000); //Optional
-        input1.setEndTimeUs(45000000); //Optional
+        input1.setEndTimeUs(musicLength); //Optional
         ((GeneralAudioInput) input2).setStartOffsetUs(0500000); //Optional. It is needed to start mixing the input at a certain time.
         String outputPath = Environment.getExternalStorageDirectory().getAbsolutePath()
                 +"/" +finalSongName +".mp3"; // for example(MY NAME)
