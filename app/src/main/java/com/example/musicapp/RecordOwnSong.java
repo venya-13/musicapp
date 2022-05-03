@@ -184,7 +184,7 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
 
     private void showPermissionDialog() {
         Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.permission_dialog);
+        dialog.setContentView(R.layout.permission_dialog_put_on_headphones);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
 
         ImageView button;
