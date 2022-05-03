@@ -72,24 +72,6 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
         });
 
         mediaPlayer2.setOnCompletionListener(this);
-
-        songSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                int songVolume = (songSeekBar.getProgress()) / 10;
-                mediaPlayer2.setVolume(songVolume,songVolume);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
     }
 
     @Override
@@ -119,7 +101,7 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
             mediaRecorder = new MediaRecorder();
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_RECOGNITION);
             mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
             mediaRecorder.setOutputFile(getRecordingFilePath());
             mediaRecorder.prepare();
             mediaRecorder.start();

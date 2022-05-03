@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -114,6 +115,7 @@ public class CheckSongActivity extends AppCompatActivity {
 
         int timeLength = (mediaPlayer.getDuration()) * 1000;
         TransmissionInformation.getInstance().setNumber(timeLength);
+        Log.e("End time:", String.valueOf(timeLength));
 
         String endTime = createTime(mediaPlayer.getDuration());
         endTxt.setText(endTime);
