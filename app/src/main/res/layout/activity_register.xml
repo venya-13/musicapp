@@ -48,7 +48,6 @@
         android:id="@+id/eyeForHidePassword"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:background="@drawable/eyeForPassword"
         android:layout_below="@+id/emailTxt"
         android:layout_marginTop="60dp"/>
 
