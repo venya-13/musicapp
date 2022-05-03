@@ -22,26 +22,25 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     private Button youtubeMusicButton, ownMusicButton, requestPermissionButton;
-    private TextView loginTxt, registerTxt;
+    private TextView loginTxt, registerTxt, logoutTxt;
     private String[] PERMISSIONS;
     private final int RequestCode = 1;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        if (user == null) {
-//            Intent intent = new Intent(MainActivity.this, Login.class);
-//            startActivity(intent);
-//        }
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
         youtubeMusicButton = findViewById(R.id.youtubeMusicButton);
         ownMusicButton = findViewById(R.id.ownMusicButton);
         requestPermissionButton = findViewById(R.id.requestPermissionButton);
         loginTxt = findViewById(R.id.loginTxt);
         registerTxt = findViewById(R.id.registerTxt);
+        logoutTxt = findViewById(R.id.logoutTxt);
 
         PERMISSIONS = new String[]{
                 Manifest.permission.RECORD_AUDIO,
@@ -83,6 +82,15 @@ public class MainActivity extends AppCompatActivity {
         requestPermissionButton.setOnClickListener(v -> {
             requestPermission();
         });
+
+        logoutTxt.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            loginTxt.setVisibility(View.VISIBLE);
+            registerTxt.setVisibility(View.VISIBLE);
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            startActivity(intent);
+        });
+
 
     }
 

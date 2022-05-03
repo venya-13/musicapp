@@ -24,4 +24,5 @@
     <string name="backToMainPageButton">Back to main page</string>
     <string name="voiceSeekBar">The volume of your voice</string>
     <string name="songSeekBar">The volume of your song</string>
+    <string name="logOutTxt">Logout</string>
 </resources>

@@ -60,8 +60,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/requestPermissionButton"
-        android:layout_marginTop="50dp"
         android:layout_marginLeft="70dp"
+        android:layout_marginTop="100dp"
         android:text="@string/loginTxt"
         android:textColor="@color/white"
         android:textSize="16sp" />
@@ -72,10 +72,22 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/requestPermissionButton"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:layout_marginRight="70dp"
         android:text="@string/registerTxt"
         android:textColor="@color/white"
         android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/logoutTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/requestPermissionButton"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/logOutTxt"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
 
 </RelativeLayout>
