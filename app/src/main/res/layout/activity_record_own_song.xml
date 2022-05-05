@@ -27,7 +27,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="200dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/button1"
+                android:background="@drawable/default_button"
                 android:text="@string/ownSongName"
                 android:textAlignment="center"
                 android:textColor="@color/white"
@@ -84,7 +84,7 @@
                 android:layout_below="@+id/voiceSeekBar"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/button1"
+                android:background="@drawable/default_button"
                 android:text="@string/voiceSeekBar"
                 android:textAlignment="center"
                 android:textColor="@color/white"/>
@@ -106,7 +106,7 @@
                 android:layout_below="@+id/songSeekBar"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/button1"
+                android:background="@drawable/default_button"
                 android:text="@string/songSeekBar"
                 android:textAlignment="center"
                 android:textColor="@color/white"/>

@@ -15,7 +15,7 @@ import java.io.File;
 
 public class CheckFinalSong extends AppCompatActivity {
 
-    private Button stopButton, playButton,goBackButton;
+    private Button stopButton,playButton,goBackButton;
     private ImageView addSongButton;
     private TextView songNameTxt;
 
