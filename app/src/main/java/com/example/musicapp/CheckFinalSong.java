@@ -32,58 +32,58 @@ public class CheckFinalSong extends AppCompatActivity {
         songNameTxt = findViewById(R.id.songNameTxt);
         addSongButton = findViewById(R.id.addSongButton);
         goBackButton = findViewById(R.id.goBackButton);
-
-        File recordedVoice = TransmissionInformation.getInstance().getFile();
-        String recordVoicePath = recordedVoice.toURI().toString();
-        Uri voiceRecordUri = Uri.parse(recordVoicePath);
-        String finalSongName = TransmissionInformation.getInstance().getSongName();
-        Uri musicUri = TransmissionInformation.getInstance().getUri();
-
-        if(mediaPlayer != null){
-            mediaPlayer.stop();
-            mediaPlayer.release();
-        }
-
-        if(mediaVoicePlayer != null){
-            mediaVoicePlayer.stop();
-            mediaVoicePlayer.release();
-        }
-
-        songNameTxt.setText(finalSongName);
-
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), musicUri);
-        mediaPlayer.start();
-        mediaVoicePlayer = MediaPlayer.create(getApplicationContext(), voiceRecordUri);
-        mediaVoicePlayer.start();
-        playButton.setVisibility(View.GONE);
-
-        playButton.setOnClickListener(v -> {
-            mediaPlayer.start();
-            mediaVoicePlayer.start();
-            stopButton.setVisibility(View.VISIBLE);
-            playButton.setVisibility(View.GONE);
-        });
-        stopButton.setOnClickListener(v -> {
-            mediaPlayer.pause();
-            mediaVoicePlayer.pause();
-            stopButton.setVisibility(View.GONE);
-            playButton.setVisibility(View.VISIBLE);
-        });
-
-
-        addSongButton.setOnClickListener(v ->{
-            Intent intent = new Intent(CheckFinalSong.this, MergeFiles.class);
-            startActivity(intent);
-            mediaPlayer.pause();
-            mediaVoicePlayer.pause();
-        });
-
-//        goBackButton.setOnClickListener(v ->{
-//            Intent intent = new Intent(CheckFinalSong.this, RecordOwnSong.class);
+//
+//        File recordedVoice = TransmissionInformation.getInstance().getFile();
+//        String recordVoicePath = recordedVoice.toURI().toString();
+//        Uri voiceRecordUri = Uri.parse(recordVoicePath);
+//        String finalSongName = TransmissionInformation.getInstance().getSongName();
+//        Uri musicUri = TransmissionInformation.getInstance().getUri();
+//
+//        if(mediaPlayer != null){
+//            mediaPlayer.stop();
+//            mediaPlayer.release();
+//        }
+//
+//        if(mediaVoicePlayer != null){
+//            mediaVoicePlayer.stop();
+//            mediaVoicePlayer.release();
+//        }
+//
+//        songNameTxt.setText(finalSongName);
+//
+//        mediaPlayer = MediaPlayer.create(getApplicationContext(), musicUri);
+//        mediaPlayer.start();
+//        mediaVoicePlayer = MediaPlayer.create(getApplicationContext(), voiceRecordUri);
+//        mediaVoicePlayer.start();
+//        playButton.setVisibility(View.GONE);
+//
+//        playButton.setOnClickListener(v -> {
+//            mediaPlayer.start();
+//            mediaVoicePlayer.start();
+//            stopButton.setVisibility(View.VISIBLE);
+//            playButton.setVisibility(View.GONE);
+//        });
+//        stopButton.setOnClickListener(v -> {
+//            mediaPlayer.pause();
+//            mediaVoicePlayer.pause();
+//            stopButton.setVisibility(View.GONE);
+//            playButton.setVisibility(View.VISIBLE);
+//        });
+//
+//
+//        addSongButton.setOnClickListener(v ->{
+//            Intent intent = new Intent(CheckFinalSong.this, MergeFiles.class);
 //            startActivity(intent);
 //            mediaPlayer.pause();
 //            mediaVoicePlayer.pause();
 //        });
+//
+////        goBackButton.setOnClickListener(v ->{
+////            Intent intent = new Intent(CheckFinalSong.this, RecordOwnSong.class);
+////            startActivity(intent);
+////            mediaPlayer.pause();
+////            mediaVoicePlayer.pause();
+////        });
 
     }
 }

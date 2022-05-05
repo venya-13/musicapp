@@ -56,36 +56,13 @@
         android:textAllCaps="false" />
 
     <TextView
-        android:id="@+id/loginTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/requestPermissionButton"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/loginTxt"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/registerTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/requestPermissionButton"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="100dp"
-        android:layout_marginRight="70dp"
-        android:text="@string/registerTxt"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
-
-    <TextView
         android:id="@+id/logoutTxt"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/requestPermissionButton"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="150dp"
         android:text="@string/logOutTxt"
+        android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="16sp" />
 
