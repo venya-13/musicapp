@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Musicapp">
         <activity
+            android:name=".CheckFinalSong"
+            android:exported="false" />
+        <activity
             android:name=".Register"
             android:exported="false" />
         <activity

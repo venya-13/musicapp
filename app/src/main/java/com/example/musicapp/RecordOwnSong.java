@@ -86,7 +86,7 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
 
 
     public void finishRecord (){
-        Intent intent = new Intent(RecordOwnSong.this, MergeFiles.class);
+        Intent intent = new Intent(RecordOwnSong.this, CheckFinalSong.class);
         startActivity(intent);
         String songName = finalSongName.getText().toString();
         int voiceVolume = (voiceSeekBar.getProgress()) / 10;

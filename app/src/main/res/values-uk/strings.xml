@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Музичний додаток</string>
+    <string name="logo">Compact Music creator</string>
+    <string name="alreadyRecordTracks">Вже записані треки</string>
+    <string name="ownMusicButton">Використати свою музику</string>
+    <string name="ownMusicSearchText">Відшукати вашу музику</string>
+    <string name="youtubeMusicSearchText">Добавити вашу ютуб силлку</string>
+    <string name="dialogHeader">Будьте обережнеми!</string>
+    <string name="dialogWarning">Через те, що ви не надали дозвіл на використання своїх файлів або голосових записів, програма не зможе виконувати всі функції. Якщо ви хочете це виправити це, натисніть кнопку нижче.</string>
+    <string name="permissionRequestButton">Перезапросити дозвіл</string>
+    <string name="SearchText">Відшукати свою пісню</string>
+    <string name="ownSongName">Назва вашої пісні</string>
+    <string name="startRecordButton">Натисніть, щоб почати запис</string>
+    <string name="finishRecordButton">Натисніть, щоб завершити</string>
+    <string name="resetButton">Натисніть, щоб почати спочатку</string>
+    <string name="emailTxt">"Адреса електронної пошти "</string>
+    <string name="passwordTxt">Пароль</string>
+    <string name="loginTxt">Увійти</string>
+    <string name="forgetPasswordTxt">Відновити пароль</string>
+    <string name="registerTxt">Реєстрація</string>
+    <string name="loadDialog">"Завантаження... "</string>
+    <string name="downloadButton">завантажити результат</string>
+    <string name="shareButton">"Поділитися з друзями "</string>
+    <string name="backToMainPageButton">Повернутися на головну сторінку</string>
+    <string name="voiceSeekBar">"Гучність вашого голосу "</string>
+    <string name="songSeekBar">Гучність вашої пісні</string>
+    <string name="logOutTxt">Вийти</string>
+    <string name="singInWithGoogleButton">Увійдіть із Google</string>
+    <string name="headphonesWarningText">Для кращого запису, якщо можливо, надіньте навушники.</string>
+    <string name="goBackButton">Повернутися назад</string>
+</resources>
