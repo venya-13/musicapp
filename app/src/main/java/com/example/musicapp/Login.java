@@ -33,6 +33,8 @@ public class Login extends AppCompatActivity implements  View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        mAuth = FirebaseAuth.getInstance();
+
         appName = findViewById(R.id.appName);
         registerButton = findViewById(R.id.registerButton);
         forgetPasswordButton = findViewById(R.id.forgetPasswordButton);
@@ -82,15 +84,15 @@ public class Login extends AppCompatActivity implements  View.OnClickListener {
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
-
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-
+            progressBar.setVisibility(View.VISIBLE);
             if(task.isSuccessful()){
                 Intent intent = new Intent(Login.this, MainActivity.class);
                 startActivity(intent);
+                progressBar.setVisibility(View.GONE);
             } else{
                 Toast.makeText(Login.this, "Failed to login!", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
