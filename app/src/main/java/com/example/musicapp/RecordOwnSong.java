@@ -87,8 +87,8 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
 
     public void finishRecord (){
         String songName = finalSongName.getText().toString();
-        int voiceVolume = (voiceSeekBar.getProgress()) / 10;
-        int songVolume = (songSeekBar.getProgress()) / 10;
+        float voiceVolume = (voiceSeekBar.getProgress()) / 10;
+        float songVolume = (songSeekBar.getProgress()) / 10;
         TransmissionInformation.getInstance().setSongName(songName);
         TransmissionInformation.getInstance().setVolumeVoice(voiceVolume);
         TransmissionInformation.getInstance().setVolumeSong(songVolume);

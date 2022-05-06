@@ -9,6 +9,9 @@ public class TransmissionInformation extends MainActivity {
     private int Number,SongTime;
     private Uri Uri;
     private File File;
+    private float voiceVolume;
+    private float songVolume;
+
 
     private TransmissionInformation(){
 
@@ -63,24 +66,24 @@ public class TransmissionInformation extends MainActivity {
         return Number;
     }
 
-    public void setVolumeVoice (int param){
-        Number = param;
+    public void setVolumeVoice (float param){
+        voiceVolume = param;
 
     }
 
-    public int getVolumeVoice (){
+    public float getVolumeVoice (){
 
-        return Number;
+        return voiceVolume;
     }
 
-    public void setVolumeSong (int param){
-        Number = param;
+    public void setVolumeSong (float param){
+        songVolume = param;
 
     }
 
-    public int getVolumeSong (){
+    public float getVolumeSong (){
 
-        return Number;
+        return songVolume;
     }
 
     public void setUri (Uri param){

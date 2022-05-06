@@ -111,7 +111,6 @@ public class OwnMusic extends AppCompatActivity {
                 Uri uri = Uri.parse(songs.get(position).toString());
 
                 TransmissionInformation.getInstance().setUri(uri);
-                TransmissionInformation.getInstance().setString2(musicPath);
 
                 String songName = (String) listViewSong.getItemAtPosition(position);
                 startActivity(new Intent(getApplicationContext(), CheckSongActivity.class)

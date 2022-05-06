@@ -2,19 +2,26 @@ package com.example.musicapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.FileProvider;
 
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -54,12 +61,12 @@ public class MergeFiles extends AppCompatActivity{
         int musicLength = TransmissionInformation.getInstance().getSongTime();
         Log.e("endTime !!!!!!!!!!!!!!", String.valueOf(musicLength));
         File recordedVoice = TransmissionInformation.getInstance().getFile();
-        Uri musicUri = TransmissionInformation.getInstance().getUri();
         String recordVoicePath = recordedVoice.toURI().toString();
+        Uri musicUri = TransmissionInformation.getInstance().getUri();
         Uri voiceRecordUri = Uri.parse(recordVoicePath);
         String finalSongName = TransmissionInformation.getInstance().getSongName();
-        int songVolume = TransmissionInformation.getInstance().getVolumeSong();
-        int voiceVolume = TransmissionInformation.getInstance().getVolumeVoice();
+        float songVolume = TransmissionInformation.getInstance().getVolumeSong();
+        float voiceVolume = TransmissionInformation.getInstance().getVolumeVoice();
 
         AudioInput input1;
         AudioInput input2;
@@ -73,8 +80,8 @@ public class MergeFiles extends AppCompatActivity{
             return;
         }
 
-        input1.setVolume((float) songVolume);
-        input2.setVolume((float) voiceVolume);//Optional
+        input1.setVolume(songVolume);
+        input2.setVolume(voiceVolume);//Optional
         // It will produce a blank portion of 3 seconds between input1 and input2 if mixing type is sequential.
         // But it will does nothing in parallel mixing.
         //AudioInput blankInput = new BlankAudioInput(3000000); //
@@ -84,6 +91,8 @@ public class MergeFiles extends AppCompatActivity{
         ((GeneralAudioInput) input2).setStartOffsetUs(500000); //Optional. It is needed to start mixing the input at a certain time.
         String outputPath = Environment.getExternalStorageDirectory().getAbsolutePath()
                 +"/" +finalSongName +".mp3"; // for example(MY NAME)
+
+        Log.d("String", "!!!!!!!!!!!!!!!!"+ outputPath);
 
         AudioMixer audioMixer;
 
@@ -160,7 +169,7 @@ public class MergeFiles extends AppCompatActivity{
         });
 
         shareButton.setOnClickListener(v -> {
-            shareDialog(outputPath);
+            shareDialog(outputPath,finalSongName);
         });
 
         downloadTrack.setOnClickListener(v -> {
@@ -179,14 +188,89 @@ public class MergeFiles extends AppCompatActivity{
 
     }
 
-    private void shareDialog(String path){
-        Uri uri = Uri.parse(path);
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_STREAM, uri);
-        sendIntent.setType("audio/*");
+    private void shareDialog(String path,String finalSongName){
+////        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
+////                +"/" +"0035" +".wav");
+//
+////        final Uri[] uri = new Uri[1];
+//
+////        Uri uri = FileProvider.getUriForFile(getApplicationContext(),getPackageName() + ".fileProvider", file);
+//
+//        //Uri uri = Uri.fromFile(file);
+//        Uri uri = Uri.parse(path);
+//
+////        MediaScannerConnection.scanFile(this, new String[] { file.getAbsolutePath() }, null,
+////                (path1, uri1) -> uri[0] = uri1);
+//
+//        Intent sendIntent = new Intent();
+//        sendIntent.setAction(Intent.ACTION_SEND);
+//        sendIntent.putExtra(Intent.EXTRA_STREAM, uri);
+//        sendIntent.setType("audio/*");
+//        sendIntent.addFlags(
+//                Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//        Intent shareIntent = Intent.createChooser(sendIntent, "name");
+//        startActivity(shareIntent);
 
-        Intent shareIntent = Intent.createChooser(sendIntent, null);
-        startActivity(shareIntent);
-    }
+        Uri songUri = Uri.parse(path);
+
+        String[] projection = new String[]{
+                MediaStore.Video.Media._ID,
+                MediaStore.Video.Media.DISPLAY_NAME
+        };
+
+        String selection = MediaStore.Video.Media.DISPLAY_NAME + " == ?";
+
+        String[] selectionArgs = new String[] {
+                finalSongName + ".mp3"
+        };
+
+        Cursor cursor = getContentResolver().query(
+                songUri,
+                projection,
+                selection,
+                selectionArgs,
+                null
+        );
+
+        int idColumn = cursor.getColumnIndexOrThrow(MediaStore.Video.Media._ID);
+        int nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DISPLAY_NAME);
+
+
+        if (! cursor.moveToNext() ) {
+            return;
+        }
+
+        long id = cursor.getInt(idColumn);
+        String name = cursor.getString(nameColumn);
+
+        Uri contentUri = ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, id);
+
+
+        try {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND); // create action send
+            shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            // create mime type of file from file uri
+            String mimeType;
+            if (ContentResolver.SCHEME_CONTENT.equals(contentUri.getScheme())) {
+                ContentResolver cr = getContentResolver();
+                mimeType = cr.getType(contentUri);
+            } else {
+                String fileExtension = MimeTypeMap.getFileExtensionFromUrl(contentUri.toString());
+                mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(
+                        fileExtension.toLowerCase());
+            }
+
+            // shareIntent.setPackage(""); // you can specify app package name here to share file that app only
+            shareIntent.setDataAndType(contentUri, mimeType);
+            shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+            startActivity(Intent.createChooser(shareIntent, "Share File"));
+        } catch (Throwable throwable) {
+            Log.i("SHARE", "shareSong: error :- " + throwable.getMessage());
+        }
+
+
+    };
 }
+
