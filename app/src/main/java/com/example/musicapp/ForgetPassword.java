@@ -25,8 +25,6 @@ public class ForgetPassword extends AppCompatActivity {
 
     private EditText emailTxt;
 
-    private ProgressBar progressBar;
-
     FirebaseAuth auth;
 
     @Override
@@ -37,7 +35,6 @@ public class ForgetPassword extends AppCompatActivity {
         goBackButton = findViewById(R.id.goBackButton);
         emailTxt = findViewById(R.id.emailTxt);
         resetButton = findViewById(R.id.resetButton);
-        progressBar = findViewById(R.id.progressBar);
 
         auth = FirebaseAuth.getInstance();
 
@@ -64,7 +61,6 @@ public class ForgetPassword extends AppCompatActivity {
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
         auth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
             if (task.isSuccessful()){
                 showPermissionDialog();
