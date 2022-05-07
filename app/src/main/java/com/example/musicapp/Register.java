@@ -3,7 +3,12 @@ package com.example.musicapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -118,12 +123,15 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                                     } else{
                                         Toast.makeText(Register.this, "Failed to register! Try again!", Toast.LENGTH_SHORT).show();
                                         progressBar.setVisibility(View.GONE);
+
+                                        connectionChecker();
                                     }
                                 });
 
                     } else {
                         Toast.makeText(Register.this, "Failed to register! Try again!", Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);
+                        connectionChecker();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -132,4 +140,30 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             }
         });
     }
+
+    private void connectionChecker() {
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            Log.d("Internet", "true");
+        } else {
+            showInternetConnectionDialog();
+        }
+    }
+
+    private void showInternetConnectionDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.internet_connection_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+
+        ImageView button;
+        button = dialog.findViewById(R.id.button);
+
+        button.setOnClickListener(v -> {
+            dialog.cancel();
+        });
+
+        dialog.show();
+    }
+
 }

@@ -4,9 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -50,6 +54,8 @@ public class Login extends AppCompatActivity implements  View.OnClickListener {
         registerButton.setOnClickListener(this);
         loginButton.setOnClickListener(this);
         forgetPasswordButton.setOnClickListener(this);
+
+        connectionChecker();
     }
 
     @Override
@@ -103,18 +109,20 @@ public class Login extends AppCompatActivity implements  View.OnClickListener {
                     progressBar.setVisibility(View.GONE);
                 } else {
                     user.sendEmailVerification();
-                    showPermissionDialog();
+                    sendEmailVerificationDialog();
                 }
 
 
             } else{
                 Toast.makeText(Login.this, "Failed to login!", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
+
+                connectionChecker();
             }
         });
     }
 
-    private void showPermissionDialog() {
+    private void sendEmailVerificationDialog() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.send_email_verifiaction_dialog);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
@@ -127,5 +135,30 @@ public class Login extends AppCompatActivity implements  View.OnClickListener {
         });
 
         dialog.show();
+    }
+
+    private void showInternetConnectionDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.internet_connection_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+
+        ImageView button;
+        button = dialog.findViewById(R.id.button);
+
+        button.setOnClickListener(v -> {
+            dialog.cancel();
+        });
+
+        dialog.show();
+    }
+
+    private void connectionChecker() {
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            Log.d("Internet", "true");
+        } else {
+            showInternetConnectionDialog();
+        }
     }
 }
