@@ -45,6 +45,7 @@ public class Login extends AppCompatActivity implements  View.OnClickListener {
 
         registerButton.setOnClickListener(this);
         loginButton.setOnClickListener(this);
+        forgetPasswordButton.setOnClickListener(this);
     }
 
     @Override
@@ -55,6 +56,9 @@ public class Login extends AppCompatActivity implements  View.OnClickListener {
                 break;
             case R.id.loginButton:
                 userLogin();
+                break;
+            case R.id.forgetPasswordButton:
+                startActivity(new Intent(this, ForgetPassword.class));
                 break;
         }
     }

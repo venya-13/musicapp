@@ -27,6 +27,7 @@
         <entry key="..\:/android studio apps/music app/app/src/main/res/font/monofett.xml" value="0.396875" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_check_final_song.xml" value="0.36666666666666664" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_check_song.xml" value="0.33" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_forget_password.xml" value="0.36666666666666664" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_listen_final_song.xml" value="0.36666666666666664" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_main.xml" value="0.25" />
@@ -37,6 +38,7 @@
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_register.xml" value="0.36666666666666664" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_sing_in_wiht_google.xml" value="0.36666666666666664" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_youtube_search.xml" value="0.2957427536231884" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/layout/check_email_dialog.xml" value="0.25" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/music_list_background.xml" value="0.5" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/permission_dialog.xml" value="0.33" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/permission_dialog_put_on_headphones.xml" value="0.36666666666666664" />

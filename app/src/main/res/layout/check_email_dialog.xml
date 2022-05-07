@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="300dp"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:background="@drawable/dialog_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,15 +21,13 @@
             android:id="@+id/dialogText"
             android:layout_width="290dp"
             android:layout_height="339dp"
-            android:text="@string/headphonesWarningText"
+            android:text="@string/resetEmailDialogTxt"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="@color/background"
             android:layout_marginTop="25dp"
             android:layout_marginLeft="5dp"
-            android:textSize="20dp" />
-
-
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -38,9 +36,9 @@
         android:id="@+id/button"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="10dp"
         android:background="@drawable/tick"
         android:orientation="horizontal"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -52,22 +50,24 @@
         android:fontFamily="@font/monofett"
         android:text="@string/dialogHeader"
         android:textAlignment="center"
+        android:textSize="25sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/visor"
-        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginBottom="90dp"
-        android:layout_marginTop="170dp"
-        android:background="@drawable/headphones"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="130dp"
+        android:background="@drawable/email_picture"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialogHead" />
+        app:layout_constraintTop_toBottomOf="@+id/dialogHead"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

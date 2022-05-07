@@ -28,4 +28,8 @@
     <string name="singInWithGoogleButton">Sing in with Google</string>
     <string name="headphonesWarningText">For the best recording, put on headphones if possible.</string>
     <string name="goBackButton">Go back</string>
+    <string name="resetPasswordTxt">You will be sent an email to reset your password</string>
+    <string name="enterEmailEditText">Enter your email</string>
+    <string name="enter">Enter</string>
+    <string name="resetEmailDialogTxt">Check your email to reset your password</string>
 </resources>

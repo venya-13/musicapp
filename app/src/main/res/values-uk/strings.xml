@@ -28,4 +28,8 @@
     <string name="singInWithGoogleButton">Увійдіть із Google</string>
     <string name="headphonesWarningText">Для кращого запису, якщо можливо, надіньте навушники.</string>
     <string name="goBackButton">Повернутися назад</string>
+    <string name="resetPasswordTxt">"Вам буде надіслано електронний лист для відновлення пароля "</string>
+    <string name="enterEmailEditText">Введіть ваше електорну почту</string>
+    <string name="enter">продовжити</string>
+    <string name="resetEmailDialogTxt">Перевірте свою електронну пошту, щоб відновити пароль</string>
 </resources>
