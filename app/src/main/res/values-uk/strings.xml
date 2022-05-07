@@ -32,4 +32,5 @@
     <string name="enterEmailEditText">Введіть ваше електорну почту</string>
     <string name="enter">продовжити</string>
     <string name="resetEmailDialogTxt">Перевірте свою електронну пошту, щоб відновити пароль</string>
+    <string name="verificationEmail">"Будь ласка, перевірте свою електронну пошту, щоб підтвердити свій обліковий запис! "</string>
 </resources>

@@ -3,12 +3,15 @@ package com.example.musicapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.regex.Pattern;
 
@@ -89,15 +93,39 @@ public class Login extends AppCompatActivity implements  View.OnClickListener {
         }
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             progressBar.setVisibility(View.VISIBLE);
             if(task.isSuccessful()){
-                Intent intent = new Intent(Login.this, MainActivity.class);
-                startActivity(intent);
-                progressBar.setVisibility(View.GONE);
+
+                if (user.isEmailVerified()){
+                    Intent intent = new Intent(Login.this, MainActivity.class);
+                    startActivity(intent);
+                    progressBar.setVisibility(View.GONE);
+                } else {
+                    user.sendEmailVerification();
+                    showPermissionDialog();
+                }
+
+
             } else{
                 Toast.makeText(Login.this, "Failed to login!", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
             }
         });
+    }
+
+    private void showPermissionDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.send_email_verifiaction_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+
+        ImageView button;
+        button = dialog.findViewById(R.id.button);
+
+        button.setOnClickListener(v -> {
+            dialog.cancel();
+        });
+
+        dialog.show();
     }
 }

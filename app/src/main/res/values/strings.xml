@@ -32,4 +32,5 @@
     <string name="enterEmailEditText">Enter your email</string>
     <string name="enter">Enter</string>
     <string name="resetEmailDialogTxt">Check your email to reset your password</string>
+    <string name="verificationEmail">Please check your email to verified your account!</string>
 </resources>
