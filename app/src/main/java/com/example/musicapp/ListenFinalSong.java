@@ -51,10 +51,11 @@ public class ListenFinalSong extends AppCompatActivity {
 
         songNameTxt.setText(finalSongName);
 
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), musicUri);
-        mediaPlayer.start();
         mediaVoicePlayer = MediaPlayer.create(getApplicationContext(), voiceRecordUri);
         mediaVoicePlayer.start();
+        // нужна задержка в 1 секунду
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), musicUri);
+        mediaPlayer.start();
         playButton.setVisibility(View.GONE);
 
         playButton.setOnClickListener(v -> {
