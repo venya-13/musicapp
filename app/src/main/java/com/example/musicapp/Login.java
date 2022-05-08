@@ -102,17 +102,9 @@ public class Login extends AppCompatActivity implements  View.OnClickListener {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             progressBar.setVisibility(View.VISIBLE);
             if(task.isSuccessful()){
-
-                if (user.isEmailVerified()){
-                    Intent intent = new Intent(Login.this, MainActivity.class);
-                    startActivity(intent);
-                    progressBar.setVisibility(View.GONE);
-                } else {
-                    user.sendEmailVerification();
-                    sendEmailVerificationDialog();
-                }
-
-
+                Intent intent = new Intent(Login.this, MainActivity.class);
+                startActivity(intent);
+                progressBar.setVisibility(View.GONE);
             } else{
                 Toast.makeText(Login.this, "Failed to login!", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
@@ -122,20 +114,7 @@ public class Login extends AppCompatActivity implements  View.OnClickListener {
         });
     }
 
-    private void sendEmailVerificationDialog() {
-        Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.send_email_verifiaction_dialog);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
 
-        ImageView button;
-        button = dialog.findViewById(R.id.button);
-
-        button.setOnClickListener(v -> {
-            dialog.cancel();
-        });
-
-        dialog.show();
-    }
 
     private void showInternetConnectionDialog() {
         Dialog dialog = new Dialog(this);

@@ -24,9 +24,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -115,6 +117,19 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                                 .document(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())
                                 .set(user).addOnCompleteListener(task1 -> {
 
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            firebaseUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    sendEmailVerificationDialog();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(Register.this, "Something go wrong", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
                                     if (task1.isSuccessful()){
                                         Toast.makeText(Register.this, "User has benn registered successfully",Toast.LENGTH_LONG).show();
                                         progressBar.setVisibility(View.GONE);
@@ -154,6 +169,21 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     private void showInternetConnectionDialog() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.internet_connection_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+
+        ImageView button;
+        button = dialog.findViewById(R.id.button);
+
+        button.setOnClickListener(v -> {
+            dialog.cancel();
+        });
+
+        dialog.show();
+    }
+
+    private void sendEmailVerificationDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.send_email_verifiaction_dialog);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
 
         ImageView button;
