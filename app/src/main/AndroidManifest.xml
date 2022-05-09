@@ -55,7 +55,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.musicapp.fileProvider"
+            android:authorities="com.example.musicapp"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
