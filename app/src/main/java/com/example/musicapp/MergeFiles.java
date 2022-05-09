@@ -103,7 +103,8 @@ public class MergeFiles extends AppCompatActivity{
 
             input1.setStartTimeUs(100000); //Optional
             input1.setEndTimeUs(musicLength); //Optional
-            ((GeneralAudioInput) input2).setStartOffsetUs(1); //Optional. It is needed to start mixing the input at a certain time.
+            ((GeneralAudioInput) input2).setStartOffsetUs(1);
+            ((GeneralAudioInput) input1).setStartOffsetUs(100000);//Optional. It is needed to start mixing the input at a certain time.
             String outputPath = dstFolder.getPath() + "/" + finalSongName + ".mp3"; // for example(MY NAME)
 
 
@@ -195,8 +196,9 @@ public class MergeFiles extends AppCompatActivity{
             });
 
             downloadTrack.setOnClickListener(v -> {
-                Uri uri = Uri.parse(outputPath);
-                DownloadManager.Request request = new DownloadManager.Request(uri);
+                File recordedSong = new File(outputPath);
+                Uri resUri = FileProvider.getUriForFile(this, "com.example.musicapp", recordedSong);
+                DownloadManager.Request request = new DownloadManager.Request(resUri);
                 request.setTitle(finalSongName);
                 request.setDescription("Downloading");
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
