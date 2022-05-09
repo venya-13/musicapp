@@ -94,6 +94,7 @@ public class RecordOwnSong extends AppCompatActivity implements MediaPlayer.OnCo
         TransmissionInformation.getInstance().setVolumeSong(songVolume);
         mediaPlayer2.stop();
         mediaRecorder.stop();
+        mediaRecorder.release();
         Intent intent = new Intent(RecordOwnSong.this, ListenFinalSong.class);
         startActivity(intent);
     }

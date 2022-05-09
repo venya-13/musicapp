@@ -6,25 +6,14 @@ import androidx.core.content.FileProvider;
 
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
-import android.content.ContentUris;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.drawable.AnimationDrawable;
-import android.media.MediaPlayer;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -212,14 +201,12 @@ public class MergeFiles extends AppCompatActivity{
     }
 
     private void shareDialog(Uri uri) throws Exception{
-
         Intent shareIntent = new Intent(Intent.ACTION_SEND); // create action send
         shareIntent.setType("audio/*");
         shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
         startActivity(Intent.createChooser(shareIntent, "Share File"));
-
     };
 }
 
