@@ -38,6 +38,9 @@ public class ListenFinalSong extends AppCompatActivity {
         Uri voiceRecordUri = Uri.parse(recordVoicePath);
         String finalSongName = TransmissionInformation.getInstance().getSongName();
         Uri musicUri = TransmissionInformation.getInstance().getUri();
+        float voiceVolume = TransmissionInformation.getInstance().getVolumeVoice();
+        float songVolume = TransmissionInformation.getInstance().getVolumeSong();
+
 
         if(mediaPlayer != null){
             mediaPlayer.stop();
@@ -57,6 +60,8 @@ public class ListenFinalSong extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(getApplicationContext(), musicUri);
         mediaPlayer.start();
         playButton.setVisibility(View.GONE);
+        mediaVoicePlayer.setVolume(voiceVolume,voiceVolume);
+        mediaVoicePlayer.setVolume(songVolume,songVolume);
 
         playButton.setOnClickListener(v -> {
             mediaPlayer.start();
