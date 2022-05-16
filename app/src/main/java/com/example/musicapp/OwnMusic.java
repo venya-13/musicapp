@@ -15,24 +15,41 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
 
+import dmax.dialog.SpotsDialog;
+
 public class OwnMusic extends AppCompatActivity {
     private ListView listViewSong;
     private SearchView searchOwnMusic;
-
-    ArrayList<File> mySongs = findSong(Environment.getExternalStorageDirectory());
-
-    String[] items = new String[mySongs.size()];
-
-    ProgressDialog progressDialog;
+    private SpotsDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_own_music);
+
+
+
+        runOnUiThread(() -> {
+            Toast.makeText(this, "dialog", Toast.LENGTH_SHORT).show();
+            dialog = new SpotsDialog(this,"");
+            dialog.show();
+        });
+
+//        Thread thread = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//            }
+//        });
+
+        ArrayList<File> mySongs = findSong(Environment.getExternalStorageDirectory());
+
+        String[] items = new String[mySongs.size()];
 
         listViewSong = findViewById(R.id.listViewSong);
         searchOwnMusic = findViewById(R.id.searchOwnMusic);
@@ -45,16 +62,16 @@ public class OwnMusic extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                filterList(s);
+                filterList(s,mySongs,items);
                 return true;
             }
         });
 
-        displaySongs(mySongs);
+        displaySongs(mySongs,items);
 
     }
 
-    private void filterList(String text) {
+    private void filterList(String text, ArrayList<File> mySongs,String[] items) {
         ArrayList<File> filteredList = new ArrayList<>();
 
         for (File file : mySongs){
@@ -64,14 +81,14 @@ public class OwnMusic extends AppCompatActivity {
         }
 
         if (filteredList.isEmpty()){
-            setFilteredList(mySongs);
+            setFilteredList(mySongs,items);
         } else{
-            setFilteredList(filteredList);
+            setFilteredList(filteredList,items);
         }
     }
 
-    public void setFilteredList(ArrayList<File> filteredList){
-        displaySongs(filteredList);
+    public void setFilteredList(ArrayList<File> filteredList,String[]items){
+        displaySongs(filteredList,items);
     }
 
     public ArrayList<File> findSong(File file){
@@ -93,15 +110,13 @@ public class OwnMusic extends AppCompatActivity {
         return songList;
     }
 
-    void displaySongs(ArrayList<File> songs){
+    void displaySongs(ArrayList<File> songs,String[] items){
         for (int i = 0; i < songs.size(); i++){
             items[i] = songs.get(i).getName().toString();
         }
 
-        CustomAdapter customAdapter = new CustomAdapter();
+        CustomAdapter customAdapter = new CustomAdapter(items);
         listViewSong.setAdapter(customAdapter);
-
-
 
         listViewSong.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -120,11 +135,18 @@ public class OwnMusic extends AppCompatActivity {
 
             }
         });
+        TransmissionInformation.getInstance().setItems(items);
     }
 
 
 
     class CustomAdapter extends BaseAdapter{
+        private final String[] items;
+
+        public CustomAdapter(String[] sourceItems){
+            items = sourceItems;
+        }
+
         @Override
         public int getCount() {
             return items.length;
@@ -140,19 +162,18 @@ public class OwnMusic extends AppCompatActivity {
             return 0;
         }
 
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
 
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup){
             View myView = getLayoutInflater().inflate(R.layout.music_list_background, null);
             TextView songName = myView.findViewById(R.id.songName);
             songName.setSelected(true);
             songName.setText(items[i]);
             notifyDataSetChanged();
+            dialog.dismiss();
 
             return myView;
         }
     }
-
-
 
 }

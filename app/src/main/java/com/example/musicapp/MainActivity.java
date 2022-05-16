@@ -20,9 +20,12 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import dmax.dialog.SpotsDialog;
+
 public class MainActivity extends AppCompatActivity {
     private Button youtubeMusicButton, ownMusicButton, requestPermissionButton;
     private TextView logoutTxt;
+    private SpotsDialog dialog;
 
     private String[] PERMISSIONS;
     private final int RequestCode = 1;
@@ -54,18 +57,15 @@ public class MainActivity extends AppCompatActivity {
         requestPermission();
 
         youtubeMusicButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, YoutubeSearch.class);
+            Intent intent = new Intent(MainActivity.this, AlreadyRecordedTracks.class);
             startActivity(intent);
         });
 
         ownMusicButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, OwnMusic.class);
+            Intent intent = new Intent(MainActivity.this, SplashScreen.class);
             startActivity(intent);
-            ProgressDialog progressDialog;
-            progressDialog = new ProgressDialog(MainActivity.this);
-            progressDialog.show();
-            progressDialog.setContentView(R.layout.progress_dialog);
-            progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            dialog = new SpotsDialog(this,"");
+            dialog.show();
         });
 
         requestPermissionButton.setOnClickListener(v -> {
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         button = dialog.findViewById(R.id.button);
 
         button.setOnClickListener(v -> {
-                dialog.cancel();
+                dialog.dismiss();
         });
 
         dialog.show();

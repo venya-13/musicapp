@@ -11,6 +11,7 @@ public class TransmissionInformation extends MainActivity {
     private File File;
     private float voiceVolume;
     private float songVolume;
+    private String[] items;
 
 
     private TransmissionInformation(){
@@ -114,5 +115,15 @@ public class TransmissionInformation extends MainActivity {
     public int getSongTime (){
 
         return SongTime;
+    }
+
+    public void setItems (String[] param){
+        items = param;
+
+    }
+
+    public String[] getItems (){
+
+        return items;
     }
 }

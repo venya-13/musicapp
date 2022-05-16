@@ -6,6 +6,7 @@ import androidx.core.content.FileProvider;
 
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -13,12 +14,19 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import org.w3c.dom.Text;
 
+import dmax.dialog.SpotsDialog;
 import zeroonezero.android.audio_mixer.AudioMixer;
 import zeroonezero.android.audio_mixer.input.AudioInput;
 import zeroonezero.android.audio_mixer.input.BlankAudioInput;
@@ -31,11 +39,17 @@ public class MergeFiles extends AppCompatActivity{
     private Button downloadTrack, shareButton, backToMainPageButton;
     private TextView logoTxt;
     private final String LogTagSharing = "SHARING";
+    private StorageReference mStorageReference;
+    private DatabaseReference mDatabaseReference;
+    private SpotsDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_merge_files);
+
+        mStorageReference = FirebaseStorage.getInstance().getReference("uploads");
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("uploads");
 
         File dstFolder = new File(getFilesDir(), "my_records");
 
@@ -56,11 +70,8 @@ public class MergeFiles extends AppCompatActivity{
             backToMainPageButton = findViewById(R.id.backToMainPageButton);
             logoTxt = findViewById(R.id.logoTxt);
 
-            ProgressDialog progressDialog;
-            progressDialog = new ProgressDialog(MergeFiles.this);
-            progressDialog.show();
-            progressDialog.setContentView(R.layout.progress_dialog);
-            progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            dialog = new SpotsDialog(this,"");
+            dialog.show();
 
             int musicLength = TransmissionInformation.getInstance().getSongTime();
             Log.e("endTime !!!!!!!!!!!!!!", String.valueOf(musicLength));
@@ -123,7 +134,6 @@ public class MergeFiles extends AppCompatActivity{
             audioMixer.setProcessingListener(new AudioMixer.ProcessingListener() {
                 @Override
                 public void onProgress(final double progress) {
-                    runOnUiThread(() -> progressDialog.setProgress((int) (progress * 100)));
                 }
 
                 @Override
@@ -131,7 +141,7 @@ public class MergeFiles extends AppCompatActivity{
                     runOnUiThread(() -> {
                         Toast.makeText(MergeFiles.this, "Success!!!", Toast.LENGTH_SHORT).show();
                         audioMixer.release();
-                        progressDialog.dismiss();
+                        dialog.dismiss();
                     });
                 }
             });
@@ -208,5 +218,6 @@ public class MergeFiles extends AppCompatActivity{
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
         startActivity(Intent.createChooser(shareIntent, "Share File"));
     };
+
 }
 
