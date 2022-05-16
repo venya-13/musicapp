@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ownMusicButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SplashScreen.class);
+            Intent intent = new Intent(MainActivity.this, OwnMusic.class);
             startActivity(intent);
             dialog = new SpotsDialog(this,"");
             dialog.show();
