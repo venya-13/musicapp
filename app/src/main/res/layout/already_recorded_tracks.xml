@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".AlreadyRecordedTracks">
+
+    <SearchView
+        android:id="@+id/searchOwnMusic"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/visor"
+        android:backgroundTint="@color/purple"
+        android:hint="@string/SearchText" />
+
+    <ListView
+        android:id="@+id/listViewSong"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/searchOwnMusic"
+        android:background="@color/background" />
+
+</RelativeLayout>

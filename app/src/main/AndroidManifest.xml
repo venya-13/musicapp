@@ -17,10 +17,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Musicapp">
         <activity
+            android:name=".FinalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CheckAlreadySong"
+            android:exported="false" />
+        <activity
             android:name=".ForgetPassword"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".ListenFinalSong"
             android:exported="false" />

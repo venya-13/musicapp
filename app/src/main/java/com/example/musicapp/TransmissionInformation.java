@@ -5,9 +5,10 @@ import android.net.Uri;
 import java.io.File;
 
 public class TransmissionInformation extends MainActivity {
-    private String Something,SongName,RecordPath;
-    private int Number,SongTime;
+    private String Something,SongName,RecordPath, AlreadyRecordedTrackPath,AlreadyRecordedTrackName;
+    private int Number,SongTime, AlreadyRecordedTrackPosition;
     private Uri Uri;
+    private Uri UriOfAlreadyRecordedSong;
     private File File;
     private float voiceVolume;
     private float songVolume;
@@ -47,6 +48,26 @@ public class TransmissionInformation extends MainActivity {
         return RecordPath;
     }
 
+    public void setAlreadyRecordedTrackPath (String param){
+        AlreadyRecordedTrackPath = param;
+
+    }
+
+    public String getAlreadyRecordedTrackPath (){
+
+        return AlreadyRecordedTrackPath;
+    }
+
+    public void setAlreadyRecordedTrackName (String param){
+        AlreadyRecordedTrackName = param;
+
+    }
+
+    public String getAlreadyRecordedTrackName (){
+
+        return AlreadyRecordedTrackName;
+    }
+
     public void setString2 (String param){
         Something = param;
 
@@ -65,6 +86,16 @@ public class TransmissionInformation extends MainActivity {
     public int getNumber (){
 
         return Number;
+    }
+
+    public void setAlreadyRecordedTrackPosition (int param){
+        AlreadyRecordedTrackPosition = param;
+
+    }
+
+    public int getAlreadyRecordedTrackPosition (){
+
+        return AlreadyRecordedTrackPosition;
     }
 
     public void setVolumeVoice (float param){
@@ -95,6 +126,16 @@ public class TransmissionInformation extends MainActivity {
     public Uri getUri (){
 
         return Uri;
+    }
+
+    public void setAlreadyRecordedUri (Uri param){
+        UriOfAlreadyRecordedSong = param;
+
+    }
+
+    public Uri getAlreadyRecordedUri (){
+
+        return UriOfAlreadyRecordedSong;
     }
 
     public void setFile (File param){

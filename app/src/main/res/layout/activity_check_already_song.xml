@@ -7,7 +7,7 @@
     android:background="@color/background"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".CheckSongActivity">
+    tools:context=".CheckAlreadySong">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -126,5 +126,8 @@
 
         </RelativeLayout>
     </LinearLayout>
+
+
+
 
 </LinearLayout>

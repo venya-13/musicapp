@@ -26,6 +26,7 @@ public class OwnMusic extends AppCompatActivity {
     private ListView listViewSong;
     private SearchView searchOwnMusic;
     private SpotsDialog dialog;
+
     private ArrayList<File> mySongs = new ArrayList<>();
     private String[] items = new String[mySongs.size()];
 
@@ -36,7 +37,6 @@ public class OwnMusic extends AppCompatActivity {
 
         dialog = new SpotsDialog(this,"");
         dialog.show();
-
 
         Thread thread = new Thread(() -> {
             createFilesList(mySongs,items);
