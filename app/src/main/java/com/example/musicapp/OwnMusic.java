@@ -64,7 +64,6 @@ public class OwnMusic extends AppCompatActivity {
         try {
             songs = findSong(Environment.getExternalStorageDirectory());
             items2 = new String[songs.size()];
-
         }catch (Exception e){
             Log.e("Error!!!!!!!!!!", e.getMessage());
         }
