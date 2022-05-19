@@ -20,10 +20,12 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.io.File;
+
 import dmax.dialog.SpotsDialog;
 
 public class MainActivity extends AppCompatActivity {
-    private Button youtubeMusicButton, ownMusicButton, requestPermissionButton;
+    private Button alreadyRecordedSongs, ownMusicButton, requestPermissionButton;
     private TextView logoutTxt;
     private SpotsDialog dialog;
 
@@ -39,10 +41,17 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        youtubeMusicButton = findViewById(R.id.youtubeMusicButton);
+        alreadyRecordedSongs = findViewById(R.id.alreadyRecordedSongs);
         ownMusicButton = findViewById(R.id.ownMusicButton);
         requestPermissionButton = findViewById(R.id.requestPermissionButton);
         logoutTxt = findViewById(R.id.logoutTxt);
+
+        File dstFolder = new File(getFilesDir(), "my_records");
+        if(dstFolder.exists()){
+            alreadyRecordedSongs.setVisibility(View.VISIBLE);
+        } else {
+            alreadyRecordedSongs.setVisibility(View.GONE);
+        }
 
         PERMISSIONS = new String[]{
                 Manifest.permission.RECORD_AUDIO,
@@ -50,13 +59,13 @@ public class MainActivity extends AppCompatActivity {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
         };
 
-        youtubeMusicButton.setVisibility(View.GONE);
+        alreadyRecordedSongs.setVisibility(View.GONE);
         ownMusicButton.setVisibility(View.GONE);
         requestPermissionButton.setVisibility(View.VISIBLE);
 
         requestPermission();
 
-        youtubeMusicButton.setOnClickListener(v -> {
+        alreadyRecordedSongs.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AlreadyRecordedTracks.class);
             startActivity(intent);
         });
@@ -86,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(MainActivity.this,PERMISSIONS,RequestCode);
         } else {
             requestPermissionButton.setVisibility(View.GONE);
-            youtubeMusicButton.setVisibility(View.VISIBLE);
+            alreadyRecordedSongs.setVisibility(View.VISIBLE);
             ownMusicButton.setVisibility(View.VISIBLE);
         }
     }
@@ -100,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     return false;
                 } else {
                     requestPermissionButton.setVisibility(View.GONE);
-                    youtubeMusicButton.setVisibility(View.VISIBLE);
+                    alreadyRecordedSongs.setVisibility(View.VISIBLE);
                     ownMusicButton.setVisibility(View.VISIBLE);
                 }
             }

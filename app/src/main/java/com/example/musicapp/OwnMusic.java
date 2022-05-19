@@ -26,30 +26,22 @@ public class OwnMusic extends AppCompatActivity {
     private ListView listViewSong;
     private SearchView searchOwnMusic;
     private SpotsDialog dialog;
+    private ArrayList<File> mySongs = new ArrayList<>();
+    private String[] items = new String[mySongs.size()];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_own_music);
 
+        dialog = new SpotsDialog(this,"");
+        dialog.show();
 
 
-        runOnUiThread(() -> {
-            Toast.makeText(this, "dialog", Toast.LENGTH_SHORT).show();
-            dialog = new SpotsDialog(this,"");
-            dialog.show();
+        Thread thread = new Thread(() -> {
+            createFilesList(mySongs,items);
         });
-
-//        Thread thread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        });
-
-        ArrayList<File> mySongs = findSong(Environment.getExternalStorageDirectory());
-
-        String[] items = new String[mySongs.size()];
+        thread.start();
 
         listViewSong = findViewById(R.id.listViewSong);
         searchOwnMusic = findViewById(R.id.searchOwnMusic);
@@ -66,8 +58,24 @@ public class OwnMusic extends AppCompatActivity {
                 return true;
             }
         });
+    }
 
-        displaySongs(mySongs,items);
+    private void createFilesList (ArrayList<File> songs,String[] items2){
+        try {
+            songs = findSong(Environment.getExternalStorageDirectory());
+            items2 = new String[songs.size()];
+
+        }catch (Exception e){
+            Log.e("Error!!!!!!!!!!", e.getMessage());
+        }
+        ArrayList<File> finalMySongs = songs;
+        String[] finalItems = items2;
+        runOnUiThread(() -> {
+            displaySongs(finalMySongs, finalItems);
+            mySongs = finalMySongs;
+            items = finalItems;
+            dialog.dismiss();
+        });
 
     }
 
@@ -114,9 +122,12 @@ public class OwnMusic extends AppCompatActivity {
         for (int i = 0; i < songs.size(); i++){
             items[i] = songs.get(i).getName().toString();
         }
-
-        CustomAdapter customAdapter = new CustomAdapter(items);
-        listViewSong.setAdapter(customAdapter);
+        try {
+            CustomAdapter customAdapter = new CustomAdapter(items);
+            listViewSong.setAdapter(customAdapter);
+        }catch (Exception e){
+            Log.e("Error 2!!!!!!!!!!", e.getMessage());
+        }
 
         listViewSong.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -170,10 +181,10 @@ public class OwnMusic extends AppCompatActivity {
             songName.setSelected(true);
             songName.setText(items[i]);
             notifyDataSetChanged();
-            dialog.dismiss();
 
             return myView;
         }
     }
 
 }
+

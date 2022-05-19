@@ -18,8 +18,7 @@
         android:theme="@style/Theme.Musicapp">
         <activity
             android:name=".ForgetPassword"
-            android:exported="false"
-            android:theme="@style/SplashTheme">
+            android:exported="false">
 
         </activity>
         <activity
