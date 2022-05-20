@@ -28,9 +28,8 @@
         android:layout_marginRight="50dp"
         android:background="@drawable/default_button"
         android:text="@string/alreadyRecordTracks"
-        android:textColor="@color/background"
-        android:textAllCaps="false" />
-
+        android:textAllCaps="false"
+        android:textColor="@color/background" />
 
     <Button
         android:id="@+id/ownMusicButton"
