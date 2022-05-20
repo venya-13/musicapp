@@ -151,8 +151,6 @@ public class AlreadyRecordedTracks extends AppCompatActivity {
         });
     }
 
-
-
     class CustomAdapter extends BaseAdapter {
         private final String[] items;
 
@@ -187,5 +185,4 @@ public class AlreadyRecordedTracks extends AppCompatActivity {
             return myView;
         }
     }
-
 }

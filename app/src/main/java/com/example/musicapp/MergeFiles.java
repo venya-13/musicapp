@@ -100,10 +100,7 @@ public class MergeFiles extends AppCompatActivity{
             ((GeneralAudioInput) input1).setStartOffsetUs(100000);//Optional. It is needed to start mixing the input at a certain time.
             String outputPath = dstFolder.getPath() + "/" + finalSongName + ".mp3"; // for example(MY NAME)
 
-
             AudioMixer audioMixer;
-
-            File finalTrack = new File(outputPath);
 
             try {
                 audioMixer = new AudioMixer(outputPath);
@@ -113,7 +110,6 @@ public class MergeFiles extends AppCompatActivity{
                 Toast.makeText(this, "Bad output", Toast.LENGTH_SHORT).show();
                 return;
             }
-
 
             audioMixer.setSampleRate(44100); // Optional
             audioMixer.setBitRate(128000); // Optional
@@ -198,8 +194,6 @@ public class MergeFiles extends AppCompatActivity{
         }catch (Exception exception){
             Log.e("Download error !!!!!", exception.getMessage());
         }
-
     }
-
 }
 

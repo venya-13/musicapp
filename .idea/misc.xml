@@ -10,6 +10,7 @@
         <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/animetedbackground2.xml" value="0.332" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/animetedbackground3.xml" value="0.332" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/background.xml" value="0.332" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/background_default.xml" value="0.196" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/background_progress_dialog.xml" value="0.331" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/button1.xml" value="0.332" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/drawable/button2.xml" value="0.331" />
@@ -33,8 +34,8 @@
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_final.xml" value="0.18802083333333333" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_forget_password.xml" value="0.36666666666666664" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_listen_final_song.xml" value="0.36666666666666664" />
-        <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
-        <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_merge_files.xml" value="0.36666666666666664" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_own_music.xml" value="0.33" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/layout/activity_profile.xml" value="0.36666666666666664" />

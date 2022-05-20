@@ -41,7 +41,6 @@ public class ListenFinalSong extends AppCompatActivity {
         float voiceVolume = TransmissionInformation.getInstance().getVolumeVoice();
         float songVolume = TransmissionInformation.getInstance().getVolumeSong();
 
-
         if(mediaPlayer != null){
             mediaPlayer.stop();
             mediaPlayer.release();

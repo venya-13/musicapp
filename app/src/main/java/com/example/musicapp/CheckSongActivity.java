@@ -64,7 +64,6 @@ public class CheckSongActivity extends AppCompatActivity {
             mediaPlayer.release();
         }
 
-
         Intent i = getIntent();
         Bundle bundle = i.getExtras();
 
@@ -88,8 +87,6 @@ public class CheckSongActivity extends AppCompatActivity {
             }
         }, delay);
 
-
-
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -107,7 +104,6 @@ public class CheckSongActivity extends AppCompatActivity {
 
             }
         });
-
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
         mediaPlayer.start();
@@ -194,7 +190,6 @@ public class CheckSongActivity extends AppCompatActivity {
         });
 
     }
-
 
     public String createTime (int duration){
         String time = "";

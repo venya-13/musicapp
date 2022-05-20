@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@drawable/background_default"
     android:orientation="vertical"
     android:weightSum="10"
     tools:context=".CheckSongActivity">
@@ -30,7 +30,7 @@
                 android:background="@drawable/default_button"
                 android:text="@string/ownSongName"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+                android:textColor="@color/background"
                 tools:ignore="TouchTargetSizeCheck" />
         </RelativeLayout>
 
@@ -87,7 +87,7 @@
                 android:background="@drawable/default_button"
                 android:text="@string/voiceSeekBar"
                 android:textAlignment="center"
-                android:textColor="@color/white"/>
+                android:textColor="@color/background" />
 
             <SeekBar
                 android:id="@+id/songSeekBar"
@@ -109,7 +109,7 @@
                 android:background="@drawable/default_button"
                 android:text="@string/songSeekBar"
                 android:textAlignment="center"
-                android:textColor="@color/white"/>
+                android:textColor="@color/background"/>
 
         </RelativeLayout>
     </LinearLayout>

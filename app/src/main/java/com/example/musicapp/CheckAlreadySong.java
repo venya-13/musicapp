@@ -87,8 +87,6 @@ public class CheckAlreadySong extends AppCompatActivity {
             }
         }, delay);
 
-
-
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -105,7 +103,6 @@ public class CheckAlreadySong extends AppCompatActivity {
                 mediaPlayer.seekTo(seekBar.getProgress());
             }
         });
-
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
         mediaPlayer.start();
@@ -190,7 +187,6 @@ public class CheckAlreadySong extends AppCompatActivity {
         });
 
     }
-
 
     public String createTime (int duration){
         String time = "";

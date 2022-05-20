@@ -3,7 +3,7 @@
     android:shape="rectangle">
 
     <item
-        android:drawable="@drawable/animetedbackground1"
+        android:drawable="@drawable/background_default"
         android:duration="5000"/>
 
     <item
