@@ -61,7 +61,7 @@ public class ListenFinalSong extends AppCompatActivity {
         mediaPlayer.start();
         playButton.setVisibility(View.GONE);
         mediaVoicePlayer.setVolume(voiceVolume,voiceVolume);
-        mediaVoicePlayer.setVolume(songVolume,songVolume);
+        mediaPlayer.setVolume(songVolume,songVolume);
 
         playButton.setOnClickListener(v -> {
             mediaPlayer.start();

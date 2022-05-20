@@ -34,6 +34,7 @@ import zeroonezero.android.audio_mixer.input.GeneralAudioInput;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 
 public class MergeFiles extends AppCompatActivity{
     private Button downloadTrack, shareButton, backToMainPageButton;
@@ -190,7 +191,6 @@ public class MergeFiles extends AppCompatActivity{
             request.setDescription("Downloading");
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
             request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, finalSongName);
-
             DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
             downloadManager.enqueue(request);
 
