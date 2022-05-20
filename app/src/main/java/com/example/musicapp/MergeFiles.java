@@ -39,17 +39,12 @@ public class MergeFiles extends AppCompatActivity{
     private Button downloadTrack, shareButton, backToMainPageButton;
     private TextView logoTxt;
     private final String LogTagSharing = "SHARING";
-    private StorageReference mStorageReference;
-    private DatabaseReference mDatabaseReference;
     private SpotsDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_merge_files);
-
-        mStorageReference = FirebaseStorage.getInstance().getReference("uploads");
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference("uploads");
 
         File dstFolder = new File(getFilesDir(), "my_records");
 
@@ -97,9 +92,6 @@ public class MergeFiles extends AppCompatActivity{
 
             input1.setVolume(songVolume);
             input2.setVolume(voiceVolume);//Optional
-            // It will produce a blank portion of 3 seconds between input1 and input2 if mixing type is sequential.
-            // But it will does nothing in parallel mixing.
-            //AudioInput blankInput = new BlankAudioInput(3000000); //
 
             input1.setStartTimeUs(100000); //Optional
             input1.setEndTimeUs(musicLength); //Optional
@@ -115,7 +107,6 @@ public class MergeFiles extends AppCompatActivity{
             try {
                 audioMixer = new AudioMixer(outputPath);
                 audioMixer.addDataSource(input1);
-                //audioMixer.addDataSource(blankInput);
                 audioMixer.addDataSource(input2);
             } catch (IOException exception) {
                 Toast.makeText(this, "Bad output", Toast.LENGTH_SHORT).show();
@@ -127,8 +118,6 @@ public class MergeFiles extends AppCompatActivity{
             audioMixer.setBitRate(128000); // Optional
             audioMixer.setChannelCount(2); // Optional //1(mono) or 2(stereo)
 
-            // Smaller audio inputs will be encoded from start-time again if it reaches end-time
-            // It is only valid for parallel mixing
             audioMixer.setLoopingEnabled(false);
             audioMixer.setMixingType(AudioMixer.MixingType.PARALLEL); // or AudioMixer.MixingType.SEQUENTIAL
             audioMixer.setProcessingListener(new AudioMixer.ProcessingListener() {
@@ -153,24 +142,8 @@ public class MergeFiles extends AppCompatActivity{
                 return;
             }
 
-            //it is for setting up the all the things
-
-
-            /* These getter methods must be called after calling 'start()'*/
-            //audioMixer.getOutputSampleRate();
-            //audioMixer.getOutputBitRate();
-            //audioMixer.getOutputChannelCount();
-            //audioMixer.getOutputDurationUs();
-
             //starting real processing
             audioMixer.processAsync();
-
-            // We can stop the processing immediately by calling audioMixer.stop() when we want.
-
-            // audioMixer.processSync() is generally not used.
-            // We have to use this carefully.
-            // Tt will do the processing in caller thread
-            // And calling audioMixer.stop() from the same thread won't stop the processing
 
             logoTxt.setOnClickListener(v -> {
                 Intent intent = new Intent(MergeFiles.this, MainActivity.class);
@@ -197,16 +170,7 @@ public class MergeFiles extends AppCompatActivity{
             downloadTrack.setOnClickListener(v -> {
                 File recordedSong = new File(outputPath);
                 Uri resUri = FileProvider.getUriForFile(this, "com.example.musicapp", recordedSong);
-                DownloadManager.Request request = new DownloadManager.Request(resUri);
-                request.setTitle(finalSongName);
-                request.setDescription("Downloading");
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, finalSongName);
-
-                DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-                downloadManager.enqueue(request);
-
-                Toast.makeText(this, "Download started", Toast.LENGTH_SHORT).show();
+                downloadTrack(resUri,finalSongName);
             });
     }
 
@@ -218,6 +182,24 @@ public class MergeFiles extends AppCompatActivity{
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
         startActivity(Intent.createChooser(shareIntent, "Share File"));
     };
+
+    private void downloadTrack(Uri resUri, String finalSongName){
+        try {
+            DownloadManager.Request request = new DownloadManager.Request(resUri);
+            request.setTitle(finalSongName);
+            request.setDescription("Downloading");
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, finalSongName);
+
+            DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+            downloadManager.enqueue(request);
+
+            Toast.makeText(this, "Download started", Toast.LENGTH_SHORT).show();
+        }catch (Exception exception){
+            Log.e("Download error !!!!!", exception.getMessage());
+        }
+
+    }
 
 }
 
