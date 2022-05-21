@@ -35,6 +35,9 @@ import zeroonezero.android.audio_mixer.input.GeneralAudioInput;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class MergeFiles extends AppCompatActivity{
     private Button downloadTrack, shareButton, backToMainPageButton;
@@ -52,7 +55,7 @@ public class MergeFiles extends AppCompatActivity{
         try {
             if (!dstFolder.exists()) {
                 if (!dstFolder.mkdirs()) {
-                    Log.v("COPY_FILE", "Failed to create folder.");
+                    Log.v("CREATE FOLDER", "Failed to create folder.");
                     return;
                 }
             }
@@ -70,7 +73,6 @@ public class MergeFiles extends AppCompatActivity{
             dialog.show();
 
             int musicLength = TransmissionInformation.getInstance().getSongTime();
-            Log.e("endTime !!!!!!!!!!!!!!", String.valueOf(musicLength));
             File recordedVoice = TransmissionInformation.getInstance().getFile();
             String recordVoicePath = recordedVoice.toURI().toString();
             Uri musicUri = TransmissionInformation.getInstance().getUri();
@@ -167,7 +169,7 @@ public class MergeFiles extends AppCompatActivity{
             downloadTrack.setOnClickListener(v -> {
                 File recordedSong = new File(outputPath);
                 Uri resUri = FileProvider.getUriForFile(this, "com.example.musicapp", recordedSong);
-                downloadTrack(resUri,finalSongName);
+                downloadTrack(resUri,finalSongName,outputPath);
             });
     }
 
@@ -180,17 +182,18 @@ public class MergeFiles extends AppCompatActivity{
         startActivity(Intent.createChooser(shareIntent, "Share File"));
     };
 
-    private void downloadTrack(Uri resUri, String finalSongName){
+    private void downloadTrack(Uri resUri, String finalSongName,String outputPath){
         try {
-            DownloadManager.Request request = new DownloadManager.Request(resUri);
-            request.setTitle(finalSongName);
-            request.setDescription("Downloading");
-            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, finalSongName);
-            DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-            downloadManager.enqueue(request);
 
-            Toast.makeText(this, "Download started", Toast.LENGTH_SHORT).show();
+//            DownloadManager.Request request = new DownloadManager.Request(resUri);
+//            request.setTitle(finalSongName);
+//            request.setDescription("Downloading");
+//            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+//            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, finalSongName);
+//            DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+//            downloadManager.enqueue(request);
+//
+//            Toast.makeText(this, "Download started", Toast.LENGTH_SHORT).show();
         }catch (Exception exception){
             Log.e("Download error !!!!!", exception.getMessage());
         }
