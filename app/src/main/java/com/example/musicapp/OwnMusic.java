@@ -69,6 +69,7 @@ public class OwnMusic extends AppCompatActivity {
         }
         ArrayList<File> finalMySongs = songs;
         String[] finalItems = items2;
+
         runOnUiThread(() -> {
             displaySongs(finalMySongs, finalItems);
             mySongs = finalMySongs;

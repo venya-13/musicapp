@@ -75,6 +75,8 @@ public class CheckAlreadySong extends AppCompatActivity {
         someName = mySongs.get(position).getName();
         songNameTxt.setText(someName);
 
+        TransmissionInformation.getInstance().setAlreadyRecordedTrackName(someName);
+
         final Handler handler = new Handler();
         final int delay = 1000;
 

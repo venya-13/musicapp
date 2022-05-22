@@ -33,7 +33,11 @@ import zeroonezero.android.audio_mixer.input.BlankAudioInput;
 import zeroonezero.android.audio_mixer.input.GeneralAudioInput;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -169,7 +173,7 @@ public class MergeFiles extends AppCompatActivity{
             downloadTrack.setOnClickListener(v -> {
                 File recordedSong = new File(outputPath);
                 Uri resUri = FileProvider.getUriForFile(this, "com.example.musicapp", recordedSong);
-                downloadTrack(resUri,finalSongName,outputPath);
+                downloadTrack(finalSongName,outputPath);
             });
     }
 
@@ -182,18 +186,34 @@ public class MergeFiles extends AppCompatActivity{
         startActivity(Intent.createChooser(shareIntent, "Share File"));
     };
 
-    private void downloadTrack(Uri resUri, String finalSongName,String outputPath){
-        try {
+    private void downloadTrack(String finalSongName,String outputPath){
+        String downloadsPathString = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getAbsolutePath() + "/" + finalSongName + ".mp3";
 
-//            DownloadManager.Request request = new DownloadManager.Request(resUri);
-//            request.setTitle(finalSongName);
-//            request.setDescription("Downloading");
-//            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-//            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, finalSongName);
-//            DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-//            downloadManager.enqueue(request);
-//
-//            Toast.makeText(this, "Download started", Toast.LENGTH_SHORT).show();
+        Path trackPath = Paths.get(outputPath);
+
+        try {
+            if(!trackPath.toFile().exists()) {
+                Log.v("COPY_FILE", "Copy file failed. Source file missing.");
+                return;
+            }
+
+            InputStream in = new FileInputStream(outputPath);
+            OutputStream out = new FileOutputStream(downloadsPathString);
+
+            // Copy the bits from instream to outstream
+            byte[] buf = new byte[1024];
+            int len;
+
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+
+            in.close();
+            out.close();
+
+            Log.v("COPY_FILE", "Copy file successful.");
+
+            Toast.makeText(this, "Download is done!", Toast.LENGTH_SHORT).show();
         }catch (Exception exception){
             Log.e("Download error !!!!!", exception.getMessage());
         }
