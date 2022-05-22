@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -55,7 +56,13 @@ public class ListenFinalSong extends AppCompatActivity {
 
         mediaVoicePlayer = MediaPlayer.create(getApplicationContext(), voiceRecordUri);
         mediaVoicePlayer.start();
-        // нужна задержка в 1 секунду
+
+        try {
+            Thread.sleep(320);
+        } catch (InterruptedException e) {
+            Log.e("Time Error!!!!", e.getMessage());
+        }
+
         mediaPlayer = MediaPlayer.create(getApplicationContext(), musicUri);
         mediaPlayer.start();
         playButton.setVisibility(View.GONE);
