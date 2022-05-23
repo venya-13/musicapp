@@ -29,7 +29,8 @@
         android:background="@drawable/default_button"
         android:text="@string/alreadyRecordTracks"
         android:textAllCaps="false"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/ownMusicButton"
@@ -67,6 +68,20 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/willBeAlreadyRecordedSongs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="100sp"
+        android:layout_marginRight="50dp"
+        android:text="@string/buttonHint"
+        android:alpha="0.5"
+        android:background="@drawable/default_button"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
 
 
 </RelativeLayout>

@@ -25,7 +25,7 @@ import java.io.File;
 import dmax.dialog.SpotsDialog;
 
 public class MainActivity extends AppCompatActivity {
-    private Button alreadyRecordedSongs, ownMusicButton, requestPermissionButton;
+    private Button alreadyRecordedSongs, ownMusicButton, requestPermissionButton,willBeAlreadyRecordedSongs;
     private TextView logoutTxt;
     private SpotsDialog dialog;
 
@@ -47,12 +47,15 @@ public class MainActivity extends AppCompatActivity {
         ownMusicButton = findViewById(R.id.ownMusicButton);
         requestPermissionButton = findViewById(R.id.requestPermissionButton);
         logoutTxt = findViewById(R.id.logoutTxt);
+        willBeAlreadyRecordedSongs = findViewById(R.id.willBeAlreadyRecordedSongs);
 
         File dstFolder = new File(getFilesDir(), "my_records");
         if(dstFolder.exists()){
             alreadyRecordedSongs.setVisibility(View.VISIBLE);
+            willBeAlreadyRecordedSongs.setVisibility(View.GONE);
         } else {
             alreadyRecordedSongs.setVisibility(View.GONE);
+            willBeAlreadyRecordedSongs.setVisibility(View.VISIBLE);
         }
 
         PERMISSIONS = new String[]{
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         alreadyRecordedSongs.setVisibility(View.GONE);
         ownMusicButton.setVisibility(View.GONE);
+        willBeAlreadyRecordedSongs.setVisibility(View.GONE);
         requestPermissionButton.setVisibility(View.VISIBLE);
 
         requestPermission();
@@ -99,11 +103,14 @@ public class MainActivity extends AppCompatActivity {
             requestPermissionButton.setVisibility(View.GONE);
             alreadyRecordedSongs.setVisibility(View.VISIBLE);
             ownMusicButton.setVisibility(View.VISIBLE);
+            willBeAlreadyRecordedSongs.setVisibility(View.VISIBLE);
             File dstFolder = new File(getFilesDir(), "my_records");
             if(dstFolder.exists()){
                 alreadyRecordedSongs.setVisibility(View.VISIBLE);
+                willBeAlreadyRecordedSongs.setVisibility(View.GONE);
             } else {
                 alreadyRecordedSongs.setVisibility(View.GONE);
+                willBeAlreadyRecordedSongs.setVisibility(View.VISIBLE);
             }
         }
     }
