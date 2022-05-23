@@ -23,6 +23,7 @@ public class AlreadyRecordedTracks extends AppCompatActivity {
     private ListView listViewSong;
     private SearchView searchOwnMusic;
     private SpotsDialog dialog;
+    private TextView emptyList;
 
     private ArrayList<File> mySongs = new ArrayList<>();
     private String[] items = new String[mySongs.size()];
@@ -42,6 +43,8 @@ public class AlreadyRecordedTracks extends AppCompatActivity {
 
         listViewSong = findViewById(R.id.listViewSong);
         searchOwnMusic = findViewById(R.id.searchOwnMusic);
+        emptyList = findViewById(R.id.emptyList);
+
         searchOwnMusic.clearFocus();
         searchOwnMusic.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -73,6 +76,12 @@ public class AlreadyRecordedTracks extends AppCompatActivity {
             mySongs = finalMySongs;
             items = finalItems;
             dialog.dismiss();
+
+            if (items.length == 0){
+                emptyList.setVisibility(View.VISIBLE);
+            } else {
+                emptyList.setVisibility(View.GONE);
+            }
         });
     }
 
