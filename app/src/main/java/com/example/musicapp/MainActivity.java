@@ -99,6 +99,12 @@ public class MainActivity extends AppCompatActivity {
             requestPermissionButton.setVisibility(View.GONE);
             alreadyRecordedSongs.setVisibility(View.VISIBLE);
             ownMusicButton.setVisibility(View.VISIBLE);
+            File dstFolder = new File(getFilesDir(), "my_records");
+            if(dstFolder.exists()){
+                alreadyRecordedSongs.setVisibility(View.VISIBLE);
+            } else {
+                alreadyRecordedSongs.setVisibility(View.GONE);
+            }
         }
     }
 

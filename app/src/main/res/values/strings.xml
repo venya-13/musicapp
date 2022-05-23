@@ -34,5 +34,5 @@
     <string name="resetEmailDialogTxt">Check your email to reset your password</string>
     <string name="verificationEmail">Please check your email to verified your account!</string>
     <string name="internetConnectionDialogTxt">You are not connected to the Internet! Please connect to the Internet.</string>
-    <string name="listIsEmpty">You don't have already recorded tracks.</string>
+    <string name="listIsEmpty">You don`t have already recorded tracks.</string>
 </resources>
