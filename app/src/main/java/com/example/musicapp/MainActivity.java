@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private final int RequestCode = 1;
     private FirebaseAuth mAuth;
 
+    int permissionsAmount = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        int permissionsAmount = 0;
+        permissionsAmount = 0;
         if(requestCode == RequestCode){
             for(int res: grantResults) {
                 if (res == PackageManager.PERMISSION_GRANTED) {
