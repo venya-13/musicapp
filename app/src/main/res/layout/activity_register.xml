@@ -90,7 +90,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:textColor="@color/background"/>
+        android:textColor="@color/white"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

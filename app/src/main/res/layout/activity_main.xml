@@ -29,7 +29,7 @@
         android:background="@drawable/default_button"
         android:text="@string/alreadyRecordTracks"
         android:textAllCaps="false"
-        android:textColor="@color/background" />
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/ownMusicButton"
@@ -40,7 +40,7 @@
         android:layout_marginTop="20sp"
         android:layout_marginRight="50dp"
         android:background="@drawable/default_button"
-        android:textColor="@color/background"
+        android:textColor="@color/white"
         android:text="@string/ownMusicButton"
         android:textAllCaps="false" />
 
@@ -53,7 +53,7 @@
         android:layout_marginTop="50sp"
         android:layout_marginRight="50dp"
         android:background="@drawable/default_button"
-        android:textColor="@color/background"
+        android:textColor="@color/white"
         android:text="@string/permissionRequestButton"
         android:textAllCaps="false" />
 

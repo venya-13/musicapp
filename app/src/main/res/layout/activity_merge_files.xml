@@ -28,8 +28,8 @@
         android:layout_marginRight="50dp"
         android:background="@drawable/default_button"
         android:text="@string/downloadButton"
-        android:textColor="@color/background"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
 
 
     <Button
@@ -42,8 +42,8 @@
         android:layout_marginRight="50dp"
         android:background="@drawable/default_button"
         android:text="@string/shareButton"
-        android:textColor="@color/background"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/backToMainPageButton"
@@ -54,9 +54,9 @@
         android:layout_marginTop="20sp"
         android:layout_marginRight="50dp"
         android:background="@drawable/default_button"
-        android:textColor="@color/background"
         android:text="@string/backToMainPageButton"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
 
 
 

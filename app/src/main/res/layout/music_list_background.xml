@@ -23,11 +23,11 @@
 
         <TextView
             android:id="@+id/songName"
-            android:layout_width="100dp"
+            android:layout_width="400dp"
             android:layout_height="30dp"
             android:layout_marginLeft="30dp"
             android:text="Song Name"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="@color/purple"
             android:textSize="12dp" />

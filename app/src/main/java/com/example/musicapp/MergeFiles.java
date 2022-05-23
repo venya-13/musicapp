@@ -213,7 +213,7 @@ public class MergeFiles extends AppCompatActivity{
 
             Log.v("COPY_FILE", "Copy file successful.");
 
-            Toast.makeText(this, "Download is done!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Your track has been downloaded to the music directory", Toast.LENGTH_SHORT).show();
         }catch (Exception exception){
             Log.e("Download error !!!!!", exception.getMessage());
         }
