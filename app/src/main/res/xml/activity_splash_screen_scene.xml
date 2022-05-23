@@ -43,7 +43,8 @@
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             android:scaleX="1"
-            android:scaleY="1" />
+            android:scaleY="1"
+            android:alpha="1" />
         <Constraint
             android:id="@+id/blackMicrophone"
             android:scaleX="1"
@@ -97,6 +98,7 @@
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             android:scaleX="0"
-            android:scaleY="0" />
+            android:scaleY="0"
+            android:alpha="1" />
     </ConstraintSet>
 </MotionScene>
