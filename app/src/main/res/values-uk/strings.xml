@@ -35,5 +35,5 @@
     <string name="verificationEmail">"Будь ласка, перевірте свою електронну пошту, щоб підтвердити свій обліковий запис! "</string>
     <string name="internetConnectionDialogTxt">Ви не підключені до Інтернету! Будь ласка, підключіть Інтернет.</string>
     <string name="listIsEmpty">У вас ще немає записаних треків</string>
-    <string name="buttonHint">Nут будуть ваши записани треки</string>
+    <string name="buttonHint">Тут будуть ваши записани треки</string>
 </resources>
