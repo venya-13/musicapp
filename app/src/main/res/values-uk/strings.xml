@@ -26,7 +26,7 @@
     <string name="songSeekBar">Гучність вашої пісні</string>
     <string name="logOutTxt">Вийти</string>
     <string name="singInWithGoogleButton">Увійдіть із Google</string>
-    <string name="headphonesWarningText">Для кращого запису, якщо можливо, надіньте навушники.</string>
+    <string name="headphonesWarningText">Для кращого запису, надіньте навушники, інакше можливі перешкоди.</string>
     <string name="goBackButton">Повернутися назад</string>
     <string name="resetPasswordTxt">"Вам буде надіслано електронний лист для відновлення пароля "</string>
     <string name="enterEmailEditText">Введіть ваше електорну почту</string>

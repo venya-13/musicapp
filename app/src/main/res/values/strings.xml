@@ -26,14 +26,14 @@
     <string name="songSeekBar">The volume of your song</string>
     <string name="logOutTxt">Logout</string>
     <string name="singInWithGoogleButton">Sing in with Google</string>
-    <string name="headphonesWarningText">For the best recording, put on headphones if possible.</string>
+    <string name="headphonesWarningText">For the best recording, put on headphones, otherwise possible interference.</string>
     <string name="goBackButton">Go back</string>
     <string name="resetPasswordTxt">You will be sent an email to reset your password</string>
     <string name="enterEmailEditText">Enter your email</string>
     <string name="enter">Enter</string>
-    <string name="resetEmailDialogTxt">Check your email to reset your password</string>
+    <string name="resetEmailDialogTxt">Check your email to reset your password.</string>
     <string name="verificationEmail">Please check your email to verified your account!</string>
     <string name="internetConnectionDialogTxt">You are not connected to the Internet! Please connect to the Internet.</string>
-    <string name="listIsEmpty">You don`t have already recorded tracks</string>
+    <string name="listIsEmpty">You don`t have already recorded tracks</string>Strings
     <string name="buttonHint">Here will be your recorded tracks</string>
 </resources>
