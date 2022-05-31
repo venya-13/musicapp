@@ -30,7 +30,7 @@ public class AlreadyRecordedTracks extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_own_music);
+        setContentView(R.layout.already_recorded_tracks);
 
         dialog = new SpotsDialog(this,"");
         dialog.show();

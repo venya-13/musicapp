@@ -80,6 +80,12 @@ public class OwnMusic extends AppCompatActivity {
             }
             Uri uri = data.getData();
 
+            String path = uri.getPath().toString();
+
+            String filename = path.substring(path.lastIndexOf("/")+1);
+
+            TransmissionInformation.getInstance().setManuallyTrackName(filename);
+
             TransmissionInformation.getInstance().setUri(uri);
 
             Intent intent = new Intent(OwnMusic.this, ManuallyChooseTrackListen.class);

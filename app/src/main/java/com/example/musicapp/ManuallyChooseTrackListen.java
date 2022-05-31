@@ -67,6 +67,8 @@ public class ManuallyChooseTrackListen extends AppCompatActivity {
         Bundle bundle = i.getExtras();
 
         Uri uri = TransmissionInformation.getInstance().getUri();
+        String songName = TransmissionInformation.getInstance().getManuallyTrackName();
+        someName = songName;
         songNameTxt.setSelected(true);
         songNameTxt.setText(someName);
 

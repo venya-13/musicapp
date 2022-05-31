@@ -5,7 +5,7 @@ import android.net.Uri;
 import java.io.File;
 
 public class TransmissionInformation extends MainActivity {
-    private String Something,SongName,RecordPath, AlreadyRecordedTrackPath,AlreadyRecordedTrackName;
+    private String Something,SongName,RecordPath, AlreadyRecordedTrackPath,AlreadyRecordedTrackName, ManuallyTrackName;
     private int Number,SongTime, AlreadyRecordedTrackPosition;
     private Uri Uri, manuallyChooseUri;
     private Uri UriOfAlreadyRecordedSong;
@@ -36,6 +36,16 @@ public class TransmissionInformation extends MainActivity {
     public String getSongName (){
 
         return SongName;
+    }
+
+    public void setManuallyTrackName (String param){
+        ManuallyTrackName = param;
+
+    }
+
+    public String getManuallyTrackName (){
+
+        return ManuallyTrackName;
     }
 
     public void setString (String param){
