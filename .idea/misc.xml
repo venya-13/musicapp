@@ -7,9 +7,12 @@
         <entry key="..\:/Compact Music Creator/app/src/main/res/drawable/default_button.xml" value="0.296" />
         <entry key="..\:/Compact Music Creator/app/src/main/res/layout/activity_check_already_song.xml" value="0.358695652173913" />
         <entry key="..\:/Compact Music Creator/app/src/main/res/layout/activity_check_song.xml" value="0.358695652173913" />
+        <entry key="..\:/Compact Music Creator/app/src/main/res/layout/activity_forget_password.xml" value="0.358695652173913" />
         <entry key="..\:/Compact Music Creator/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
         <entry key="..\:/Compact Music Creator/app/src/main/res/layout/activity_manually_choose_track_listen.xml" value="0.358695652173913" />
         <entry key="..\:/Compact Music Creator/app/src/main/res/layout/activity_own_music.xml" value="0.36666666666666664" />
+        <entry key="..\:/Compact Music Creator/app/src/main/res/layout/activity_record_own_song.xml" value="0.358695652173913" />
+        <entry key="..\:/Compact Music Creator/app/src/main/res/layout/activity_register.xml" value="0.358695652173913" />
         <entry key="..\:/Compact Music Creator/app/src/main/res/layout/already_recorded_tracks.xml" value="0.358695652173913" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/drawable-v24/default_hint.xml" value="0.328" />
         <entry key="..\:/android studio apps/music app/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22135416666666666" />
