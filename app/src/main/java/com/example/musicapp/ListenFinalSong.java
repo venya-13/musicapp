@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.media.audiofx.PresetReverb;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,7 +36,7 @@ public class ListenFinalSong extends AppCompatActivity {
         goBackButton = findViewById(R.id.goBackButton);
 
         File recordedVoice = TransmissionInformation.getInstance().getFile();
-        String recordVoicePath = recordedVoice.toURI().toString();
+        String recordVoicePath = recordedVoice.toString();
         Uri voiceRecordUri = Uri.parse(recordVoicePath);
         String finalSongName = TransmissionInformation.getInstance().getSongName();
         Uri musicUri = TransmissionInformation.getInstance().getUri();
@@ -68,6 +69,18 @@ public class ListenFinalSong extends AppCompatActivity {
         playButton.setVisibility(View.GONE);
         mediaVoicePlayer.setVolume(voiceVolume,voiceVolume);
         mediaPlayer.setVolume(songVolume,songVolume);
+
+//        try{
+//            PresetReverb mReverb = new PresetReverb(0,0);
+//            mReverb.setPreset(PresetReverb.PRESET_LARGEROOM);
+//            mReverb.setEnabled(true);
+//
+//            mediaVoicePlayer.attachAuxEffect(mReverb.getId());
+//            mediaVoicePlayer.setAuxEffectSendLevel(1.0f);
+//        }catch (Exception e){
+//            Log.e("Reverb Error", e.getMessage());
+//        }
+
 
         playButton.setOnClickListener(v -> {
             mediaPlayer.start();

@@ -19,7 +19,7 @@
     <string name="forgetPasswordTxt">Відновити пароль</string>
     <string name="registerTxt">Реєстрація</string>
     <string name="loadDialog">"Завантаження... "</string>
-    <string name="downloadButton">завантажити результат</string>
+    <string name="downloadButton">Завантажити результат</string>
     <string name="shareButton">"Поділитися з друзями "</string>
     <string name="backToMainPageButton">Повернутися на головну сторінку</string>
     <string name="voiceSeekBar">"Гучність вашого голосу "</string>
@@ -30,10 +30,11 @@
     <string name="goBackButton">Повернутися назад</string>
     <string name="resetPasswordTxt">"Вам буде надіслано електронний лист для відновлення пароля "</string>
     <string name="enterEmailEditText">Введіть ваше електорну почту</string>
-    <string name="enter">продовжити</string>
+    <string name="enter">Продовжити</string>
     <string name="resetEmailDialogTxt">Перевірте свою електронну пошту, щоб відновити пароль</string>
     <string name="verificationEmail">"Будь ласка, перевірте свою електронну пошту, щоб підтвердити свій обліковий запис! "</string>
     <string name="internetConnectionDialogTxt">Ви не підключені до Інтернету! Будь ласка, підключіть Інтернет.</string>
     <string name="listIsEmpty">У вас ще немає записаних треків</string>
     <string name="buttonHint">Тут будуть ваши записані треки</string>
+    <string name="searchFileManually">Пошук файлу вручну</string>
 </resources>

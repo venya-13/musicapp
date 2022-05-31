@@ -36,4 +36,5 @@
     <string name="internetConnectionDialogTxt">You are not connected to the Internet! Please connect to the Internet.</string>
     <string name="listIsEmpty">You don`t have already recorded tracks</string>Strings
     <string name="buttonHint">Here will be your recorded tracks</string>
+    <string name="searchFileManually">Search for a file manually</string>
 </resources>

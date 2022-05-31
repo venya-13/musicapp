@@ -7,7 +7,7 @@ import java.io.File;
 public class TransmissionInformation extends MainActivity {
     private String Something,SongName,RecordPath, AlreadyRecordedTrackPath,AlreadyRecordedTrackName;
     private int Number,SongTime, AlreadyRecordedTrackPosition;
-    private Uri Uri;
+    private Uri Uri, manuallyChooseUri;
     private Uri UriOfAlreadyRecordedSong;
     private File File;
     private float voiceVolume;
@@ -126,6 +126,16 @@ public class TransmissionInformation extends MainActivity {
     public Uri getUri (){
 
         return Uri;
+    }
+
+    public void setManuallyChooseUri (Uri param){
+        manuallyChooseUri = param;
+
+    }
+
+    public Uri getManuallyChooseUri (){
+
+        return manuallyChooseUri;
     }
 
     public void setAlreadyRecordedUri (Uri param){

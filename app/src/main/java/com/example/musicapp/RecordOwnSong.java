@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.media.audiofx.PresetReverb;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;

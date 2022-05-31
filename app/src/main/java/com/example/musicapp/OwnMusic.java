@@ -2,7 +2,9 @@ package com.example.musicapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -26,9 +29,12 @@ public class OwnMusic extends AppCompatActivity {
     private ListView listViewSong;
     private SearchView searchOwnMusic;
     private SpotsDialog dialog;
+    private Button searchFileManually;
 
     private ArrayList<File> mySongs = new ArrayList<>();
     private String[] items = new String[mySongs.size()];
+
+    private int requestCode = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,8 @@ public class OwnMusic extends AppCompatActivity {
 
         listViewSong = findViewById(R.id.listViewSong);
         searchOwnMusic = findViewById(R.id.searchOwnMusic);
+        searchFileManually = findViewById(R.id.searchFileManually);
+
         searchOwnMusic.clearFocus();
         searchOwnMusic.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -58,11 +66,37 @@ public class OwnMusic extends AppCompatActivity {
                 return true;
             }
         });
+
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+
+        Context context = getApplicationContext();
+
+        super.onActivityResult(requestCode,resultCode,data);
+        if (requestCode == requestCode && resultCode == Activity.RESULT_OK){
+            if (data == null){
+                return;
+            }
+            Uri uri = data.getData();
+
+            TransmissionInformation.getInstance().setUri(uri);
+
+            Intent intent = new Intent(OwnMusic.this, ManuallyChooseTrackListen.class);
+            startActivity(intent);
+        }
+    }
+
+    public void fileChooser(View view){
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("*/*");
+        startActivityForResult(intent,requestCode);
     }
 
     private void createFilesList (ArrayList<File> songs,String[] items2){
         try {
-            songs = findSong(Environment.getExternalStorageDirectory());
+            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
+            songs = findSong(path);
             items2 = new String[songs.size()];
         }catch (Exception e){
             Log.e("Error!!!!!!!!!!", e.getMessage());
