@@ -30,6 +30,7 @@ public class OwnMusic extends AppCompatActivity {
     private SearchView searchOwnMusic;
     private SpotsDialog dialog;
     private Button searchFileManually;
+    private TextView emptyListTxt;
 
     private ArrayList<File> mySongs = new ArrayList<>();
     private String[] items = new String[mySongs.size()];
@@ -52,6 +53,7 @@ public class OwnMusic extends AppCompatActivity {
         listViewSong = findViewById(R.id.listViewSong);
         searchOwnMusic = findViewById(R.id.searchOwnMusic);
         searchFileManually = findViewById(R.id.searchFileManually);
+        emptyListTxt = findViewById(R.id.emptyListTxt);
 
         searchOwnMusic.clearFocus();
         searchOwnMusic.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -104,6 +106,10 @@ public class OwnMusic extends AppCompatActivity {
             File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
             songs = findSong(path);
             items2 = new String[songs.size()];
+
+            if(items2.length == 0){
+                emptyListTxt.setVisibility(View.VISIBLE);
+            }
         }catch (Exception e){
             Log.e("Error!!!!!!!!!!", e.getMessage());
         }

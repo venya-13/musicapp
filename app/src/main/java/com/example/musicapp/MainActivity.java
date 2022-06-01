@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
             alreadyRecordedSongs.setVisibility(View.VISIBLE);
             ownMusicButton.setVisibility(View.VISIBLE);
             willBeAlreadyRecordedSongs.setVisibility(View.VISIBLE);
+
             File dstFolder = new File(getFilesDir(), "my_records");
             if(dstFolder.exists()){
                 alreadyRecordedSongs.setVisibility(View.VISIBLE);
@@ -136,18 +138,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        permissionsAmount = 0;
         if(requestCode == RequestCode){
             for(int res: grantResults) {
+                permissionsAmount = 0;
                 if (res == PackageManager.PERMISSION_GRANTED) {
                     permissionsAmount++;
-                } else {
-                    showPermissionDialog();
                 }
             }
         }
-        if (permissionsAmount == grantResults.length){
+        Log.d("lenghtt", String.valueOf(grantResults.length));
+        if (permissionsAmount == grantResults.length + 1){
             requestPermission();
+        } else{
+            showPermissionDialog();
         }
 
     }

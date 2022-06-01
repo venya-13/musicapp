@@ -30,6 +30,18 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/default_button_with_stroke"
         android:text="@string/searchFileManually"
-        android:onClick="fileChooser"/>
+        android:onClick="fileChooser"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/emptyListTxt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/listIsEmpty"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/purple"
+        android:visibility="gone"/>
 
     </RelativeLayout>
