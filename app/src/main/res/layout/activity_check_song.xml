@@ -51,17 +51,18 @@
                 android:layout_height="wrap_content">
 
             </SeekBar>
+
             <TextView
                 android:id="@+id/startTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/seekBar"
-                android:layout_centerInParent="true"
                 android:layout_alignParentLeft="false"
+                android:layout_centerInParent="true"
                 android:layout_marginLeft="20dp"
+                android:layout_toLeftOf="@+id/seekBar"
                 android:text="0:00"
                 android:textColor="@color/purple"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/endTxt"
