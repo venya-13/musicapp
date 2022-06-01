@@ -19,16 +19,13 @@ public class SplashScreen extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if(mAuth.getCurrentUser() != null){
-                    startActivity(new Intent(SplashScreen.this, MainActivity.class));
-                } else{
-                    startActivity(new Intent(SplashScreen.this, Login.class));
-                }
-                finish();
+        new Handler().postDelayed(() -> {
+            if(mAuth.getCurrentUser() != null){
+                startActivity(new Intent(SplashScreen.this, MainActivity.class));
+            } else{
+                startActivity(new Intent(SplashScreen.this, Login.class));
             }
+            finish();
         },2000);
 
     }

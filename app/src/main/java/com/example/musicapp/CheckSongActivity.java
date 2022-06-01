@@ -151,26 +151,10 @@ public class CheckSongActivity extends AppCompatActivity {
 
         skipSong.setOnClickListener(v -> {
 
-            mediaPlayer.stop();
-            mediaPlayer.release();
-            position = ((position+1)%mySongs.size());
-            Uri u = Uri.parse(mySongs.get(position).toString());
-            mediaPlayer = MediaPlayer.create(getApplicationContext(), u);
-            someName = mySongs.get(position).getName();
-            songNameTxt.setText(someName);
-            mediaPlayer.start();
-            stopButton.setVisibility(View.VISIBLE);
-            playButton.setVisibility(View.GONE);
-            String timeEnd = createTime(mediaPlayer.getDuration());
-            endTxt.setText(timeEnd);
-
-        });
-
-        goBackButton.setOnClickListener(v -> {
-            if (positionNow != 0){
+            try {
                 mediaPlayer.stop();
                 mediaPlayer.release();
-                position = ((position-1)%mySongs.size());
+                position = ((position+1)%mySongs.size());
                 Uri u = Uri.parse(mySongs.get(position).toString());
                 mediaPlayer = MediaPlayer.create(getApplicationContext(), u);
                 someName = mySongs.get(position).getName();
@@ -180,6 +164,30 @@ public class CheckSongActivity extends AppCompatActivity {
                 playButton.setVisibility(View.GONE);
                 String timeEnd = createTime(mediaPlayer.getDuration());
                 endTxt.setText(timeEnd);
+            }catch (Exception e){
+                Log.e("Skip track button error", e.getMessage());
+            }
+
+        });
+
+        goBackButton.setOnClickListener(v -> {
+            try {
+                if (positionNow != 0){
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                    position = ((position-1)%mySongs.size());
+                    Uri u = Uri.parse(mySongs.get(position).toString());
+                    mediaPlayer = MediaPlayer.create(getApplicationContext(), u);
+                    someName = mySongs.get(position).getName();
+                    songNameTxt.setText(someName);
+                    mediaPlayer.start();
+                    stopButton.setVisibility(View.VISIBLE);
+                    playButton.setVisibility(View.GONE);
+                    String timeEnd = createTime(mediaPlayer.getDuration());
+                    endTxt.setText(timeEnd);
+                }
+            }catch (Exception e){
+                Log.e("Go back track button error",e.getMessage());
             }
         });
 

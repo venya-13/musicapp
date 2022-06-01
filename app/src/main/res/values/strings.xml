@@ -34,7 +34,7 @@
     <string name="resetEmailDialogTxt">Check your email to reset your password.</string>
     <string name="verificationEmail">Please check your email to verified your account!</string>
     <string name="internetConnectionDialogTxt">You are not connected to the Internet! Please connect to the Internet.</string>
-    <string name="listIsEmpty">Your music list is empty</string>Strings
+    <string name="listIsEmpty">The music folder on your phone is empty</string>Strings
     <string name="buttonHint">Here will be your recorded tracks</string>
-    <string name="searchFileManually">Search for a file manually</string>
+    <string name="searchFileManually">Search file in the another folder</string>
 </resources>

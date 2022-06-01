@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private final int RequestCode = 1;
     private FirebaseAuth mAuth;
 
-    int permissionsAmount = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,15 +47,6 @@ public class MainActivity extends AppCompatActivity {
         requestPermissionButton = findViewById(R.id.requestPermissionButton);
         logoutTxt = findViewById(R.id.logoutTxt);
         willBeAlreadyRecordedSongs = findViewById(R.id.willBeAlreadyRecordedSongs);
-
-        File dstFolder = new File(getFilesDir(), "my_records");
-        if(dstFolder.exists()){
-            alreadyRecordedSongs.setVisibility(View.VISIBLE);
-            willBeAlreadyRecordedSongs.setVisibility(View.GONE);
-        } else {
-            alreadyRecordedSongs.setVisibility(View.GONE);
-            willBeAlreadyRecordedSongs.setVisibility(View.VISIBLE);
-        }
 
         PERMISSIONS = new String[]{
                 Manifest.permission.RECORD_AUDIO,
@@ -100,20 +89,25 @@ public class MainActivity extends AppCompatActivity {
     private void requestPermission(){
         if (!hasPermissions(MainActivity.this,PERMISSIONS)){
             ActivityCompat.requestPermissions(MainActivity.this,PERMISSIONS,RequestCode);
-        } else {
-            requestPermissionButton.setVisibility(View.GONE);
-            alreadyRecordedSongs.setVisibility(View.VISIBLE);
-            ownMusicButton.setVisibility(View.VISIBLE);
-            willBeAlreadyRecordedSongs.setVisibility(View.VISIBLE);
+            return;
+        }
 
-            File dstFolder = new File(getFilesDir(), "my_records");
-            if(dstFolder.exists()){
-                alreadyRecordedSongs.setVisibility(View.VISIBLE);
-                willBeAlreadyRecordedSongs.setVisibility(View.GONE);
-            } else {
-                alreadyRecordedSongs.setVisibility(View.GONE);
-                willBeAlreadyRecordedSongs.setVisibility(View.VISIBLE);
-            }
+        enableButtons();
+
+    }
+
+    private void enableButtons(){
+
+        ownMusicButton.setVisibility(View.VISIBLE);
+        requestPermissionButton.setVisibility(View.GONE);
+
+        File dstFolder = new File(getFilesDir(), "my_records");
+        if(dstFolder.exists()){
+            alreadyRecordedSongs.setVisibility(View.VISIBLE);
+            willBeAlreadyRecordedSongs.setVisibility(View.GONE);
+        } else {
+            alreadyRecordedSongs.setVisibility(View.GONE);
+            willBeAlreadyRecordedSongs.setVisibility(View.VISIBLE);
         }
     }
 
@@ -124,10 +118,6 @@ public class MainActivity extends AppCompatActivity {
             for (String permission: PERMISSIONS){
                 if (ActivityCompat.checkSelfPermission(context,permission) != PackageManager.PERMISSION_GRANTED){
                     return false;
-                } else {
-                    requestPermissionButton.setVisibility(View.GONE);
-                    alreadyRecordedSongs.setVisibility(View.VISIBLE);
-                    ownMusicButton.setVisibility(View.VISIBLE);
                 }
             }
         }
@@ -138,17 +128,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        int permissionsAmount = 0;
         if(requestCode == RequestCode){
             for(int res: grantResults) {
-                permissionsAmount = 0;
+                
                 if (res == PackageManager.PERMISSION_GRANTED) {
                     permissionsAmount++;
                 }
             }
         }
         Log.d("lenghtt", String.valueOf(grantResults.length));
-        if (permissionsAmount == grantResults.length + 1){
-            requestPermission();
+        if (permissionsAmount == grantResults.length){
+            enableButtons();
         } else{
             showPermissionDialog();
         }
